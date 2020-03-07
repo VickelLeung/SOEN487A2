@@ -25,8 +25,16 @@ public class LibraryCore {
         BooksController bc = BooksController.getInstance();
 //        Books book = bc.getBookByID();
 //        System.out.println(book.title);
-        Books book = bc.getBookById(1);
-         System.out.println(book.title);
+//        Books book = bc.getBookById(1);
+//         System.out.println(book.title);
+    Books book = new Books("orange","orange","orange","orange","orange");
+    if(bc.addBook(book)){
+        System.out.println("[Sccess] AddBook");
+    }
+    else{
+    System.out.println("[Failed] AddBook");
+    }
+        
     }
     
 }

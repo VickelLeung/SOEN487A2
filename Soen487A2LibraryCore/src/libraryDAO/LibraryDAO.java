@@ -92,4 +92,35 @@ public class LibraryDAO {
         }
         return ret;
     }
+    
+    
+    /*
+        public String title;
+    public String description;
+    public String author;
+    public String ISBN;
+    public String Publisher;
+    */
+     public boolean addBookToSQL(String title, String description, String author, String ISBN, String Publisher ){
+       
+         boolean ret = false;
+         PreparedStatement preparedStatement = null;
+         try {
+            
+            preparedStatement = con
+                    .prepareStatement("insert into books (title, description, author, ISBN, Publisher) values (?,?,?,?,?)");  
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, description);
+            preparedStatement.setString(3, author);
+            preparedStatement.setString(4, ISBN);
+            preparedStatement.setString(5, Publisher);
+            preparedStatement.executeUpdate();
+            ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return ret;
+     }
+
 }

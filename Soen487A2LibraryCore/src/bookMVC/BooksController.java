@@ -81,6 +81,11 @@ public class BooksController {
             return bk;
    }    
    
+   
+   public boolean addBook(Books book){
+       return dao.addBookToSQL(book.getTitle(), book.getDescription(), book.getAuthor(), book.getISBN(), book.getPublisher());
+    }
+   
    public boolean deleteBookById(int id){
         return dao.delete(id);
    }

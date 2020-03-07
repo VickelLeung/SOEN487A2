@@ -22,18 +22,11 @@ public class LibraryCore {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-//        ResultSet rs = LibraryDAO.getInstance().getBook();
-//        String title = "";
-//        while(rs.next()){
-//           title =  rs.getString("title");
-//        }
-//        
-//        System.out.print(title);
         BooksController bc = BooksController.getInstance();
-        Books book = bc.getBookByID();
-        System.out.println(book.title);
-        
-        
+//        Books book = bc.getBookByID();
+//        System.out.println(book.title);
+        Books book = bc.getBookById(1);
+         System.out.println(book.title);
     }
     
 }

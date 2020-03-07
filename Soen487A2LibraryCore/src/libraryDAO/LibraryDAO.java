@@ -6,6 +6,7 @@
 package libraryDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class LibraryDAO {
     
+ 
     private static LibraryDAO dao = null;
     public Connection con = null;
     
@@ -51,8 +53,43 @@ public class LibraryDAO {
     }
         
         
+    public ResultSet getAllBook() throws SQLException
+    {
+        ResultSet rs = null;
+      
+            String query = "SELECT * From books";
+            Statement stmt = con.createStatement();
+           
+            rs = stmt.executeQuery(query);
+            return rs;
+    }
         
         
-        
-        
+     public ResultSet getbookById(int id){
+           ResultSet rs = null;
+           String query = "Select * From books where id = ?";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return rs;
+     }
+     
+    public boolean delete(int id)
+    {  
+        boolean ret = false;
+        try {
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("delete from book where id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            ret = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
 }

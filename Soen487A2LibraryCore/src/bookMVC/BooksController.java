@@ -31,7 +31,6 @@ public class BooksController {
         return booksContoller;
     }
     
-    
     private BooksController(){
         this.dao = LibraryDAO.getInstance();
         this.booksmap = new HashMap <>();
@@ -83,7 +82,7 @@ public class BooksController {
    
    
    public boolean addBook(Books book){
-       return dao.addBookToSQL(book.getTitle(), book.getDescription(), book.getAuthor(), book.getISBN(), book.getPublisher());
+       return dao.addBook(book.getTitle(), book.getDescription(), book.getAuthor(), book.getISBN(), book.getPublisher());
     }
    
    public boolean deleteBookById(int id){

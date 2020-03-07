@@ -1,0 +1,136 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package LoanDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author fokpoonkai
+ */
+public class LoanDAO {
+    private static LoanDAO dao = null;
+    public Connection con = null;
+    
+    public static synchronized LoanDAO getInstance(){
+        if(dao == null){
+            dao = new LoanDAO();
+        }
+        return dao;
+    }
+   
+    
+    public ResultSet getLoanById(int id){
+           ResultSet rs = null;
+           String query = "Select * From loans where id = ?";
+            try {
+                  PreparedStatement preparedStatement = con.prepareStatement(query);
+                  preparedStatement.setInt(1, id);
+                  rs = preparedStatement.executeQuery();
+              } catch (SQLException ex) {
+                  Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            return rs;
+    }
+    
+    
+    public boolean loanBook(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate){
+          boolean ret = false;
+              PreparedStatement preparedStatement = null;
+             try {         
+                    preparedStatement = con
+                            .prepareStatement("insert into loans (BorrowId, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn,) values (?,?,?,?,?,?)");  
+                    preparedStatement.setInt(1, borrowId);
+                    preparedStatement.setString(2, personBorrow);
+                    preparedStatement.setString(3, dateOfBorrowing);
+                    preparedStatement.setString(4, returnDate);
+                    preparedStatement.setInt(5, 0);
+                    preparedStatement.executeUpdate();
+                    ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return ret;
+    }
+    
+        public boolean returnBook(int borrowId){
+          boolean ret = false;
+              PreparedStatement preparedStatement = null;
+
+             try {         
+                    preparedStatement = con
+                            .prepareStatement("update loans set IsReturn = 1 where id = ?");  
+                    preparedStatement.setInt(1, borrowId);
+                    preparedStatement.executeUpdate();
+                    ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return ret;
+    }
+    
+      public boolean update(int borrowId, String data){
+          boolean ret = false;
+              PreparedStatement preparedStatement = null;
+             try {         
+                    preparedStatement = con
+                            .prepareStatement("update loans set IsReturn = ? where id = ?");  
+                    preparedStatement.setString(1, data);
+                    preparedStatement.setInt(2, borrowId);
+                    preparedStatement.executeUpdate();
+                    ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return ret;
+    }
+        
+    public boolean delete(int id)
+    {  
+        boolean ret = false;
+        try {
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("delete from loans where id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            ret = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+    public ResultSet getLoan(){
+       
+        ResultSet rs = null;
+        try {
+            
+            
+            String query = "SELECT * From loans";
+            Statement stmt = con.createStatement();
+           
+            rs = stmt.executeQuery(query);
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     return rs;
+    
+    }
+    
+    
+    
+    
+}

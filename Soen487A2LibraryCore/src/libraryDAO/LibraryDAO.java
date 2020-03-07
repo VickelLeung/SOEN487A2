@@ -101,7 +101,7 @@ public class LibraryDAO {
     public String ISBN;
     public String Publisher;
     */
-     public boolean addBookToSQL(String title, String description, String author, String ISBN, String Publisher ){
+     public boolean addBook(String title, String description, String author, String ISBN, String Publisher ){
        
          boolean ret = false;
          PreparedStatement preparedStatement = null;

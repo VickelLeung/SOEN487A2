@@ -32,13 +32,13 @@ public class LoanController {
         this.dao = LoanDAO.getInstance();
         this.loadsmap = new HashMap <>();
     }
-    
-    public ResultSet loanBook(int id){
-    ResultSet rs = null;
-    rs = this.dao.getLoanById(id);    
-    return rs;
-    }
-      
+//    
+//    public ResultSet loanBook(int id){
+//    ResultSet rs = null;
+//    rs = this.dao.getLoanById(id);    
+//    return rs;
+//    }
+//      
     public boolean loanBook(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate) {
         return this.dao.loanBook(borrowId, personBorrow, dateOfBorrowing, returnDate);
     }
@@ -55,11 +55,11 @@ public class LoanController {
         ResultSet rs = dao.getLoanList();
         while(rs.next()){
             Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
-        
-        
-        
-        }
-        
+            this.loadsmap.put(rs.getInt("BorrowId"), ls);
+        }      
    }
    
+   public boolean delete(int id){
+       return this.dao.delete(id);
+   }
 }

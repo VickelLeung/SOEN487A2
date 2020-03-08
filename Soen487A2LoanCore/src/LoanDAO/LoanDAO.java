@@ -6,6 +6,7 @@
 package LoanDAO;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,17 @@ public class LoanDAO {
         }
         return dao;
     }
-   
+  
+    public LoanDAO(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            this.con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
     
     public ResultSet getLoanById(int id){
            ResultSet rs = null;
@@ -45,10 +56,9 @@ public class LoanDAO {
     
     public boolean loanBook(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate){
           boolean ret = false;
-              PreparedStatement preparedStatement = null;
              try {         
-                    preparedStatement = con
-                            .prepareStatement("insert into loans (BorrowId, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn,) values (?,?,?,?,?,?)");  
+                  PreparedStatement preparedStatement = con
+                            .prepareStatement("insert into loans (BorrowId, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn) values (?,?,?,?,?)");  
                     preparedStatement.setInt(1, borrowId);
                     preparedStatement.setString(2, personBorrow);
                     preparedStatement.setString(3, dateOfBorrowing);
@@ -69,7 +79,7 @@ public class LoanDAO {
 
              try {         
                     preparedStatement = con
-                            .prepareStatement("update loans set IsReturn = 1 where id = ?");  
+                            .prepareStatement("update loans set IsReturn = 1 where BorrowId = ?");  
                     preparedStatement.setInt(1, borrowId);
                     preparedStatement.executeUpdate();
                     ret = true;
@@ -85,7 +95,7 @@ public class LoanDAO {
               PreparedStatement preparedStatement = null;
              try {         
                     preparedStatement = con
-                            .prepareStatement("update loans set IsReturn = ? where id = ?");  
+                            .prepareStatement("update loans set ReturnDate = ? where BorrowId = ?");  
                     preparedStatement.setString(1, data);
                     preparedStatement.setInt(2, borrowId);
                     preparedStatement.executeUpdate();
@@ -102,7 +112,7 @@ public class LoanDAO {
         boolean ret = false;
         try {
             PreparedStatement preparedStatement = con
-                    .prepareStatement("delete from loans where id = ?");
+                    .prepareStatement("delete from loans where BorrowId = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
             ret = true;
@@ -112,7 +122,7 @@ public class LoanDAO {
         return ret;
     }
     
-    public ResultSet getLoan(){
+    public ResultSet getLoanList(){
        
         ResultSet rs = null;
         try {

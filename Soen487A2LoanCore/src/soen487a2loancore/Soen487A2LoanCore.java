@@ -5,6 +5,8 @@
  */
 package soen487a2loancore;
 
+import loanMVC.LoanController;
+
 /**
  *
  * @author fokpoonkai
@@ -16,6 +18,21 @@ public class Soen487A2LoanCore {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        LoanController lc = LoanController.getInstance();
+//        if(lc.loanBook(1, "aaa", "dddd", "dddd")){
+//            System.out.println("True");
+//        }else
+//        {System.out.println("false");}
+//        
+//        
+
+      if(lc.delete(1)){
+          System.out.println("True");
+      }else{
+          System.out.println("false");
+      }
+        
     }
     
 }

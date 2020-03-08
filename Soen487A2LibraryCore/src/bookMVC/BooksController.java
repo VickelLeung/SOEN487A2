@@ -22,7 +22,6 @@ public class BooksController {
     //public HashMap <Integer, Books> booksmap = new HashMap <Integer, Books>();
     public HashMap <Integer, Books> booksmap = null;
     
-    
     public static synchronized BooksController getInstance(){
         if(booksContoller == null){
             booksContoller = new BooksController();

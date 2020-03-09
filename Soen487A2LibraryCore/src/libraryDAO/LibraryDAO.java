@@ -61,8 +61,8 @@ public class LibraryDAO {
             Statement stmt = con.createStatement();
            
             rs = stmt.executeQuery(query);
-            return rs;
-    }
+            return rs; 
+   }
         
         
      public ResultSet getbookById(int id){

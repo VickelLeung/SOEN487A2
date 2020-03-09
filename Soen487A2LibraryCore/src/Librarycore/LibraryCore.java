@@ -27,7 +27,7 @@ public class LibraryCore {
 //        System.out.println(book.title);
 //        Books book = bc.getBookById(1);
 //         System.out.println(book.title);
-    Books book = new Books("orange","orange","orange","orange","orange");
+    Books book = new Books("test","test","test","test","test");
     if(bc.addBook(book)){
         System.out.println("[Sccess] AddBook");
     }

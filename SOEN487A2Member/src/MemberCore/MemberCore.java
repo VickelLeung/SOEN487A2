@@ -35,8 +35,8 @@ public class MemberCore {
 //          else System.out.println("Did not updated"); 
 
 //        ==Delete mem==
-        if( mc.deleteMember(1)) System.out.println("deleted");
-        else System.out.println("Did not delete");
+//        if( mc.deleteMember(1)) System.out.println("deleted");
+//        else System.out.println("Did not delete");
 
 //       ==GetMembers==
 //       System.out.print(mc.getMember(1).toString());

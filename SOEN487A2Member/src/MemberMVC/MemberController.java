@@ -83,9 +83,7 @@ public class MemberController {
         return dao.deleteMember(id);
    }
    
-   public String test(){
-       return "ffff";
-   }
+
 }
 
 

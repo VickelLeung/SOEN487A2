@@ -6,7 +6,10 @@
 package loanService;
 
 import MemberMVC.Members;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -114,14 +117,7 @@ public class loanService {
         return result;
     }
 
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "getLoanListByBookName")
-    public String getLoanListByBookName(@WebParam(name = "bookName") String bookName) {
-        //TODO write your implementation code here:
-        return null;
-    }
+    
 
     
    /**
@@ -129,9 +125,54 @@ public class loanService {
     
     */
     
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getLoanListByBookName")
+    public String getLoanListByBookName(@WebParam(name = "bookName") String bookName) {
+        //TODO write your implementation code here:\
+        HashMap <Integer, Loans> loansMap = null;
+        String result = "No loanBook on the list";
+        try {
+            loansMap = loanMVC.LoanController.getInstance().getLoanListByName(bookName);
+        } catch (SQLException ex) {
+            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
+            result = "fail to get loan list by book name";
+        }
+        
+        if(loansMap != null){
+            result = "";
+            for(int i : loansMap.keySet()){
+                result = result + " " + loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+  loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "CreateLoanBook")
+    public String CreateLoanBook(@WebParam(name = "borrowID") int borrowID, @WebParam(name = "bookName") String bookName, @WebParam(name = "personBorrow") int personBorrow, @WebParam(name = "borrowDate") String borrowDate, @WebParam(name = "returnDate") String returnDate) {
+        //TODO write your implementation code here:
+        
+        
+        
+        String result = "failed to add the loanbook";
+        
+ 
+        
+        if(loanMVC.LoanController.getInstance().loanBook(borrowID, bookName, personBorrow, borrowDate, returnDate)){
+            result = "sccessful to add the loanbook"; 
+        }
+        
+        
+        
+        return result;
+    }
     
     
-    
+   
     
     
 }

@@ -68,16 +68,17 @@ public class LoanDAO {
     }
 
     
-    public boolean loanBook(int borrowId, int personBorrow, String dateOfBorrowing, String returnDate){
+    public boolean loanBook(int borrowId,String bookname, int personBorrow, String dateOfBorrowing, String returnDate){
           boolean ret = false;
              try {         
                   PreparedStatement preparedStatement = con
-                            .prepareStatement("insert into loans (BorrowId, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn) values (?,?,?,?,?)");  
+                            .prepareStatement("insert into loans (BorrowId, BookName, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn) values (?,?,?,?,?,?)");  
                     preparedStatement.setInt(1, borrowId);
-                    preparedStatement.setInt(2, personBorrow);
-                    preparedStatement.setString(3, dateOfBorrowing);
-                    preparedStatement.setString(4, returnDate);
-                    preparedStatement.setInt(5, 0);
+                    preparedStatement.setString(2, bookname);
+                    preparedStatement.setInt(3, personBorrow);
+                    preparedStatement.setString(4, dateOfBorrowing);
+                    preparedStatement.setString(5, returnDate);
+                    preparedStatement.setInt(6, 0);
                     preparedStatement.executeUpdate();
                     ret = true;
             

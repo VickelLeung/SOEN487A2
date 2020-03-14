@@ -26,13 +26,20 @@ public class Soen487A2LoanCore {
 //        {System.out.println("false");}
 //        
 //        
-
-      if(lc.delete(1)){
-          System.out.println("True");
-      }else{
-          System.out.println("false");
-      }
-        
+//
+//      if(lc.deleteLoanBook(1)){
+//          System.out.println("True");
+//      }else{
+//          System.out.println("false");
+//      }
+//       
+    int x = 1;
+    if(lc.loanBook(1, "aaaa", 0, "aaa", "aaaa")){
+        x= 2;
+    }
+    
+        System.out.println(x);
+    
     }
     
 }

@@ -39,8 +39,8 @@ public class LoanController {
 //    return rs;
 //    }
 //      
-    public boolean loanBook(int borrowId, int personBorrow, String dateOfBorrowing, String returnDate) {
-        return this.dao.loanBook(borrowId, personBorrow, dateOfBorrowing, returnDate);
+    public boolean loanBook(int borrowId, String bookname, int personBorrow, String dateOfBorrowing, String returnDate) {
+        return this.dao.loanBook(borrowId, bookname ,personBorrow, dateOfBorrowing, returnDate);
     }
   
    public boolean returnBook(int borrowId){
@@ -59,7 +59,21 @@ public class LoanController {
         }      
    }
    
-   public boolean delete(int id){
+   
+      public HashMap <Integer, Loans> getLoanListByName(String name ) throws SQLException{
+         this.loadsmap.clear();
+        ResultSet rs = dao.getLoanByName(name);
+        while(rs.next()){
+            Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+            this.loadsmap.put(rs.getInt("BorrowId"), ls);
+        }
+        return this.loadsmap;
+        
+   }
+   
+   public boolean deleteLoanBook(int id){
        return this.dao.delete(id);
    }
+   
+   
 }

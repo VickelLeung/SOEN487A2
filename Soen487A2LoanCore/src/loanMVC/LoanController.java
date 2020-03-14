@@ -39,7 +39,7 @@ public class LoanController {
 //    return rs;
 //    }
 //      
-    public boolean loanBook(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate) {
+    public boolean loanBook(int borrowId, int personBorrow, String dateOfBorrowing, String returnDate) {
         return this.dao.loanBook(borrowId, personBorrow, dateOfBorrowing, returnDate);
     }
   
@@ -54,7 +54,7 @@ public class LoanController {
    public void getLoanList() throws SQLException{
         ResultSet rs = dao.getLoanList();
         while(rs.next()){
-            Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+            Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
             this.loadsmap.put(rs.getInt("BorrowId"), ls);
         }      
    }

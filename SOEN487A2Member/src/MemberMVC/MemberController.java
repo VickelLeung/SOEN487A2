@@ -82,6 +82,10 @@ public class MemberController {
    public boolean deleteMember(int id){
         return dao.deleteMember(id);
    }
+   
+   public String test(){
+       return "ffff";
+   }
 }
 
 

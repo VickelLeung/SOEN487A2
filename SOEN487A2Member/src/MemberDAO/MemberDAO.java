@@ -62,6 +62,7 @@ public class MemberDAO {
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
+            System.out.println(rs);
         } catch (SQLException ex) {
             Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,20 +91,35 @@ public class MemberDAO {
      public boolean updateMember(int id ,String name, String contact){
        
          boolean ret = false;
-         PreparedStatement preparedStatement = null;
-         try {
-             
-            preparedStatement = con
-                      .prepareStatement("update members SET name=?, contact=? WHERE id=? "); 
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, contact);
-            preparedStatement.setInt(3, id);
-            preparedStatement.executeUpdate();
-            ret = true;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         boolean flag = false;
+         
+         String query = "update members SET ";
+         if(!name.equals("")&&!contact.equals("")){
+             query = query +"name= \'"+name+"\', contact=\'"+ contact +"\'";
+             flag = true;
+         }
+         else if(!name.equals("")){
+             query = query +"name= \'"+name+"\'";
+             flag = true;
+         }
+         else if(!contact.equals("")){
+             query = query +"contact= \'"+contact+"\'";
+             flag = true;
+         }
+         
+         query = query + " WHERE id="+id +";";
+         
+        if(flag){
+            try {            
+                 Statement stmt = con.createStatement();
+                 stmt.executeUpdate(query);
+                ret = true;
+
+            } catch (SQLException ex) {
+                Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        } 
+       
       return ret;
      }
      

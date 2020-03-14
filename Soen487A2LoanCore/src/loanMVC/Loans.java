@@ -11,7 +11,8 @@ package loanMVC;
  */
 public class Loans {
     public int borrowId;
-    public String personBorrow;
+    public String bookName;
+    public int personBorrow;
     public String dateOfBorrowing;
     public String returnDate;
     public int isReturn;
@@ -19,15 +20,16 @@ public class Loans {
     public Loans() {
     }
 
-    public Loans(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate, int isReturn) {
+    public Loans(int borrowId, String bookName, int personBorrow, String dateOfBorrowing, String returnDate, int isReturn) {
         this.borrowId = borrowId;
+        this.bookName = bookName;
         this.personBorrow = personBorrow;
         this.dateOfBorrowing = dateOfBorrowing;
         this.returnDate = returnDate;
         this.isReturn = isReturn;
     }
 
-    public Loans(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate) {
+    public Loans(int borrowId, int personBorrow, String dateOfBorrowing, String returnDate) {
         this.borrowId = borrowId;
         this.personBorrow = personBorrow;
         this.dateOfBorrowing = dateOfBorrowing;
@@ -41,12 +43,22 @@ public class Loans {
     public void setBorrowId(int borrowId) {
         this.borrowId = borrowId;
     }
+    
+    
+   public String getBookName() {
+        return bookName;
+    }
 
-    public String getPersonBorrow() {
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+
+    public int getPersonBorrow() {
         return personBorrow;
     }
 
-    public void setPersonBorrow(String personBorrow) {
+    public void setPersonBorrow(int personBorrow) {
         this.personBorrow = personBorrow;
     }
 

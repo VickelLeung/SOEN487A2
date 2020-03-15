@@ -51,7 +51,8 @@ public class BooksController {
     }
     
     
-   public void getBookList(){
+   public HashMap<Integer, Books> getBookList(){
+//       String results = "";
        this.booksmap.clear();
        try {
             ResultSet rs = dao.getAllBook();
@@ -59,14 +60,20 @@ public class BooksController {
             while(rs.next()){
                 Books book = new Books(rs.getString("Title"),rs.getString("Description"),rs.getString("Author"),rs.getString("ISBN"),rs.getString("Publisher"));
                 booksmap.put(rs.getInt("id"), book);
+//                results += book.toString();
             }
             rs.close();
+             
+            
         } catch (SQLException ex) {
             Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+       return booksmap;
     }
    
-   public Books getBookById(int id){
+   public Books getBookById(int id) throws ClassNotFoundException{
+         System.out.println("DAO: "+dao + " id: " + id);
             Books bk = null;
             try {
                 ResultSet rs = dao.getbookById(id);
@@ -85,7 +92,13 @@ public class BooksController {
     }
    
    public boolean deleteBookById(int id){
+        
         return dao.delete(id);
+   }
+   
+   public boolean updateBookById(int id, String title, String description, String author, String ISBN, String Publisher ){
+       
+        return dao.updateBook(id, title, description, author, ISBN, Publisher);
    }
 
 }

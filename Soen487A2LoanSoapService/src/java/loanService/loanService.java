@@ -170,6 +170,23 @@ public class loanService {
         
         return result;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "loanBook")
+    public String borrowBook(@WebParam(name = "id") int id) throws SQLException {
+        //TODO write your implementation code here:
+        
+        String result = "fail to borrow book";
+         if(loanMVC.LoanController.getInstance().isLoanBookExsit(id)){
+             if(loanMVC.LoanController.getInstance().borrowBook(id)){
+                 result = "success to borrow book";
+             }
+         }
+        
+        return result;
+    }
     
     
    

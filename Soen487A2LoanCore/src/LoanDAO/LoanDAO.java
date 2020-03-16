@@ -78,7 +78,7 @@ public class LoanDAO {
                     preparedStatement.setInt(3, personBorrow);
                     preparedStatement.setString(4, dateOfBorrowing);
                     preparedStatement.setString(5, returnDate);
-                    preparedStatement.setInt(6, 0);
+                    preparedStatement.setInt(6, 1);
                     preparedStatement.executeUpdate();
                     ret = true;
             
@@ -155,7 +155,24 @@ public class LoanDAO {
     
     }
     
-    
+     public boolean borrowBook(int id) {
+ 
+        boolean ret = false;
+        String query = "UPDATE loans SET IsReturn='0' WHERE BorrowId="+id+";";
+            
+         try {
+     
+            
+            Statement stmt = con.createStatement();
+            stmt.executeQuery(query);
+            ret = true;
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         return ret;
+     }
     
     
 }

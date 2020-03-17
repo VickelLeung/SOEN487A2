@@ -23,8 +23,8 @@ public class MemberCore {
      */
     public static void main(String[] args) throws SQLException {
         MemberController mc = MemberController.getInstance();
-        Members mem = new Members(1, "tom", "514-423-12421");
-        HashMap hm = new HashMap();
+      //  Members mem = new Members(1, "tom", "514-423-12421");
+      //  HashMap hm = new HashMap();
         
 //        ==Add==
 //        if( mc.addMember(mem)) System.out.println("Added");
@@ -38,8 +38,8 @@ public class MemberCore {
 //        if( mc.deleteMember(1)) System.out.println("deleted");
 //        else System.out.println("Did not delete");
 
-//       ==GetMembers==
-//       System.out.print(mc.getMember(1).toString());
+      // ==GetMembers==
+       System.out.print(mc.getMember(1).toString());
         
 //         ==ListMembers==
 //            hm = mc.getMemberList();

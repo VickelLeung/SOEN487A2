@@ -27,7 +27,12 @@ public class Members {
         this.name = name;
         this.contact = contact;
     }
-
+    
+    
+    public Members(String name,String contact){
+        this.name = name;
+        this.contact = contact;
+      }
     
     public void setName(String n){
         name = n;

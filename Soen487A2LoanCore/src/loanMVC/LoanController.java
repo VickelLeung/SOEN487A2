@@ -51,10 +51,7 @@ public class LoanController {
     }
   
     
-  
-   public boolean returnBook(int borrowId){
-       return this.dao.returnBook(borrowId);
-   }
+
    
    public boolean updateBook(int borrowId, String data){
        return this.dao.update(borrowId, data);
@@ -83,6 +80,12 @@ public class LoanController {
       
    public boolean borrowBook(int id){
        return dao.borrowBook(id);
+   }
+   
+   
+     
+   public boolean returnBook(int borrowId){
+       return this.dao.returnBook(borrowId);
    }
       
    public boolean deleteLoanBook(int id){

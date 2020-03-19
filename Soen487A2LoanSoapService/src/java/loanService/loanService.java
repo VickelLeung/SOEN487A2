@@ -174,19 +174,51 @@ public class loanService {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "loanBook")
-    public String borrowBook(@WebParam(name = "id") int id) throws SQLException {
+    @WebMethod(operationName = "borrowBook")
+    public String borrowBook(@WebParam(name = "Bookid") int Bookid) {
         //TODO write your implementation code here:
-        
-        String result = "fail to borrow book";
-         if(loanMVC.LoanController.getInstance().isLoanBookExsit(id)){
-             if(loanMVC.LoanController.getInstance().borrowBook(id)){
-                 result = "success to borrow book";
-             }
-         }
-        
+        String result = "init";
+        try{
+        if(loanMVC.LoanController.getInstance().isLoanBookExsit(Bookid)){
+            if(loanMVC.LoanController.getInstance().borrowBook(Bookid)){
+                result = "Success to borrow book";
+            }
+            
+        }
+        else{
+            result = "book is not exsit";
+        }
+        }
+        catch(Exception e){ 
+        }
         return result;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "returnBook")
+    public String returnBook(@WebParam(name = "bookID") int bookID) {
+        //TODO write your implementation code here:
+               String result = "init";
+        try{
+        if(loanMVC.LoanController.getInstance().isLoanBookExsit(bookID)){
+            if(loanMVC.LoanController.getInstance().returnBook(bookID)){
+                result = "Success to return book";
+            }
+            
+        }
+        else{
+            result = "book is not exsit";
+        }
+        }
+        catch(Exception e){ 
+        }
+        return result;
+    }
+
+
+
     
     
    

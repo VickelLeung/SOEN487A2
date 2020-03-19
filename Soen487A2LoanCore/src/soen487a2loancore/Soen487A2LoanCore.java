@@ -5,6 +5,7 @@
  */
 package soen487a2loancore;
 
+import java.sql.SQLException;
 import loanMVC.LoanController;
 
 /**
@@ -16,7 +17,7 @@ public class Soen487A2LoanCore {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         // TODO code application logic here
         
         LoanController lc = LoanController.getInstance();
@@ -34,12 +35,12 @@ public class Soen487A2LoanCore {
 //      }
 //       
     int x = 1;
-    if(lc.loanBook(1, "aaaa", 0, "aaa", "aaaa")){
-        x= 2;
+    try{
+    if(lc.borrowBook(1)){
+        System.out.println("fff");}
+    }catch(Exception e){
+        System.out.println("fdfdsa");
     }
     
-        System.out.println(x);
-    
     }
-    
 }

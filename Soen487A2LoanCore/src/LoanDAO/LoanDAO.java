@@ -42,7 +42,7 @@ public class LoanDAO {
     
     public ResultSet getLoanById(int id){
            ResultSet rs = null;
-           String query = "Select * From loans where id = ?";
+           String query = "Select * From loans where BorrowId = ?";
             try {
                   PreparedStatement preparedStatement = con.prepareStatement(query);
                   preparedStatement.setInt(1, id);
@@ -87,24 +87,7 @@ public class LoanDAO {
         }
           return ret;
     }
-    
-        public boolean returnBook(int borrowId){
-          boolean ret = false;
-              PreparedStatement preparedStatement = null;
 
-             try {         
-                    preparedStatement = con
-                            .prepareStatement("update loans set IsReturn = 1 where BorrowId = ?");  
-                    preparedStatement.setInt(1, borrowId);
-                    preparedStatement.executeUpdate();
-                    ret = true;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          return ret;
-    }
-    
       public boolean update(int borrowId, String data){
           boolean ret = false;
               PreparedStatement preparedStatement = null;
@@ -158,13 +141,15 @@ public class LoanDAO {
      public boolean borrowBook(int id) {
  
         boolean ret = false;
-        String query = "UPDATE loans SET IsReturn='0' WHERE BorrowId="+id+";";
+        //String query = "UPDATE loans SET IsReturn='0' WHERE BorrowId="+id+";";
             
          try {
-     
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE loans SET IsReturn=0 WHERE BorrowId= ?");
+            preparedStatement.setInt(1, id);
             
-            Statement stmt = con.createStatement();
-            stmt.executeQuery(query);
+      
+            preparedStatement.executeUpdate();
             ret = true;
            
         } catch (SQLException ex) {
@@ -173,6 +158,28 @@ public class LoanDAO {
         
          return ret;
      }
+     
+     
+         
+        public boolean returnBook(int borrowId){
+          boolean ret = false;
+              PreparedStatement preparedStatement = null;
+
+             try {         
+                    preparedStatement = con
+                            .prepareStatement("update loans set IsReturn = 1 where BorrowId = ?");  
+                    preparedStatement.setInt(1, borrowId);
+                    preparedStatement.executeUpdate();
+                    ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return ret;
+    }
     
     
+    
+     
+     
 }

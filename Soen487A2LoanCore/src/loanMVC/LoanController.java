@@ -92,5 +92,9 @@ public class LoanController {
        return this.dao.delete(id);
    }
    
+   public boolean updateLoan(int id , HashMap<String, String> map) throws SQLException{
+       return this.dao.updateBook(id, map);
+   
+   }
    
 }

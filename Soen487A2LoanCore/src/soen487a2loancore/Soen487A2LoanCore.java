@@ -6,6 +6,9 @@
 package soen487a2loancore;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import loanMVC.LoanController;
 
 /**
@@ -34,13 +37,32 @@ public class Soen487A2LoanCore {
 //          System.out.println("false");
 //      }
 //       
-    int x = 1;
-    try{
-    if(lc.borrowBook(1)){
-        System.out.println("fff");}
-    }catch(Exception e){
-        System.out.println("fdfdsa");
-    }
+//    int x = 1;
+//    try{
+//    if(lc.borrowBook(1)){
+//        System.out.println("fff");}
+//    }catch(Exception e){
+//        System.out.println("fdfdsa");
+//    }
+
+//
+//    HashMap <String, String> map = new HashMap<>();
+//    map.put("BookName", "bbbb");
+//    map.put("ReturnDate", "aaaaa");
+//    
+//    
+//        try {
+//            if(lc.updateLoan(1, map)){
+//                System.out.print("ddd");
+//            }else{
+//                System.out.print("Eeee");
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Soen487A2LoanCore.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    
+    
+    
     
     }
 }

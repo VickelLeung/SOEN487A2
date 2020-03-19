@@ -217,11 +217,55 @@ public class loanService {
         return result;
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "updateLoan")
+    public String updateLoan(@WebParam(name = "BookId") int BookId, @WebParam(name = "BookName") String BookName, @WebParam(name = "PersonBorrow") int PersonBorrow, @WebParam(name = "DateOfBorrowing") String DateOfBorrowing, @WebParam(name = "ReturnDate") String ReturnDate, @WebParam(name = "isReturn") int isReturn) {
+        //TODO write your implementation code here:\
+        boolean flag = false;
+        HashMap<String, String> map = new HashMap<>();
+        if(!BookName.equals("")  || BookName !=null){
+            map.put("BookName", BookName);
+            flag = true;
+        }
+        if(PersonBorrow != 0){
+            map.put("PersonBorrow", Integer.toString(PersonBorrow));
+            flag = true;
+        }
+        if(!DateOfBorrowing.equals("")  || DateOfBorrowing !=null){
+            map.put("DateOfBorrowing", DateOfBorrowing);
+            flag = true;
+        }
+        if(!ReturnDate.equals("")  || ReturnDate !=null){
+            map.put("ReturnDate", ReturnDate);
+            flag = true;
+        }
+        if(isReturn>0 && isReturn <2){
+            map.put("isReturn", Integer.toString(isReturn));
+            flag = true;
+        }
+        String result = "False to update the loan records";
+        if(flag){
+            try {
+                if(loanMVC.LoanController.getInstance().isLoanBookExsit(BookId)){
+                    if(loanMVC.LoanController.getInstance().updateLoan(BookId, map)){
+                        result = "Success to update the lloan records";
+                    }
+                    else{}
+                }else{
+                    result = "book is not exsit in loan system";
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else
+        {
+            result = "no argment";
+        }
+        return result;
+    }
 
 
-    
-    
-   
-    
-    
+
 }

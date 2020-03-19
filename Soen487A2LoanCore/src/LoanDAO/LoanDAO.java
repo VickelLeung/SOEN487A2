@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,6 +54,32 @@ public class LoanDAO {
             return rs;
     }
     
+    
+    
+    public boolean updateBook(int bookid, HashMap<String, String> map) throws SQLException{
+        boolean ret = false;
+         String query = "UPDATE loans Set ";
+         int index = 0;
+         for(String key : map.keySet()){
+            index ++;
+            if(index == 1){
+                  String x = key +" = \'"+ map.get(key)+"\'";
+                  query = query + x;
+            }
+            else {
+                String x = key +" = \'"+ map.get(key)+"\'";
+                query = query +", "+ x;      
+            }
+         }
+                query = query + "WHERE BorrowId ="+bookid+";";
+                
+              System.out.println(query);
+               Statement stmt = con.createStatement();
+               stmt.executeUpdate(query);
+               ret = true;
+         
+    return ret;
+    }
     
     public ResultSet getLoanByName(String name){
        ResultSet rs = null;

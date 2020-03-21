@@ -82,7 +82,7 @@ public class Books {
     }
     
     public String toString(){
-        String results = "Title : " + title + "\nDescription: " + description + 
+        String results = "ID #: " + id +"\nTitle : " + title + "\nDescription: " + description + 
                  "\nAuthor: " + author + "\nISBN: " + ISBN  + "\nPublisher: " + Publisher +"\n";
         
         return results;

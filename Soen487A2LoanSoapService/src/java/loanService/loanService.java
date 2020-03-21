@@ -281,4 +281,13 @@ public class loanService {
         return result;
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "showIsReturn")
+    public int showIsReturn(@WebParam(name = "borrowBookId") int borrowBookId) {
+        //TODO write your implementation code here:
+        return loanMVC.LoanController.getInstance().showIsReturn(borrowBookId);
+    }
+
 }

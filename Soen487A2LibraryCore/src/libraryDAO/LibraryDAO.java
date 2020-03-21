@@ -43,17 +43,6 @@ public class LibraryDAO {
         }        
     }
     
-    public ResultSet getBook() throws SQLException
-    {
-     
-      
-            String query = "SELECT * From books";
-            Statement stmt = con.createStatement();
-           
-            rs = stmt.executeQuery(query);
-            return rs;
-    }
-        
         
     public ResultSet getAllBook() throws SQLException
     {
@@ -154,50 +143,47 @@ public class LibraryDAO {
       return ret;
      }
      
-      public boolean updateBook(int id, String title, String description, String author, String ISBN, String Publisher){
-       
-         boolean ret = false;
-         boolean flag = false;
+      public boolean updateBook(int id, String title, String description, String author, String ISBN, String Publisher) throws SQLException{
+        HashMap <String, String> map = new HashMap<>();
+        boolean ret = false;
+        
+        if(!title.equals("")){
+             map.put("title", title);
+         }
+        if(!description.equals("")){
+            map.put("description",description);
+        }
+        if(!author.equals("")){
+            map.put("author", author);
+        }
+        if(!ISBN.equals("")){
+            map.put("ISBN", ISBN);
+        }
+        if(!Publisher.equals("")){
+            map.put("Publisher",Publisher);
+        }
          
-         String query = "update members SET ";
-         if(!title.equals("")&&!description.equals("")&& !author.equals("") && !ISBN.equals("") && !Publisher.equals("")){
-             query = query +"title= \'"+ title +"\', description=\'"+ description +"\', author=\'" + author +"\', ISBN=" + ISBN + "\', Publisher=" + Publisher;
-             flag = true;
+        if(!map.isEmpty()){
+         String query = "UPDATE books Set ";
+         int index = 0;
+         for(String key : map.keySet()){
+            index ++;
+            if(index == 1){
+                  String x = key +" = \'"+ map.get(key)+"\'";
+                  query = query + x;
+            }
+            else {
+                String x = key +" = \'"+ map.get(key)+"\'";
+                query = query +", "+ x;      
+            }
          }
-         else if(!title.equals("")){
-             query = query +"title= \'"+title+"\'";
-             flag = true;
-         }
-         else if(!description.equals("")){
-             query = query +"description= \'"+description+"\'";
-             flag = true;
-         }
-         else if(!author.equals("")){
-             query = query +"author= \'"+author+"\'";
-             flag = true;
-         }
-         else if(!ISBN.equals("")){
-             query = query +"ISBN= \'"+ISBN+"\'";
-             flag = true;
-         }
-         else if(!Publisher.equals("")){
-             query = query +"Publisher= \'"+Publisher+"\'";
-             flag = true;
-         }
-         
-         query = query + " WHERE id="+id +";";
-         
-        if(flag){
-            try {            
-                 Statement stmt = con.createStatement();
-                 stmt.executeUpdate(query);
-                ret = true;
-
-            } catch (SQLException ex) {
-                Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        } 
-       
+                query = query + "WHERE id ="+id+";";
+                
+              System.out.println(query);
+               Statement stmt = con.createStatement();
+               stmt.executeUpdate(query);
+               ret = true;
+        }
       return ret;
      }
 

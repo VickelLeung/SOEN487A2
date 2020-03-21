@@ -96,5 +96,8 @@ public class LoanController {
        return this.dao.updateBook(id, map);
    
    }
-   
+    
+   public int showIsReturn(int id){
+       return this.dao.showIsReturn(id);
+   }
 }

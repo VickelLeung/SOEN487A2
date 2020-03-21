@@ -205,8 +205,23 @@ public class LoanDAO {
           return ret;
     }
     
-    
-    
+        public int showIsReturn(int borrowId){
+            int result = -1;
+            ResultSet rs = null;
+            
+            String query = "SELECT * From loans where BorrowId = ?";
+        try {
+             PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setInt(1, borrowId);
+              rs = preparedStatement.executeQuery();
+              while(rs.next()){
+                 result =  rs.getInt("IsReturn");
+              }        
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+        }
      
      
 }

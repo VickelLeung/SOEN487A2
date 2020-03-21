@@ -39,7 +39,7 @@ public class BooksController {
         Books book = null;
         
         try {
-            ResultSet rs = dao.getBook();
+            ResultSet rs = dao.getAllBook();
             while(rs.next()){
              book = new Books(rs.getString("Title"),rs.getString("Description"),rs.getString("Author"),rs.getString("ISBN"),rs.getString("Publisher"));
             }
@@ -96,7 +96,7 @@ public class BooksController {
         return dao.delete(id);
    }
    
-   public boolean updateBookById(int id, String title, String description, String author, String ISBN, String Publisher ){
+   public boolean updateBookById(int id, String title, String description, String author, String ISBN, String Publisher ) throws SQLException{
        
         return dao.updateBook(id, title, description, author, ISBN, Publisher);
    }

@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import static bookMVC.BooksController.getInstance;
+import java.sql.SQLException;
 import javax.ws.rs.QueryParam;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -42,7 +43,7 @@ public class UpdateBookAPI {
      */
     @PUT
     @Produces(MediaType.APPLICATION_XML)
-    public String getXml(String data, @QueryParam("id") int id) throws ParseException {
+    public String getXml(String data, @QueryParam("id") int id) throws ParseException, SQLException {
    
         String result = "";
         String tempData = data;

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +43,7 @@ public class LoanDAO {
     
     public ResultSet getLoanById(int id){
            ResultSet rs = null;
-           String query = "Select * From loans where id = ?";
+           String query = "Select * From loans where BorrowId = ?";
             try {
                   PreparedStatement preparedStatement = con.prepareStatement(query);
                   preparedStatement.setInt(1, id);
@@ -54,16 +55,57 @@ public class LoanDAO {
     }
     
     
-    public boolean loanBook(int borrowId, String personBorrow, String dateOfBorrowing, String returnDate){
+    
+    public boolean updateBook(int bookid, HashMap<String, String> map) throws SQLException{
+        boolean ret = false;
+         String query = "UPDATE loans Set ";
+         int index = 0;
+         for(String key : map.keySet()){
+            index ++;
+            if(index == 1){
+                  String x = key +" = \'"+ map.get(key)+"\'";
+                  query = query + x;
+            }
+            else {
+                String x = key +" = \'"+ map.get(key)+"\'";
+                query = query +", "+ x;      
+            }
+         }
+                query = query + "WHERE BorrowId ="+bookid+";";
+                
+              System.out.println(query);
+               Statement stmt = con.createStatement();
+               stmt.executeUpdate(query);
+               ret = true;
+         
+    return ret;
+    }
+    
+    public ResultSet getLoanByName(String name){
+       ResultSet rs = null;
+       String query = "Select * From loans where BookName = ?";
+        try {
+              PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setString(1, name);
+              rs = preparedStatement.executeQuery();
+          } catch (SQLException ex) {
+              Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return rs;
+    }
+
+    
+    public boolean loanBook(int borrowId,String bookname, int personBorrow, String dateOfBorrowing, String returnDate){
           boolean ret = false;
              try {         
                   PreparedStatement preparedStatement = con
-                            .prepareStatement("insert into loans (BorrowId, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn) values (?,?,?,?,?)");  
+                            .prepareStatement("insert into loans (BorrowId, BookName, PersonBorrow, DateOfBorrowing, ReturnDate, IsReturn) values (?,?,?,?,?,?)");  
                     preparedStatement.setInt(1, borrowId);
-                    preparedStatement.setString(2, personBorrow);
-                    preparedStatement.setString(3, dateOfBorrowing);
-                    preparedStatement.setString(4, returnDate);
-                    preparedStatement.setInt(5, 0);
+                    preparedStatement.setString(2, bookname);
+                    preparedStatement.setInt(3, personBorrow);
+                    preparedStatement.setString(4, dateOfBorrowing);
+                    preparedStatement.setString(5, returnDate);
+                    preparedStatement.setInt(6, 1);
                     preparedStatement.executeUpdate();
                     ret = true;
             
@@ -72,24 +114,7 @@ public class LoanDAO {
         }
           return ret;
     }
-    
-        public boolean returnBook(int borrowId){
-          boolean ret = false;
-              PreparedStatement preparedStatement = null;
 
-             try {         
-                    preparedStatement = con
-                            .prepareStatement("update loans set IsReturn = 1 where BorrowId = ?");  
-                    preparedStatement.setInt(1, borrowId);
-                    preparedStatement.executeUpdate();
-                    ret = true;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          return ret;
-    }
-    
       public boolean update(int borrowId, String data){
           boolean ret = false;
               PreparedStatement preparedStatement = null;
@@ -140,7 +165,48 @@ public class LoanDAO {
     
     }
     
+     public boolean borrowBook(int id) {
+ 
+        boolean ret = false;
+        //String query = "UPDATE loans SET IsReturn='0' WHERE BorrowId="+id+";";
+            
+         try {
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE loans SET IsReturn=0 WHERE BorrowId= ?");
+            preparedStatement.setInt(1, id);
+            
+      
+            preparedStatement.executeUpdate();
+            ret = true;
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         return ret;
+     }
+     
+     
+         
+        public boolean returnBook(int borrowId){
+          boolean ret = false;
+              PreparedStatement preparedStatement = null;
+
+             try {         
+                    preparedStatement = con
+                            .prepareStatement("update loans set IsReturn = 1 where BorrowId = ?");  
+                    preparedStatement.setInt(1, borrowId);
+                    preparedStatement.executeUpdate();
+                    ret = true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return ret;
+    }
     
     
     
+     
+     
 }

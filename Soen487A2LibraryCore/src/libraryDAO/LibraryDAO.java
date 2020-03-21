@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -64,11 +65,37 @@ public class LibraryDAO {
             rs = stmt.executeQuery(query);
             return rs; 
    }
-        
-        
-     public ResultSet getbookById(int id) throws ClassNotFoundException{
-        
-          
+    
+    /*
+    haven't check it yet
+    
+    */
+    public void editBook(HashMap<String,String> map, int tmp_static_num_2) throws SQLException
+    {
+            String query = "UPDATE books Set ";
+          int index = 0;
+
+          for(String key: map.keySet())
+          {   
+              index ++;
+              if(index == 1)
+              {
+              String x = key +" = \'"+ map.get(key)+"\'";
+              query = query + x;                
+              }
+              else
+              {
+                  String x = key +" = \'"+ map.get(key)+"\'";
+                  query = query +", "+ x;      
+              }
+           }
+          query = query + "WHERE id ="+tmp_static_num_2+";";
+          Statement stmt = con.createStatement();
+          stmt.executeUpdate(query);
+    }
+
+    
+     public ResultSet getbookById(int id){
            ResultSet rs = null;
            String query = "Select * From books where id = ?";
         try {

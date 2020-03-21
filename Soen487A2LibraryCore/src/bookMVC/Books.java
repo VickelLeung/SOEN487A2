@@ -80,4 +80,12 @@ public class Books {
     public void setPublisher(String Publisher) {
         this.Publisher = Publisher;
     }
+    
+    public String toString(){
+        String results = "Title : " + title + "\nDescription: " + description + 
+                 "\nAuthor: " + author + "\nISBN: " + ISBN  + "\nPublisher: " + Publisher +"\n";
+        
+        return results;
+    }
+    
 }

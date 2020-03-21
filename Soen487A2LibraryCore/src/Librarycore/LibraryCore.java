@@ -27,13 +27,14 @@ public class LibraryCore {
 //        System.out.println(book.title);
 //        Books book = bc.getBookById(1);
 //         System.out.println(book.title);
-    Books book = new Books("test","test","test","test","test");
-    if(bc.addBook(book)){
-        System.out.println("[Sccess] AddBook");
-    }
-    else{
-    System.out.println("[Failed] AddBook");
-    }
+//    Books book = new Books("pi","apple","jo","da","lo");
+//    if(bc.addBook(book)){
+//        System.out.println("[Sccess] AddBook");
+//    }
+//    else{
+//    System.out.println("[Failed] AddBook");
+//    }
+//        System.out.println(bc.getBookById(0));
         
     }
     

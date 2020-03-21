@@ -22,6 +22,7 @@ public class LibraryDAO {
  
     private static LibraryDAO dao = null;
     public Connection con = null;
+    public ResultSet rs = null;
     
     public static synchronized LibraryDAO getInstance(){
         if(dao == null){
@@ -34,7 +35,7 @@ public class LibraryDAO {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
+            con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -44,7 +45,7 @@ public class LibraryDAO {
     
     public ResultSet getBook() throws SQLException
     {
-        ResultSet rs = null;
+     
       
             String query = "SELECT * From books";
             Statement stmt = con.createStatement();
@@ -56,7 +57,7 @@ public class LibraryDAO {
         
     public ResultSet getAllBook() throws SQLException
     {
-        ResultSet rs = null;
+     
       
             String query = "SELECT * From books";
             Statement stmt = con.createStatement();
@@ -64,7 +65,6 @@ public class LibraryDAO {
             rs = stmt.executeQuery(query);
             return rs; 
    }
-        
     
     /*
     haven't check it yet
@@ -88,7 +88,7 @@ public class LibraryDAO {
                   String x = key +" = \'"+ map.get(key)+"\'";
                   query = query +", "+ x;      
               }
-                    }
+           }
           query = query + "WHERE id ="+tmp_static_num_2+";";
           Statement stmt = con.createStatement();
           stmt.executeUpdate(query);
@@ -99,6 +99,7 @@ public class LibraryDAO {
            ResultSet rs = null;
            String query = "Select * From books where id = ?";
         try {
+           
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
@@ -113,9 +114,9 @@ public class LibraryDAO {
         boolean ret = false;
         try {
             PreparedStatement preparedStatement = con
-                    .prepareStatement("delete from book where id = ?");
+                    .prepareStatement("DELETE from books where id = ?");
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
             ret = true;
         } catch (SQLException ex) {
             Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,7 +139,7 @@ public class LibraryDAO {
          try {
             
             preparedStatement = con
-                    .prepareStatement("insert into books (title, description, author, ISBN, Publisher) values (?,?,?,?,?)");  
+                    .prepareStatement("INSERT into books (title, description, author, ISBN, Publisher) values (?,?,?,?,?)");  
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, description);
             preparedStatement.setString(3, author);
@@ -150,6 +151,53 @@ public class LibraryDAO {
         } catch (SQLException ex) {
             Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+      return ret;
+     }
+     
+      public boolean updateBook(int id, String title, String description, String author, String ISBN, String Publisher){
+       
+         boolean ret = false;
+         boolean flag = false;
+         
+         String query = "update members SET ";
+         if(!title.equals("")&&!description.equals("")&& !author.equals("") && !ISBN.equals("") && !Publisher.equals("")){
+             query = query +"title= \'"+ title +"\', description=\'"+ description +"\', author=\'" + author +"\', ISBN=" + ISBN + "\', Publisher=" + Publisher;
+             flag = true;
+         }
+         else if(!title.equals("")){
+             query = query +"title= \'"+title+"\'";
+             flag = true;
+         }
+         else if(!description.equals("")){
+             query = query +"description= \'"+description+"\'";
+             flag = true;
+         }
+         else if(!author.equals("")){
+             query = query +"author= \'"+author+"\'";
+             flag = true;
+         }
+         else if(!ISBN.equals("")){
+             query = query +"ISBN= \'"+ISBN+"\'";
+             flag = true;
+         }
+         else if(!Publisher.equals("")){
+             query = query +"Publisher= \'"+Publisher+"\'";
+             flag = true;
+         }
+         
+         query = query + " WHERE id="+id +";";
+         
+        if(flag){
+            try {            
+                 Statement stmt = con.createStatement();
+                 stmt.executeUpdate(query);
+                ret = true;
+
+            } catch (SQLException ex) {
+                Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        } 
+       
       return ret;
      }
 

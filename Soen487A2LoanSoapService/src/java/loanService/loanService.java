@@ -266,6 +266,19 @@ public class loanService {
         return result;
     }
 
-
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "deleteLoanBook")
+    public String deleteLoanBook(@WebParam(name = "borrowBookId") int borrowBookId) {
+        //TODO write your implementation code here:
+        String result = "fail delete loan book";
+       
+        if(loanMVC.LoanController.getInstance().deleteLoanBook(borrowBookId)){
+            result = "success delete loan book";
+        }
+  
+        return result;
+    }
 
 }

@@ -75,7 +75,7 @@ public class loanService {
      * Web service operation
      */
     @WebMethod(operationName = "updateMember")
-    public String edit(@WebParam(name = "id") int id, @WebParam(name = "name") String name, @WebParam(name = "contact") String contact) {
+    public String updateMember(@WebParam(name = "id") int id, @WebParam(name = "name") String name, @WebParam(name = "contact") String contact) {
         //TODO write your implementation code here:
        String result = "fail to edit member";
        if(name == null){

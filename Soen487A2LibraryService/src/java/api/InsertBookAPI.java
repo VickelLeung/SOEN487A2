@@ -8,8 +8,8 @@ package api;
 import bookMVC.Books;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -25,21 +25,17 @@ import org.json.simple.parser.ParseException;
  * @author vickelleung
  */
 @Path("add_book")
-public class AddBookAPI {
+public class InsertBookAPI {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of AddBookAPI
+     * Creates a new instance of InsertBookAPIResource
      */
-    public AddBookAPI() {
+    public InsertBookAPI() {
     }
-
-    /**
-     * Retrieves representation of an instance of api.AddBookAPI
-     * @return an instance of java.lang.String
-     */
+    
     @POST
     @Consumes("application/json") 
     @Produces(MediaType.TEXT_PLAIN)
@@ -72,7 +68,7 @@ public class AddBookAPI {
     }
 
     /**
-     * PUT method for updating or creating an instance of AddBookAPI
+     * PUT method for updating or creating an instance of InsertBookAPI
      * @param content representation for the resource
      */
     @PUT

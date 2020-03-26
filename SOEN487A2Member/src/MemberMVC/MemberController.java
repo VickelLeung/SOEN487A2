@@ -83,6 +83,9 @@ public class MemberController {
         return dao.deleteMember(id);
    }
    
+   public int getMemberIdByName(String name){
+       return dao.getMemberIdByName(name);
+   }
 
 }
 

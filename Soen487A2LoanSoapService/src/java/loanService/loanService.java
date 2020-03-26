@@ -48,6 +48,14 @@ public class loanService {
          return result;
     }
 
+   /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getMemberIdByName")
+    public int getMemberIdByName(@WebParam(name = "name") String name) {
+        //TODO write your implementation code here:
+        return MemberMVC.MemberController.getInstance().getMemberIdByName(name);
+    }
 
     /**
      * Web service operation
@@ -66,7 +74,7 @@ public class loanService {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "edit")
+    @WebMethod(operationName = "updateMember")
     public String edit(@WebParam(name = "id") int id, @WebParam(name = "name") String name, @WebParam(name = "contact") String contact) {
         //TODO write your implementation code here:
        String result = "fail to edit member";
@@ -289,5 +297,7 @@ public class loanService {
         //TODO write your implementation code here:
         return loanMVC.LoanController.getInstance().showIsReturn(borrowBookId);
     }
+
+
 
 }

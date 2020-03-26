@@ -39,7 +39,7 @@ public class MemberCore {
 //        else System.out.println("Did not delete");
 
       // ==GetMembers==
-       System.out.print(mc.getMember(1).toString());
+      // System.out.print(mc.getMember(1).toString());
         
 //         ==ListMembers==
 //            hm = mc.getMemberList();
@@ -47,8 +47,8 @@ public class MemberCore {
 //                System.out.println(hm.get(i));
 //            }
 
-
-
+      int x = mc.getMemberIdByName("sssss");
+        System.out.println(x);
 
     }
  }

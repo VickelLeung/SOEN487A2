@@ -88,6 +88,26 @@ public class MemberDAO {
       return ret;
      }
 
+     public int getMemberIdByName(String name){
+        int ret = -1;
+        try {
+            ResultSet rs = null;
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("Select * from members where name = ?");
+            preparedStatement.setString(1, name);
+            
+            rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                ret = rs.getInt("id");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+        return ret;
+     }
+     
+     
      public boolean updateMember(int id ,String name, String contact){
        
          boolean ret = false;

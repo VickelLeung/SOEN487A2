@@ -61,10 +61,10 @@ public class loanService {
      * Web service operation
      */
     @WebMethod(operationName = "addMember")
-    public String addMember(@WebParam(name = "name") String name, @WebParam(name = "contact") String contact) {
+    public String addMember(@WebParam(name = "name") String name, @WebParam(name = "contact") String contact, @WebParam(name = "password") String password) {
         //TODO write your implementation code here:
         String result = "fail to add member";
-        Members mb = new Members(name,contact);
+        Members mb = new Members(name,contact,password);
         if(MemberMVC.MemberController.getInstance().addMember(mb)){
             result = "success to add member";
         }

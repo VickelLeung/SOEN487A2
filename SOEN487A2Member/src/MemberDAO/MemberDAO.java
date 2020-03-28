@@ -69,16 +69,16 @@ public class MemberDAO {
          return rs;
     }
 
-     public boolean addMember(String name, String contact){
-         System.out.println("n: " + name + " c: " + contact);
+     public boolean addMember(String name, String contact, String password){
          boolean ret = false;
          PreparedStatement preparedStatement = null;
          try {
             
             preparedStatement = con
-                    .prepareStatement("insert into members (name, contact) values (?,?)");  
+                    .prepareStatement("insert into members (name, contact, password) values (?,?,?)");  
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, contact);
+            preparedStatement.setString(3, password);
             preparedStatement.executeUpdate();
             ret = true;
             

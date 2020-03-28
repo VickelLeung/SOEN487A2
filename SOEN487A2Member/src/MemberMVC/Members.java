@@ -15,27 +15,35 @@ public class Members {
     private int id;
     private String name;
     private String contact;
+    private String password;
     
     public  Members(){
         this.id = 1;
         this.name = "default";
         this.contact = "contact";
+        this.password = "abcd";
     }
     
-    public  Members(int id,String name,String contact){
+    public  Members(int id,String name,String contact, String password){
         this.id = id;
         this.name = name;
         this.contact = contact;
+        this.password = password;
     }
     
     
-    public Members(String name,String contact){
+    public Members(String name,String contact,String password){
         this.name = name;
         this.contact = contact;
+        this.password = password;
       }
-    
+
     public void setName(String n){
         name = n;
+    }
+    
+    public void setPassword(String p){
+        password = p;
     }
     
     public void setContact(String c){
@@ -46,6 +54,10 @@ public class Members {
         return name;
     }
      
+    public String getPassword(){
+        return password;
+    }
+    
     public String getContact(){
         return contact;
     }

@@ -43,7 +43,7 @@ public class MemberController {
         try {
             ResultSet rs = dao.getMemberInfo(id);
             while(rs.next()){
-             mem = new Members(rs.getInt("id"),rs.getString("name"),rs.getString("contact"));
+             mem = new Members(rs.getInt("id"),rs.getString("name"),rs.getString("contact"),rs.getString("password"));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -52,14 +52,13 @@ public class MemberController {
         return mem; 
     }
     
-    
    public HashMap getMemberList(){
        this.memberMap.clear();
        try {
             ResultSet rs = dao.getListMembers();
             
             while(rs.next()){
-                Members mem = new Members(rs.getInt("id"),rs.getString("name"),rs.getString("contact"));
+                Members mem = new Members(rs.getInt("id"),rs.getString("name"),rs.getString("contact"),rs.getString("password"));
                 memberMap.put(rs.getInt("id"), mem);
             }
             rs.close();
@@ -70,10 +69,11 @@ public class MemberController {
     }
    
    
-   public boolean addMember(Members m){
-       return dao.addMember(m.getName(), m.getContact());
+    public boolean addMember(Members m){
+       return dao.addMember(m.getName(), m.getContact(),m.getPassword());
        //return dao.addBookToSQL(m.getTitle(), m.getDescription(), m.getAuthor(), m.getISBN(), m.getPublisher());
     }
+   
    
    public boolean updateMember(int id,String name, String contact){ 
        return dao.updateMember(id, name, contact);

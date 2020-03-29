@@ -71,6 +71,7 @@ public class MemberDAO {
          return rs;
     }
 
+
      public boolean addMember(String name, String contact, String password){
          boolean ret = false;
          PreparedStatement preparedStatement = null;

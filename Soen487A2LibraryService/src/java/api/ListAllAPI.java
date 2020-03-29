@@ -6,6 +6,8 @@
 package api;
 
 import bookMVC.Books;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -14,25 +16,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-import static bookMVC.BooksController.getInstance;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * REST Web Service
  *
  * @author vickelleung
  */
-@Path("list_book")
-public class ListBookAPI {
+@Path("list_all")
+public class ListAllAPI {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of GetbookResource
+     * Creates a new instance of List_allAPI
      */
-    public ListBookAPI() {
+    public ListAllAPI() {
     }
 
     /**
@@ -57,11 +56,11 @@ public class ListBookAPI {
     }
 
     /**
-     * PUT method for updating or creating an instance of GetbookResource
+     * PUT method for updating or creating an instance of ListAllAPI
      * @param content representation for the resource
      */
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Consumes(MediaType.APPLICATION_XML)
+    public void putXml(String content) {
     }
 }

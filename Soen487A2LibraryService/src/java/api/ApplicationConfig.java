@@ -29,10 +29,11 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(api.AddBookAPI.class);
+        
         resources.add(api.DeleteBookAPI.class);
         resources.add(api.GetBookAPI.class);
-        resources.add(api.ListBookAPI.class);
+        resources.add(api.InsertBookAPI.class);
+        resources.add(api.ListAllAPI.class);
         resources.add(api.UpdateBookAPI.class);
     }
     

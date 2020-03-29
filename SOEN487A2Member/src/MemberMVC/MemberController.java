@@ -52,7 +52,6 @@ public class MemberController {
         return mem; 
     }
     
-    
    public HashMap getMemberList(){
        this.memberMap.clear();
        try {
@@ -70,10 +69,12 @@ public class MemberController {
     }
    
    
-   public boolean addMember(Members m){
+
+    public boolean addMember(Members m){
        return dao.addMember(m.getName(), m.getContact(),m.getPassword());
        //return dao.addBookToSQL(m.getTitle(), m.getDescription(), m.getAuthor(), m.getISBN(), m.getPublisher());
     }
+   
    
    public boolean updateMember(int id,String name, String contact){ 
        return dao.updateMember(id, name, contact);

@@ -26,13 +26,7 @@ public class loanService {
      
      member
      */
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
+
 
     /**
      * Web service operation
@@ -64,12 +58,15 @@ public class loanService {
     public String addMember(@WebParam(name = "name") String name, @WebParam(name = "contact") String contact, @WebParam(name = "password") String password) {
         //TODO write your implementation code here:
         String result = "fail to add member";
+
         Members mb = new Members(name,contact,password);
         if(MemberMVC.MemberController.getInstance().addMember(mb)){
             result = "success to add member";
         }
         return result;
     }
+    
+    
 
     /**
      * Web service operation
@@ -78,17 +75,25 @@ public class loanService {
     public String updateMember(@WebParam(name = "id") int id, @WebParam(name = "name") String name, @WebParam(name = "contact") String contact) {
         //TODO write your implementation code here:
        String result = "fail to edit member";
-       if(name == null){
-           name = "";
-       }
-       if(contact == null){
-           contact = ""; 
-       }
-       
-       if(MemberMVC.MemberController.getInstance().updateMember(id, name, contact)){
-           result = "success to edit member";
-       };
-        return result;
+       try{
+            if(name == null){
+                name = "";
+            }
+            if (contact == null) {
+                contact = "";
+            }
+
+            if (MemberMVC.MemberController.getInstance().updateMember(id, name, contact)) {
+                result = "success to edit member";
+            }
+            return result;
+        }
+        catch (NumberFormatException e) { 
+            return (id + " is not a valid integer number"); 
+        }
+        catch (Exception ex) {
+            return ("Exception: " + ex);
+        }   
     }
 
     /**
@@ -112,13 +117,15 @@ public class loanService {
         return result;
     }
 
+    
+    
     /**
      * Web service operation
      */
     @WebMethod(operationName = "deleteMember")
     public String deleteMember(@WebParam(name = "id") int id) {
        //TODO write your implementation code here:
-       String result = "fail to delete member";
+        String result = "fail to delete member";
         if(MemberMVC.MemberController.getInstance().deleteMember(id)){
             result = "success to delete member";
         }
@@ -149,14 +156,14 @@ public class loanService {
         }
         
         if(loansMap != null){
-            result = "";
             for(int i : loansMap.keySet()){
-                result = result + " " + loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+  loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn();
+                result = loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+ " " + loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn();
             }
         }
         return result;
     }
 
+    
     /**
      * Web service operation
      */
@@ -164,43 +171,41 @@ public class loanService {
     public String CreateLoanBook(@WebParam(name = "borrowID") int borrowID, @WebParam(name = "bookName") String bookName, @WebParam(name = "personBorrow") int personBorrow, @WebParam(name = "borrowDate") String borrowDate, @WebParam(name = "returnDate") String returnDate) {
         //TODO write your implementation code here:
         
-        
-        
         String result = "failed to add the loanbook";
         
- 
-        
         if(loanMVC.LoanController.getInstance().loanBook(borrowID, bookName, personBorrow, borrowDate, returnDate)){
-            result = "sccessful to add the loanbook"; 
+            result = "success to add the loanbook"; 
         }
-        
-        
         
         return result;
     }
 
-    /**
+    
+    
+     /**
      * Web service operation
      */
     @WebMethod(operationName = "borrowBook")
     public String borrowBook(@WebParam(name = "Bookid") int Bookid) {
         //TODO write your implementation code here:
         String result = "init";
-        try{
-        if(loanMVC.LoanController.getInstance().isLoanBookExsit(Bookid)){
-            if(loanMVC.LoanController.getInstance().borrowBook(Bookid)){
-                result = "Success to borrow book";
+        try {
+            if (loanMVC.LoanController.getInstance().isLoanBookExsit(Bookid)
+                    && loanMVC.LoanController.getInstance().showIsReturn(Bookid) == 1) {
+                if (loanMVC.LoanController.getInstance().borrowBook(Bookid)) {
+                    result = "Success to borrow book";
+                }
+            } else if (loanMVC.LoanController.getInstance().showIsReturn(Bookid) == 0) {
+                result = "Sorry. Your requested book is already borrowed by someone else. Please come back later!";
+            } else {
+                result = "The requested book does not exist";
             }
-            
-        }
-        else{
-            result = "book is not exsit";
-        }
-        }
-        catch(Exception e){ 
+        } catch (Exception e) {
         }
         return result;
     }
+    
+    
 
     /**
      * Web service operation
@@ -208,23 +213,24 @@ public class loanService {
     @WebMethod(operationName = "returnBook")
     public String returnBook(@WebParam(name = "bookID") int bookID) {
         //TODO write your implementation code here:
-               String result = "init";
-        try{
-        if(loanMVC.LoanController.getInstance().isLoanBookExsit(bookID)){
-            if(loanMVC.LoanController.getInstance().returnBook(bookID)){
-                result = "Success to return book";
+        String result = "init";
+        try {
+            if (loanMVC.LoanController.getInstance().isLoanBookExsit(bookID)
+                    && loanMVC.LoanController.getInstance().showIsReturn(bookID) == 0) {
+                if (loanMVC.LoanController.getInstance().returnBook(bookID)) {
+                    result = "Success to return book";
+                }
+            } else if (loanMVC.LoanController.getInstance().showIsReturn(bookID) == 1) {
+                result = "This book has been previously returned. It is available to borrow now.";
+            } else {
+                result = "This book does not exist";
             }
-            
-        }
-        else{
-            result = "book is not exsit";
-        }
-        }
-        catch(Exception e){ 
+        } catch (Exception e) {
         }
         return result;
     }
 
+    
     /**
      * Web service operation
      */
@@ -258,18 +264,18 @@ public class loanService {
             try {
                 if(loanMVC.LoanController.getInstance().isLoanBookExsit(BookId)){
                     if(loanMVC.LoanController.getInstance().updateLoan(BookId, map)){
-                        result = "Success to update the lloan records";
+                        result = "Success to update the loan records";
                     }
                     else{}
                 }else{
-                    result = "book is not exsit in loan system";
+                    result = "book does not exsit in loan system";
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else
         {
-            result = "no argment";
+            result = "no arguments";
         }
         return result;
     }

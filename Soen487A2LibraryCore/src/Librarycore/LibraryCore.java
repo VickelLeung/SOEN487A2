@@ -7,8 +7,12 @@ package Librarycore;
 
 import bookMVC.Books;
 import bookMVC.BooksController;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import libraryDAO.GetProperties;
 
 
 
@@ -22,7 +26,9 @@ public class LibraryCore {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        BooksController bc = BooksController.getInstance();
+           BooksController bc = BooksController.getInstance();
+
+        
 //        Books book = bc.getBookByID();
 //        System.out.println(book.title);
 //        Books book = bc.getBookById(1);

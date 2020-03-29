@@ -69,6 +69,7 @@ public class MemberController {
     }
    
    
+
     public boolean addMember(Members m){
        return dao.addMember(m.getName(), m.getContact(),m.getPassword());
        //return dao.addBookToSQL(m.getTitle(), m.getDescription(), m.getAuthor(), m.getISBN(), m.getPublisher());

@@ -34,7 +34,9 @@ public class MemberDAO {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            GetProperties properties = new GetProperties();
             this.con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
+            //con =  DriverManager.getConnection( GetProperties.getDBURL(), GetProperties.getDBUser(), GetProperties.getDBPassword());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -69,7 +71,8 @@ public class MemberDAO {
          return rs;
     }
 
-      public boolean addMember(String name, String contact, String password){
+
+     public boolean addMember(String name, String contact, String password){
          boolean ret = false;
          PreparedStatement preparedStatement = null;
          try {

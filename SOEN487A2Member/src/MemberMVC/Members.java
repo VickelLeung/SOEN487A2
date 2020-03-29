@@ -17,18 +17,22 @@ public class Members {
     private String password;
 
     public Members() {
+
         this.id = 1;
         this.name = "default";
         this.contact = "contact";
         this.password = "abcd";
     }
 
-    public Members(int id, String name, String contact, String password) {
+
+
+    public  Members(int id,String name,String contact, String password){
         this.id = id;
         this.name = name;
         this.contact = contact;
         this.password = password;
     }
+
 
     public Members(String name, String contact, String password) {
         this.name = name;
@@ -52,11 +56,12 @@ public class Members {
         return name;
     }
 
-    public String getPassword() {
+     
+    public String getPassword(){
         return password;
     }
-
-    public String getContact() {
+    
+    public String getContact(){
         return contact;
     }
 

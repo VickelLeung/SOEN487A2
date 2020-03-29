@@ -24,9 +24,11 @@ public class LibraryDAO {
     public Connection con = null;
     public ResultSet rs = null;
     
+    
     public static synchronized LibraryDAO getInstance(){
         if(dao == null){
             dao = new LibraryDAO();
+            
         }
         return dao;
     }
@@ -35,7 +37,9 @@ public class LibraryDAO {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            GetProperties properties = new GetProperties();
             con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
+            //con =  DriverManager.getConnection( GetProperties.getDBURL(), GetProperties.getDBUser(), GetProperties.getDBPassword());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

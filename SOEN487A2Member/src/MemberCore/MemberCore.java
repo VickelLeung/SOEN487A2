@@ -23,6 +23,7 @@ public class MemberCore {
      */
     public static void main(String[] args) throws SQLException {
         MemberController mc = MemberController.getInstance();
+        Members mem = mc.getMember(2);
       //  Members mem = new Members(1, "tom", "514-423-12421");
       //  HashMap hm = new HashMap();
         

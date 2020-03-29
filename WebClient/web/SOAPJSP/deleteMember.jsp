@@ -29,8 +29,10 @@
                 // TODO initialize WS operation arguments here
                 String id = request.getParameter("member_id");;
                 // TODO process result here
+                
                 java.lang.String result = port.deleteMember(Integer.parseInt(id));
                 
+               
                 %><font color="red"><%out.print(result);%></font><%  
                 
             } catch (Exception ex) {

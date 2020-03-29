@@ -24,6 +24,8 @@ public class Soen487A2LoanCore {
         // TODO code application logic here
         
         LoanController lc = LoanController.getInstance();
+        
+        lc.test2();
 //        if(lc.loanBook(1, "aaa", "dddd", "dddd")){
 //            System.out.println("True");
 //        }else

@@ -5,6 +5,7 @@
  */
 package loanMVC;
 
+import LoanDAO.GetProperties;
 import LoanDAO.LoanDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +46,15 @@ public class LoanController {
     }
 
 
+    public String test(){
+        return GetProperties.getDBURL();
+    }
+    
+      public void test2(){
+         GetProperties.set();
+    }
+    
+    
     
     public boolean loanBook(int borrowId, String bookname, int personBorrow, String dateOfBorrowing, String returnDate) {
         return this.dao.loanBook(borrowId, bookname ,personBorrow, dateOfBorrowing, returnDate);

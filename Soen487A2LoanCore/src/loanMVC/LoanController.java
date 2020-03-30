@@ -75,7 +75,6 @@ public class LoanController {
         }      
    }
    
-   
       public HashMap <Integer, Loans> getLoanListByName(String name ) throws SQLException{
          this.loadsmap.clear();
         ResultSet rs = dao.getLoanByName(name);
@@ -86,6 +85,16 @@ public class LoanController {
         return this.loadsmap;
         
    }
+      
+    public HashMap <Integer, Loans> listLoanByMemberID(int memberID) throws SQLException{
+       this.loadsmap.clear();
+        ResultSet rs = dao.listLoanByMemberID(memberID);
+                while(rs.next()){
+            Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+            this.loadsmap.put(rs.getInt("BorrowId"), ls);
+        }
+     return this.loadsmap;
+   } 
    
       
    public boolean borrowBook(int id){

@@ -132,6 +132,20 @@ public class LoanDAO {
         }
           return ret;
     }
+      
+      
+    public ResultSet listLoanByMemberID(int memberID){
+        ResultSet rs = null;
+                String query = "Select * From loans where PersonBorrow = ?";
+        try {
+              PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setInt(1, memberID);
+              rs = preparedStatement.executeQuery();
+          } catch (SQLException ex) {
+              Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return rs;
+    }
         
     public boolean delete(int id)
     {  

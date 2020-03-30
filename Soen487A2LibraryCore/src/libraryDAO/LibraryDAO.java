@@ -86,7 +86,20 @@ public class LibraryDAO {
           Statement stmt = con.createStatement();
           stmt.executeUpdate(query);
     }
-
+    
+    public ResultSet getbookByTitle(String title){
+           ResultSet rs = null;
+           String query = "Select * From books where title = ?";
+        try {
+           
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, title);
+            rs = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return rs;
+     }
     
      public ResultSet getbookById(int id){
            ResultSet rs = null;

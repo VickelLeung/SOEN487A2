@@ -35,6 +35,7 @@
         <%-- start web service invocation --%><hr/>
         <%
             try {
+                
                 loanservice.LoanService_Service service = new loanservice.LoanService_Service();
                 loanservice.LoanService port = service.getLoanServicePort();
                 // TODO initialize WS operation arguments here

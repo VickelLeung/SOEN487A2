@@ -35,7 +35,7 @@ public class LoanController {
     }
     
       
-    public boolean isLoanBookExsit(int id) throws SQLException{
+    public boolean isLoanBookExist(int id) throws SQLException{
     ResultSet rs = null;
     boolean flag = false;
     rs = this.dao.getLoanById(id);    
@@ -45,6 +45,8 @@ public class LoanController {
     return flag;
     }
 
+    
+    
 
     public String test(){
         return GetProperties.getDBURL();
@@ -75,17 +77,43 @@ public class LoanController {
         }      
    }
    
+    
    
-      public HashMap <Integer, Loans> getLoanListByName(String name ) throws SQLException{
-         this.loadsmap.clear();
+      public HashMap<Integer, Loans> getLoanListByName(String name) throws SQLException {
+        this.loadsmap.clear();
         ResultSet rs = dao.getLoanByName(name);
-        while(rs.next()){
-            Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+        while (rs.next()) {
+            Loans ls = new Loans(rs.getInt("BorrowId"), rs.getString("BookName"), rs.getInt("PersonBorrow"), rs.getString("DateOfBorrowing"), rs.getString("ReturnDate"), rs.getInt("IsReturn"));
             this.loadsmap.put(rs.getInt("BorrowId"), ls);
         }
         return this.loadsmap;
-        
-   }
+
+    }
+      
+    
+    public Loans getLoanDetailByID(int borrowId) throws SQLException{
+        Loans loan = null;
+        ResultSet rs = this.dao.getLoanDetailByID(borrowId);
+        while(rs.next()){
+            loan = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+        }
+        return loan;
+    }
+    
+    
+      
+    public HashMap<Integer, Loans> listLoanByMemberID(int memberID) throws SQLException {
+        this.loadsmap.clear();
+        ResultSet rs = dao.listLoanByMemberID(memberID);
+        while (rs.next()) {
+            Loans ls = new Loans(rs.getInt("BorrowId"), rs.getString("BookName"), rs.getInt("PersonBorrow"), rs.getString("DateOfBorrowing"), rs.getString("ReturnDate"), rs.getInt("IsReturn"));
+            this.loadsmap.put(rs.getInt("BorrowId"), ls);
+        }
+        return this.loadsmap;
+    }
+     
+      
+      
    
       
    public boolean borrowBook(int id){

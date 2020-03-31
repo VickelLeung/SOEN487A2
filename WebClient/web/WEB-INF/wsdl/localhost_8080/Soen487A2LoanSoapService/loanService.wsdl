@@ -4,17 +4,41 @@
 <xsd:import namespace="http://loanService/" schemaLocation="http://localhost:8080/Soen487A2LoanSoapService/loanService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getMemberIdByName">
+<part name="parameters" element="tns:getMemberIdByName"/>
+</message>
+<message name="getMemberIdByNameResponse">
+<part name="parameters" element="tns:getMemberIdByNameResponse"/>
+</message>
+<message name="getLoanListByMemberID">
+<part name="parameters" element="tns:getLoanListByMemberID"/>
+</message>
+<message name="getLoanListByMemberIDResponse">
+<part name="parameters" element="tns:getLoanListByMemberIDResponse"/>
+</message>
+<message name="getLoanListByBookName">
+<part name="parameters" element="tns:getLoanListByBookName"/>
+</message>
+<message name="getLoanListByBookNameResponse">
+<part name="parameters" element="tns:getLoanListByBookNameResponse"/>
+</message>
 <message name="getMember">
 <part name="parameters" element="tns:getMember"/>
 </message>
 <message name="getMemberResponse">
 <part name="parameters" element="tns:getMemberResponse"/>
 </message>
-<message name="deleteLoanBook">
-<part name="parameters" element="tns:deleteLoanBook"/>
+<message name="getLoanDetailByID">
+<part name="parameters" element="tns:getLoanDetailByID"/>
 </message>
-<message name="deleteLoanBookResponse">
-<part name="parameters" element="tns:deleteLoanBookResponse"/>
+<message name="getLoanDetailByIDResponse">
+<part name="parameters" element="tns:getLoanDetailByIDResponse"/>
+</message>
+<message name="addMember">
+<part name="parameters" element="tns:addMember"/>
+</message>
+<message name="addMemberResponse">
+<part name="parameters" element="tns:addMemberResponse"/>
 </message>
 <message name="borrowBook">
 <part name="parameters" element="tns:borrowBook"/>
@@ -28,17 +52,11 @@
 <message name="updateLoanResponse">
 <part name="parameters" element="tns:updateLoanResponse"/>
 </message>
-<message name="CreateLoanBook">
-<part name="parameters" element="tns:CreateLoanBook"/>
+<message name="updateMember">
+<part name="parameters" element="tns:updateMember"/>
 </message>
-<message name="CreateLoanBookResponse">
-<part name="parameters" element="tns:CreateLoanBookResponse"/>
-</message>
-<message name="returnBook">
-<part name="parameters" element="tns:returnBook"/>
-</message>
-<message name="returnBookResponse">
-<part name="parameters" element="tns:returnBookResponse"/>
+<message name="updateMemberResponse">
+<part name="parameters" element="tns:updateMemberResponse"/>
 </message>
 <message name="showIsReturn">
 <part name="parameters" element="tns:showIsReturn"/>
@@ -46,11 +64,23 @@
 <message name="showIsReturnResponse">
 <part name="parameters" element="tns:showIsReturnResponse"/>
 </message>
-<message name="updateMember">
-<part name="parameters" element="tns:updateMember"/>
+<message name="getListMember">
+<part name="parameters" element="tns:getListMember"/>
 </message>
-<message name="updateMemberResponse">
-<part name="parameters" element="tns:updateMemberResponse"/>
+<message name="getListMemberResponse">
+<part name="parameters" element="tns:getListMemberResponse"/>
+</message>
+<message name="returnBook">
+<part name="parameters" element="tns:returnBook"/>
+</message>
+<message name="returnBookResponse">
+<part name="parameters" element="tns:returnBookResponse"/>
+</message>
+<message name="CreateLoanBook">
+<part name="parameters" element="tns:CreateLoanBook"/>
+</message>
+<message name="CreateLoanBookResponse">
+<part name="parameters" element="tns:CreateLoanBookResponse"/>
 </message>
 <message name="deleteMember">
 <part name="parameters" element="tns:deleteMember"/>
@@ -58,38 +88,36 @@
 <message name="deleteMemberResponse">
 <part name="parameters" element="tns:deleteMemberResponse"/>
 </message>
-<message name="addMember">
-<part name="parameters" element="tns:addMember"/>
+<message name="deleteLoanBook">
+<part name="parameters" element="tns:deleteLoanBook"/>
 </message>
-<message name="addMemberResponse">
-<part name="parameters" element="tns:addMemberResponse"/>
-</message>
-<message name="getListMember">
-<part name="parameters" element="tns:getListMember"/>
-</message>
-<message name="getListMemberResponse">
-<part name="parameters" element="tns:getListMemberResponse"/>
-</message>
-<message name="getMemberIdByName">
-<part name="parameters" element="tns:getMemberIdByName"/>
-</message>
-<message name="getMemberIdByNameResponse">
-<part name="parameters" element="tns:getMemberIdByNameResponse"/>
-</message>
-<message name="getLoanListByBookName">
-<part name="parameters" element="tns:getLoanListByBookName"/>
-</message>
-<message name="getLoanListByBookNameResponse">
-<part name="parameters" element="tns:getLoanListByBookNameResponse"/>
+<message name="deleteLoanBookResponse">
+<part name="parameters" element="tns:deleteLoanBookResponse"/>
 </message>
 <portType name="loanService">
+<operation name="getMemberIdByName">
+<input wsam:Action="http://loanService/loanService/getMemberIdByNameRequest" message="tns:getMemberIdByName"/>
+<output wsam:Action="http://loanService/loanService/getMemberIdByNameResponse" message="tns:getMemberIdByNameResponse"/>
+</operation>
+<operation name="getLoanListByMemberID">
+<input wsam:Action="http://loanService/loanService/getLoanListByMemberIDRequest" message="tns:getLoanListByMemberID"/>
+<output wsam:Action="http://loanService/loanService/getLoanListByMemberIDResponse" message="tns:getLoanListByMemberIDResponse"/>
+</operation>
+<operation name="getLoanListByBookName">
+<input wsam:Action="http://loanService/loanService/getLoanListByBookNameRequest" message="tns:getLoanListByBookName"/>
+<output wsam:Action="http://loanService/loanService/getLoanListByBookNameResponse" message="tns:getLoanListByBookNameResponse"/>
+</operation>
 <operation name="getMember">
 <input wsam:Action="http://loanService/loanService/getMemberRequest" message="tns:getMember"/>
 <output wsam:Action="http://loanService/loanService/getMemberResponse" message="tns:getMemberResponse"/>
 </operation>
-<operation name="deleteLoanBook">
-<input wsam:Action="http://loanService/loanService/deleteLoanBookRequest" message="tns:deleteLoanBook"/>
-<output wsam:Action="http://loanService/loanService/deleteLoanBookResponse" message="tns:deleteLoanBookResponse"/>
+<operation name="getLoanDetailByID">
+<input wsam:Action="http://loanService/loanService/getLoanDetailByIDRequest" message="tns:getLoanDetailByID"/>
+<output wsam:Action="http://loanService/loanService/getLoanDetailByIDResponse" message="tns:getLoanDetailByIDResponse"/>
+</operation>
+<operation name="addMember">
+<input wsam:Action="http://loanService/loanService/addMemberRequest" message="tns:addMember"/>
+<output wsam:Action="http://loanService/loanService/addMemberResponse" message="tns:addMemberResponse"/>
 </operation>
 <operation name="borrowBook">
 <input wsam:Action="http://loanService/loanService/borrowBookRequest" message="tns:borrowBook"/>
@@ -99,45 +127,64 @@
 <input wsam:Action="http://loanService/loanService/updateLoanRequest" message="tns:updateLoan"/>
 <output wsam:Action="http://loanService/loanService/updateLoanResponse" message="tns:updateLoanResponse"/>
 </operation>
-<operation name="CreateLoanBook">
-<input wsam:Action="http://loanService/loanService/CreateLoanBookRequest" message="tns:CreateLoanBook"/>
-<output wsam:Action="http://loanService/loanService/CreateLoanBookResponse" message="tns:CreateLoanBookResponse"/>
-</operation>
-<operation name="returnBook">
-<input wsam:Action="http://loanService/loanService/returnBookRequest" message="tns:returnBook"/>
-<output wsam:Action="http://loanService/loanService/returnBookResponse" message="tns:returnBookResponse"/>
+<operation name="updateMember">
+<input wsam:Action="http://loanService/loanService/updateMemberRequest" message="tns:updateMember"/>
+<output wsam:Action="http://loanService/loanService/updateMemberResponse" message="tns:updateMemberResponse"/>
 </operation>
 <operation name="showIsReturn">
 <input wsam:Action="http://loanService/loanService/showIsReturnRequest" message="tns:showIsReturn"/>
 <output wsam:Action="http://loanService/loanService/showIsReturnResponse" message="tns:showIsReturnResponse"/>
 </operation>
-<operation name="updateMember">
-<input wsam:Action="http://loanService/loanService/updateMemberRequest" message="tns:updateMember"/>
-<output wsam:Action="http://loanService/loanService/updateMemberResponse" message="tns:updateMemberResponse"/>
+<operation name="getListMember">
+<input wsam:Action="http://loanService/loanService/getListMemberRequest" message="tns:getListMember"/>
+<output wsam:Action="http://loanService/loanService/getListMemberResponse" message="tns:getListMemberResponse"/>
+</operation>
+<operation name="returnBook">
+<input wsam:Action="http://loanService/loanService/returnBookRequest" message="tns:returnBook"/>
+<output wsam:Action="http://loanService/loanService/returnBookResponse" message="tns:returnBookResponse"/>
+</operation>
+<operation name="CreateLoanBook">
+<input wsam:Action="http://loanService/loanService/CreateLoanBookRequest" message="tns:CreateLoanBook"/>
+<output wsam:Action="http://loanService/loanService/CreateLoanBookResponse" message="tns:CreateLoanBookResponse"/>
 </operation>
 <operation name="deleteMember">
 <input wsam:Action="http://loanService/loanService/deleteMemberRequest" message="tns:deleteMember"/>
 <output wsam:Action="http://loanService/loanService/deleteMemberResponse" message="tns:deleteMemberResponse"/>
 </operation>
-<operation name="addMember">
-<input wsam:Action="http://loanService/loanService/addMemberRequest" message="tns:addMember"/>
-<output wsam:Action="http://loanService/loanService/addMemberResponse" message="tns:addMemberResponse"/>
-</operation>
-<operation name="getListMember">
-<input wsam:Action="http://loanService/loanService/getListMemberRequest" message="tns:getListMember"/>
-<output wsam:Action="http://loanService/loanService/getListMemberResponse" message="tns:getListMemberResponse"/>
-</operation>
-<operation name="getMemberIdByName">
-<input wsam:Action="http://loanService/loanService/getMemberIdByNameRequest" message="tns:getMemberIdByName"/>
-<output wsam:Action="http://loanService/loanService/getMemberIdByNameResponse" message="tns:getMemberIdByNameResponse"/>
-</operation>
-<operation name="getLoanListByBookName">
-<input wsam:Action="http://loanService/loanService/getLoanListByBookNameRequest" message="tns:getLoanListByBookName"/>
-<output wsam:Action="http://loanService/loanService/getLoanListByBookNameResponse" message="tns:getLoanListByBookNameResponse"/>
+<operation name="deleteLoanBook">
+<input wsam:Action="http://loanService/loanService/deleteLoanBookRequest" message="tns:deleteLoanBook"/>
+<output wsam:Action="http://loanService/loanService/deleteLoanBookResponse" message="tns:deleteLoanBookResponse"/>
 </operation>
 </portType>
 <binding name="loanServicePortBinding" type="tns:loanService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="getMemberIdByName">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getLoanListByMemberID">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getLoanListByBookName">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getMember">
 <soap:operation soapAction=""/>
 <input>
@@ -147,7 +194,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="deleteLoanBook">
+<operation name="getLoanDetailByID">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addMember">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -174,16 +230,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="CreateLoanBook">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="returnBook">
+<operation name="updateMember">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -201,7 +248,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="updateMember">
+<operation name="getListMember">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="returnBook">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="CreateLoanBook">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -219,34 +284,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="addMember">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getListMember">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getMemberIdByName">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getLoanListByBookName">
+<operation name="deleteLoanBook">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

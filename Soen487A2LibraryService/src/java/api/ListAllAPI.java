@@ -39,7 +39,7 @@ public class ListAllAPI {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_XML})
     public String getJson() {
          String results ="";
          HashMap<Integer, Books> hm = new HashMap<Integer, Books>();

@@ -30,7 +30,7 @@ public class LoanDAO {
         return dao;
     }
   
-    public LoanDAO(){
+     public LoanDAO(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             this.con =  DriverManager.getConnection( "jdbc:mysql://den1.mysql1.gear.host/soen487a2", "soen487a2", "Bo4hZ0KtZ?~0" );
@@ -54,6 +54,22 @@ public class LoanDAO {
               }
             return rs;
     }
+    
+    
+    
+    public ResultSet getLoanDetailByID(int id){
+       ResultSet rs = null;
+       String query = "Select * From loans where BorrowId = ?";
+        try {
+              PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setInt(1, id);
+              rs = preparedStatement.executeQuery();
+          } catch (SQLException ex) {
+              Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return rs;
+    }
+    
     
     
     
@@ -131,6 +147,20 @@ public class LoanDAO {
             Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
           return ret;
+    }
+      
+      
+    public ResultSet listLoanByMemberID(int memberID){
+        ResultSet rs = null;
+                String query = "Select * From loans where PersonBorrow = ?";
+        try {
+              PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setInt(1, memberID);
+              rs = preparedStatement.executeQuery();
+          } catch (SQLException ex) {
+              Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return rs;
     }
         
     public boolean delete(int id)

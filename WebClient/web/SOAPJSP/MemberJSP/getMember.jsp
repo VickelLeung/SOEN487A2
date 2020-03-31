@@ -1,7 +1,7 @@
 <%-- 
     Document   : getMember
     Created on : Mar 27, 2020, 8:58:10 PM
-    Author     : TOMMY
+    Author     : HUY
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Get Member Info</title>
+        <title>getMemberByID</title>
     </head>
     <body>
         <h1>Get Member Info</h1>
+        
         <form action = "getMember.jsp" method = "GET">
             Member ID: <input type = "text" name = "member_id">
             <br />

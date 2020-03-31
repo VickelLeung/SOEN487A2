@@ -1,6 +1,6 @@
 <%-- 
-    Document   : deleteMember
-    Created on : Mar 28, 2020, 4:43:59 PM
+    Document   : returnBook
+    Created on : Mar 29, 2020, 9:34:06 PM
     Author     : TOMMY
 --%>
 
@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>deleteMember</title>
+        <title>returnBook</title>
     </head>
     <body>
-        <h1>Delete Member</h1>  
+        <h1>Return Book</h1>
         
-        <form action = "deleteMember.jsp" method = "GET">
-            Member ID: <input type = "text" name = "member_id">
+        <form action = "returnBook.jsp" method = "GET">
+            Book ID: <input type = "text" name = "book_id">
             <br />
             <input type = "submit" value = "Submit" />
         </form>
@@ -27,14 +27,11 @@
                 loanservice.LoanService_Service service = new loanservice.LoanService_Service();
                 loanservice.LoanService port = service.getLoanServicePort();
                 // TODO initialize WS operation arguments here
-                String id = request.getParameter("member_id");;
+                String book_id = request.getParameter("book_id");
+                int bookID = Integer.parseInt(book_id);
                 // TODO process result here
-                
-                java.lang.String result = port.deleteMember(Integer.parseInt(id));
-                
-               
-                %><font color="red"><%out.print(result);%></font><%  
-                
+                java.lang.String result = port.returnBook(bookID);
+                out.println(result);
             } catch (Exception ex) {
                 // TODO handle custom exceptions here
             }

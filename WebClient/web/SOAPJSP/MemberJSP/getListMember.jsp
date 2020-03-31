@@ -12,7 +12,7 @@
         <title>List Members</title>
     </head>
     <body>
-        <h1>Get List Member</h1>
+        <h1>Get List Of Members Info</h1>
         <table border="1" width="90%">
             <tr>
                 <th>ID</th>

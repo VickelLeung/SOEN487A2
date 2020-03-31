@@ -40,11 +40,17 @@ public class GetBookAPI {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getBook(@QueryParam("id") int id) throws ClassNotFoundException {
+    public String getBook(@QueryParam("id") int id, @QueryParam("title") String title) throws ClassNotFoundException {
         
        System.out.println("id: "+id);
        
-       return bookMVC.BooksController.getInstance().getBookById(id).toString();
+       if(title != null){
+        return Integer.toString(bookMVC.BooksController.getInstance().getBookByTitle(title));
+       }
+       else{
+        return bookMVC.BooksController.getInstance().getBookById(id).toString();
+       }
+      
     }
 
     /**

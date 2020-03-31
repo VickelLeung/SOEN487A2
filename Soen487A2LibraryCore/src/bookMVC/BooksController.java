@@ -72,8 +72,33 @@ public class BooksController {
        return booksmap;
     }
    
+   public int getBookByTitle(String title) throws ClassNotFoundException{
+       int id = 0;
+        
+      
+      
+        try {
+                 ResultSet rs = dao.getbookByTitle(title);
+                if(rs == null){
+                    id = -1;
+                }
+                else{
+                    //id = Integer.parseInt(rs.getString("id"));
+                    while(rs.next()){
+                    id = Integer.parseInt(rs.getString("id"));
+                    }
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       System.out.println("id: "+id);
+       
+       return id;
+   }
+   
    public Books getBookById(int id) throws ClassNotFoundException{
-         System.out.println("DAO: "+dao + " id: " + id);
+        
             Books bk = null;
             try {
                 ResultSet rs = dao.getbookById(id);

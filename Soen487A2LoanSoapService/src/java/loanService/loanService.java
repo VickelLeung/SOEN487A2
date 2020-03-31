@@ -355,6 +355,28 @@ public class loanService {
     }
 
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getLoanDetailByID")
+    public String getLoanDetailByID(@WebParam(name = "borrowBookId") int borrowBookId) {
+       String result = "";
+        try {
+            Loans ls = loanMVC.LoanController.getInstance().getLoanDetailByID(borrowBookId);
+            if(ls != null){
+                result = ls.getBookName() + " " + ls.getPersonBorrow() + " " + ls.getBorrowId()+ " " + ls.getDateOfBorrowing() + " " + ls.getReturnDate()+" "+ ls.isIsReturn();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if("".equals(result)){
+            result = "no book";
+        }
+        return result;
+    }
+
+
 
 
 }

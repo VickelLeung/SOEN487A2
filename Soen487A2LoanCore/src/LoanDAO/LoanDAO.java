@@ -95,6 +95,19 @@ public class LoanDAO {
         return rs;
     }
 
+    public ResultSet getLoanDetailByID(int id){
+       ResultSet rs = null;
+       String query = "Select * From loans where BorrowId = ?";
+        try {
+              PreparedStatement preparedStatement = con.prepareStatement(query);
+              preparedStatement.setInt(1, id);
+              rs = preparedStatement.executeQuery();
+          } catch (SQLException ex) {
+              Logger.getLogger(LoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return rs;
+    }
+
     
     public boolean loanBook(int borrowId,String bookname, int personBorrow, String dateOfBorrowing, String returnDate){
           boolean ret = false;

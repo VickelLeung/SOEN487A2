@@ -33,8 +33,7 @@ public class LoanController {
         this.dao = LoanDAO.getInstance();
         this.loadsmap = new HashMap <>();
     }
-    
-      
+       
     public boolean isLoanBookExsit(int id) throws SQLException{
     ResultSet rs = null;
     boolean flag = false;
@@ -44,16 +43,25 @@ public class LoanController {
     }  
     return flag;
     }
+    
+    public Loans getLoanDetailByID(int borrowId) throws SQLException{
+        Loans loan = null;
+        ResultSet rs = this.dao.getLoanDetailByID(borrowId);
+        while(rs.next()){
+            loan = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
+        }
+        return loan;
+    }
 
 
-    public String test(){
-        return GetProperties.getDBURL();
-    }
-    
-      public void test2(){
-         GetProperties.set();
-    }
-    
+//    public String test(){
+//        return GetProperties.getDBURL();
+//    }
+//    
+//      public void test2(){
+//         GetProperties.set();
+//    }
+//    
     
     
     public boolean loanBook(int borrowId, String bookname, int personBorrow, String dateOfBorrowing, String returnDate) {

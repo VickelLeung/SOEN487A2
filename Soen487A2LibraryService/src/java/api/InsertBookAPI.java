@@ -11,6 +11,8 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
@@ -36,37 +38,97 @@ public class InsertBookAPI {
     public InsertBookAPI() {
     }
     
+    
+    
+    
     @POST
-    @Consumes("application/json") 
+    @Consumes({"application/json",MediaType.TEXT_PLAIN}) 
     @Produces(MediaType.TEXT_PLAIN)
-    public String addBook(String data) throws ParseException {
-       
+    public String addBook(@Context HttpHeaders headers, String data) throws ParseException {
+        String contentType = headers.getRequestHeader("Content-Type").get(0);
+        
+        Books book = null;
         String result = "";
-        String tempData = data;
         
-        JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(tempData);
+        if(contentType.toLowerCase().contains("text")){
+             //string key=value & key=value
+             System.out.println(data);
+             String tempDataArr []= data.split("&");
+             String title = "";
+             String description = "";
+             String isbn = "";
+             String author  = "";
+             String publisher = "";
+            
+             for(String str : tempDataArr){
+                 String tmp [] = str.split("=");
+                 
+                 if(tmp[0].equalsIgnoreCase("title")){
+                     title = tmp[1];
+                 }
+                 else if(tmp[0].equalsIgnoreCase("description"))
+                 {
+                     description= tmp[1];
+                 }
+                 else if(tmp[0].equalsIgnoreCase("isbn"))
+                 {
+                     isbn= tmp[1];
+                 }
+                 else if(tmp[0].equalsIgnoreCase("author"))
+                 {
+                     author= tmp[1];
+                 }
+                 else if(tmp[0].equalsIgnoreCase("publisher"))
+                 {
+                     publisher= tmp[1];
+                 }
+             }//END FOR
+            book = new Books(title, description, isbn, author, publisher);
+
+            boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);
+
+            if(isAdded){
+                result =  "Sucessfully added \"" + title + "\"";
+            }
+            else
+            {
+                result =  "Error, please try again.";
+            }
         
-        String title = json.get("title").toString();
-        String description = json.get("description").toString();
-        String isbn = json.get("isbn").toString();
-        String author  = json.get("author").toString();
-        String publisher = json.get("publisher").toString();
-        Books book = new Books(title, description, isbn, author, publisher);
+        }else{
+                  
+                String tempData = data;
+
+
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(tempData);
+
+                String title = json.get("title").toString();
+                String description = json.get("description").toString();
+                String isbn = json.get("isbn").toString();
+                String author  = json.get("author").toString();
+                String publisher = json.get("publisher").toString();
+                book = new Books(title, description, isbn, author, publisher);
+
+                boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);
+
+                if(isAdded){
+                    result =  "Sucessfully added \"" + title + "\"";
+                }
+                else
+                {
+                    result =  "Error, please try again.";
+                }
         
-        boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);
-        
-        if(isAdded){
-            result =  "Sucessfully added \"" + title + "\"";
         }
-        else
-        {
-            result =  "Error, please try again.";
-        }
+        
+
+
         
         return result;
     }
 
+    
     /**
      * PUT method for updating or creating an instance of InsertBookAPI
      * @param content representation for the resource

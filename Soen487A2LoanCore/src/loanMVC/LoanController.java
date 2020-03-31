@@ -67,12 +67,14 @@ public class LoanController {
        return this.dao.update(borrowId, data);
    }
     
-   public void getLoanList() throws SQLException{
-        ResultSet rs = dao.getLoanList();
+   public HashMap <Integer, Loans> getLoanList() throws SQLException{
+       this.loadsmap.clear();
+       ResultSet rs = dao.getLoanList();
         while(rs.next()){
             Loans ls = new Loans(rs.getInt("BorrowId"),rs.getString("BookName"),rs.getInt("PersonBorrow"),rs.getString("DateOfBorrowing"),rs.getString("ReturnDate"),rs.getInt("IsReturn"));
             this.loadsmap.put(rs.getInt("BorrowId"), ls);
-        }      
+        } 
+        return this.loadsmap;
    }
    
       public HashMap <Integer, Loans> getLoanListByName(String name ) throws SQLException{

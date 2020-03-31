@@ -164,6 +164,32 @@ public class loanService {
         return result;
     }
 
+    
+ /**
+     * Web service operation
+     */
+   @WebMethod(operationName = "getLoanList")
+    public String getLoanList() {
+        //TODO write your implementation code here:\
+        HashMap <Integer, Loans> loansMap = null;
+        String result = "No loanBook on the list";
+        try {
+            loansMap = loanMVC.LoanController.getInstance().getLoanList();
+        } catch (SQLException ex) {
+            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
+            result = "fail to get loan list by book name";
+        }
+        
+        if(loansMap != null){
+            result = "";
+            for(int i : loansMap.keySet()){
+                result = result + loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+ " " + loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn() +"\n";
+            }
+        }
+        return result;
+    }
+
+    
         /**
      * Web service operation
      */

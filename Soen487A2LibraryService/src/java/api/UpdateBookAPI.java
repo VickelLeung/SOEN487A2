@@ -48,12 +48,11 @@ public class UpdateBookAPI {
      * @return an instance of java.lang.String
      */
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML})
-    @Produces(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_XML})
     public String getXml(@Context HttpHeaders headers,String data, @QueryParam("id") int id) throws ParseException, SQLException {
    
         String contentType = headers.getRequestHeader("Content-Type").get(0);
-        //System.out.println(contentType);
         String result = "";
         String tempData = data;
         
@@ -74,45 +73,25 @@ public class UpdateBookAPI {
             isbn = json.get("isbn").toString();
             author  = json.get("author").toString();
             publisher = json.get("publisher").toString();
-
+            
             isAdded = bookMVC.BooksController.getInstance().updateBookById(id, title, description, author, isbn, publisher );
         }
-        else if(contentType.equals("application/xml")){
-            System.out.println("XML");
-            String xml = data;
-            try{
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            
-            InputSource src = new InputSource();
-            src.setCharacterStream(new StringReader(xml));
-            Document doc = builder.parse(src);
-
-            title= doc.getElementsByTagName("title").item(0).getTextContent();
-            description = doc.getElementsByTagName("description").item(0).getTextContent();
-            author = doc.getElementsByTagName("author").item(0).getTextContent();
-            isbn = doc.getElementsByTagName("isbn").item(0).getTextContent();
-            publisher = doc.getElementsByTagName("publisher").item(0).getTextContent();
-             
-           isAdded = bookMVC.BooksController.getInstance().updateBookById(id, title, description, author, isbn, publisher );
- 
-            } catch (Exception e) {
-            }
-                
-        }
+       
         else if(contentType.equals("text/plain")){
-            String[] arr = data.split(",");
-            
+            String[] arr = data.split(" ");    
             isAdded = bookMVC.BooksController.getInstance().updateBookById(id, arr[0], arr[1], arr[2], arr[3], arr[4] );
         }
-        else{
-            System.out.println("html");
-        }
+        
+        JSONObject obj = new JSONObject();
         
         if(isAdded){
-            return "Updated book";
+            obj.put("message", "Successfully update");
+            return obj.toJSONString();
+            
         }
         else{
-            return "Did not update";
+            obj.put("message", "unsuccessfully update");
+            return obj.toJSONString();
         }
     }
 

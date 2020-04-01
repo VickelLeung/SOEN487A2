@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import static bookMVC.BooksController.getInstance;
 import javax.ws.rs.QueryParam;
+import org.json.simple.JSONObject;
 /**
  * REST Web Service
  *
@@ -38,16 +39,19 @@ public class DeleteBookAPI {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_XML})
     public String delete_book(@QueryParam("id") int id) {
         
         boolean isDeleted = bookMVC.BooksController.getInstance().deleteBookById(id);
-        
+        JSONObject obj = new JSONObject();
+         
         if(isDeleted){
-            return "Book is deleted";
+            obj.put("message", "Successfully deleted");
+            return obj.toJSONString();
         }
         else{
-            return "Book was not deleted";
+           obj.put("message", "unsuccessfully deleted");
+            return obj.toJSONString();
         }
         
     }

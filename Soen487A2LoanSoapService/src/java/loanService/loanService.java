@@ -57,6 +57,7 @@ public class loanService {
     @WebMethod(operationName = "addMember")
     public String addMember(@WebParam(name = "name") String name, @WebParam(name = "contact") String contact, @WebParam(name = "password") String password) {
         //TODO write your implementation code here:
+        
         String result = "fail to add member";
 
         Members mb = new Members(name,contact,password);
@@ -76,13 +77,13 @@ public class loanService {
         //TODO write your implementation code here:
        String result = "fail to edit member";
        try{
-            if(name == null){
+            if  (name == null){
                 name = "";
             }
             if (contact == null) {
                 contact = "";
             }
-
+            
             if (MemberMVC.MemberController.getInstance().updateMember(id, name, contact)) {
                 result = "success to edit member";
             }
@@ -156,39 +157,41 @@ public class loanService {
         }
         
         if(loansMap != null){
-            result = "";
             for(int i : loansMap.keySet()){
-                result = result + loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+ " " + loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn() + "\n";
+                result = loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+ " " + loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn();
             }
+        }
+        return result;
+    }
+
+    /**
+     * Web service operation
+     */
+  
+      
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getLoanDetailByID")
+    public String getLoanDetailByID(@WebParam(name = "borrowBookId") int borrowBookId) {
+       String result = "";
+        try {
+            Loans ls = loanMVC.LoanController.getInstance().getLoanDetailByID(borrowBookId);
+            if(ls != null){
+                result = ls.getBookName() + " " + ls.getPersonBorrow() + " " + ls.getBorrowId()+ " " + ls.getDateOfBorrowing() + " " + ls.getReturnDate()+" "+ ls.isIsReturn();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
+            result = "fail to get loan list by ID";
+        }
+        if("".equals(result)){
+            result = "no book loan";
         }
         return result;
     }
 
     
- /**
-     * Web service operation
-     */
-   @WebMethod(operationName = "getLoanList")
-    public String getLoanList() {
-        //TODO write your implementation code here:\
-        HashMap <Integer, Loans> loansMap = null;
-        String result = "No loanBook on the list";
-        try {
-            loansMap = loanMVC.LoanController.getInstance().getLoanList();
-        } catch (SQLException ex) {
-            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
-            result = "fail to get loan list by book name";
-        }
-        
-        if(loansMap != null){
-            result = "";
-            for(int i : loansMap.keySet()){
-                result = result + loansMap.get(i).getBookName() + " " + loansMap.get(i).getPersonBorrow() + " " +loansMap.get(i).getBorrowId()+ " " + loansMap.get(i).getDateOfBorrowing() + " " + loansMap.get(i).getReturnDate()+" "+loansMap.get(i).isIsReturn() +"\n";
-            }
-        }
-        return result;
-    }
-
     
         /**
      * Web service operation
@@ -202,7 +205,7 @@ public class loanService {
             loansMap = loanMVC.LoanController.getInstance().listLoanByMemberID(memberID);
         } catch (SQLException ex) {
             Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
-            result = "fail to get loan list by book name";
+            result = "fail to get loan list by MemberID";
         }
         
         if(loansMap != null){
@@ -213,7 +216,9 @@ public class loanService {
         }
         return result;
     }
- 
+    
+    
+    
     /**
      * Web service operation
      */
@@ -240,7 +245,7 @@ public class loanService {
         //TODO write your implementation code here:
         String result = "init";
         try {
-            if (loanMVC.LoanController.getInstance().isLoanBookExsit(Bookid)
+            if (loanMVC.LoanController.getInstance().isLoanBookExist(Bookid)
                     && loanMVC.LoanController.getInstance().showIsReturn(Bookid) == 1) {
                 if (loanMVC.LoanController.getInstance().borrowBook(Bookid)) {
                     result = "Success to borrow book";
@@ -265,7 +270,7 @@ public class loanService {
         //TODO write your implementation code here:
         String result = "init";
         try {
-            if (loanMVC.LoanController.getInstance().isLoanBookExsit(bookID)
+            if (loanMVC.LoanController.getInstance().isLoanBookExist(bookID)
                     && loanMVC.LoanController.getInstance().showIsReturn(bookID) == 0) {
                 if (loanMVC.LoanController.getInstance().returnBook(bookID)) {
                     result = "Success to return book";
@@ -312,13 +317,13 @@ public class loanService {
         String result = "False to update the loan records";
         if(flag){
             try {
-                if(loanMVC.LoanController.getInstance().isLoanBookExsit(BookId)){
+                if(loanMVC.LoanController.getInstance().isLoanBookExist(BookId)){
                     if(loanMVC.LoanController.getInstance().updateLoan(BookId, map)){
                         result = "Success to update the loan records";
                     }
                     else{}
                 }else{
-                    result = "book does not exsit in loan system";
+                    result = "book does not exist in loan system";
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
@@ -352,28 +357,6 @@ public class loanService {
     public int showIsReturn(@WebParam(name = "borrowBookId") int borrowBookId) {
         //TODO write your implementation code here:
         return loanMVC.LoanController.getInstance().showIsReturn(borrowBookId);
-    }
-
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "getLoanDetailByID")
-    public String getLoanDetailByID(@WebParam(name = "borrowBookId") int borrowBookId) {
-       String result = "";
-        try {
-            Loans ls = loanMVC.LoanController.getInstance().getLoanDetailByID(borrowBookId);
-            if(ls != null){
-                result = ls.getBookName() + " " + ls.getPersonBorrow() + " " + ls.getBorrowId()+ " " + ls.getDateOfBorrowing() + " " + ls.getReturnDate()+" "+ ls.isIsReturn();
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(loanService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if("".equals(result)){
-            result = "no book";
-        }
-        return result;
     }
 
 

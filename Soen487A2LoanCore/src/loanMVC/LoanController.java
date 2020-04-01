@@ -34,7 +34,7 @@ public class LoanController {
         this.loadsmap = new HashMap <>();
     }
        
-    public boolean isLoanBookExsit(int id) throws SQLException{
+    public boolean isLoanBookExist(int id) throws SQLException{
     ResultSet rs = null;
     boolean flag = false;
     rs = this.dao.getLoanById(id);    

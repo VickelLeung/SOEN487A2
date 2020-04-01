@@ -58,7 +58,7 @@ public class BooksController {
             ResultSet rs = dao.getAllBook();
             
             while(rs.next()){
-                Books book = new Books(rs.getString("Title"),rs.getString("Description"),rs.getString("Author"),rs.getString("ISBN"),rs.getString("Publisher"));
+                Books book = new Books(rs.getInt("id"),rs.getString("Title"),rs.getString("Description"),rs.getString("Author"),rs.getString("ISBN"),rs.getString("Publisher"));
                 booksmap.put(rs.getInt("id"), book);
 //                results += book.toString();
             }

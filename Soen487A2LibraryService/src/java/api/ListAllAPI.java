@@ -16,6 +16,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  * REST Web Service
@@ -39,20 +41,38 @@ public class ListAllAPI {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.TEXT_PLAIN,MediaType.TEXT_HTML})
     public String getJson() {
-         String results ="";
+        /*
+            public int id;
+    public String title;
+    public String description;
+    public String author;
+    public String ISBN;
+    public String Publisher;
+
+        
+        */
+         JSONArray list = new JSONArray();
          HashMap<Integer, Books> hm = new HashMap<Integer, Books>();
          hm = bookMVC.BooksController.getInstance().getBookList();
-            
-          int index = 0;
-          for (Map.Entry<Integer,Books> entry : hm.entrySet()) {
-              
-              results+="[index]: "+index + "\n"+ entry.getValue().toString() + "\n";
-              index++;
+          for (int i : hm.keySet()){
+             JSONObject obj = new JSONObject();
+             obj.put("id", hm.get(i).getId());
+             obj.put("title", hm.get(i).getTitle());
+             obj.put("description", hm.get(i).getDescription());
+             obj.put("author", hm.get(i).getAuthor());
+             obj.put("ISBN", hm.get(i).getISBN());
+             obj.put("publisher", hm.get(i).getPublisher());
+             list.add(obj);
           }
-          
-         return results;
+//          int index = 0;
+//          for (Map.Entry<Integer,Books> entry : hm.entrySet()) {
+//              
+//              results+="[index]: "+index + "\n"+ entry.getValue().toString() + "\n";
+//              index++;
+//          }         
+         return list.toJSONString();
     }
 
     /**

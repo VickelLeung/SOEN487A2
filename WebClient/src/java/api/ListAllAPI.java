@@ -8,6 +8,10 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Jersey REST client generated for REST resource:ListAllAPI [list_all]<br>
@@ -47,9 +51,20 @@ public class ListAllAPI {
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
     }
 
-    public String getJson_TEXT() throws UniformInterfaceException {
+    public String getJson_TEXT() throws UniformInterfaceException, ParseException {
         WebResource resource = webResource;
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+        String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+        String result = "";
+        
+        JSONParser parser = new JSONParser();
+        JSONArray array = (JSONArray)parser.parse(data);
+        /*
+        {"ISBN":"apple","author":"apple","description":"apple is sweet","publisher":"","id":1,"title":"apple"}*/
+        for(int i = 0; i < array.size(); i++){
+           //result = result + (String)(((JSONObject)array.get(i)).get("id")) +" "+(String)(((JSONObject)array.get(i)).get("title"))+" "+(String)(((JSONObject)array.get(i)).get("description"))+" "+(String)(((JSONObject)array.get(i)).get("publisher"))+" "+(String)(((JSONObject)array.get(i)).get("author"))+"\n";    
+        result =result + String.valueOf(((JSONObject)array.get(i)).get("id")) + " "+String.valueOf((((JSONObject)array.get(i)).get("title")))+"\n";
+        }
+        return result;
     }
 
     public String getJson_HTML() throws UniformInterfaceException {

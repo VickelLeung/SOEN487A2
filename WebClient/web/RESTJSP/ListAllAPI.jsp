@@ -15,8 +15,11 @@
     <body>
         <h1>Hello World!</h1>
         <%
+            
             ListAllAPI lt = new   ListAllAPI();
-            String x = lt.getJson_HTML();
+            String y = lt.getJson_JSON();
+            String x = lt.getJson_TEXT();
+            out.print(y);
             out.print(x);
         %>
     </body>

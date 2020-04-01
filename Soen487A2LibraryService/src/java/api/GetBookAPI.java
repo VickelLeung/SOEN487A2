@@ -18,7 +18,7 @@ import static bookMVC.BooksController.getInstance;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.QueryParam;
 import org.json.simple.JSONObject;
-import org.json.XML;
+
 
 /**
  * REST Web Service

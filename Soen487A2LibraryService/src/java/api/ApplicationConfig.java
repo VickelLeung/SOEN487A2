@@ -34,7 +34,6 @@ public class ApplicationConfig extends Application {
         resources.add(api.GetBookAPI.class);
         resources.add(api.InsertBookAPI.class);
         resources.add(api.ListAllAPI.class);
-        resources.add(api.TestResource.class);
         resources.add(api.UpdateBookAPI.class);
     }
     

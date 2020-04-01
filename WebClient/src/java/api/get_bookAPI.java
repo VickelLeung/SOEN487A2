@@ -8,6 +8,7 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.*;
 
 /**
  * Jersey REST client generated for REST resource:GetBookAPI [get_book]<br>
@@ -39,10 +40,16 @@ public class get_bookAPI {
 
     public String getBook_XML(String id) throws UniformInterfaceException {
         WebResource resource = webResource;
+        
         if (id != null) {
             resource = resource.queryParam("id", id);
         }
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+       
+       String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+       JSONObject obj = new JSONObject(x);
+       String xml = XML.toString(obj);
+
+       return xml;
     }
 
     public String getBook_JSON(String id) throws UniformInterfaceException {
@@ -55,18 +62,17 @@ public class get_bookAPI {
 
     public String getBook_TEXT(String id) throws UniformInterfaceException {
         WebResource resource = webResource;
+        
         if (id != null) {
             resource = resource.queryParam("id", id);
         }
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
-    }
-
-    public String getBook_TEXT_XML(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        if (id != null) {
-            resource = resource.queryParam("id", id);
-        }
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_XML).get(String.class);
+         String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+         JSONObject obj = new JSONObject(x);
+        
+         String plainText = obj.get("title")+" " + obj.get("description") + " " + obj.get("author") + " " 
+                 + obj.get("isbn") + " " + obj.get("publisher");
+         
+        return plainText;
     }
 
     public void close() {

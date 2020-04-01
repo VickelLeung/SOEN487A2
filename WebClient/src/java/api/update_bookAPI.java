@@ -8,6 +8,8 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.JSONObject;
+import org.json.XML;
 
 /**
  * Jersey REST client generated for REST resource:UpdateBookAPI
@@ -35,7 +37,12 @@ public class update_bookAPI {
     }
 
     public String getXml_XML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.type(javax.ws.rs.core.MediaType.APPLICATION_XML).put(String.class, requestEntity);
+
+       String x = webResource.type(javax.ws.rs.core.MediaType.APPLICATION_XML).put(String.class, requestEntity);
+       JSONObject obj = new JSONObject(x);
+       String xml = XML.toString(obj);
+
+       return xml;
     }
 
     public String getXml_JSON(Object requestEntity) throws UniformInterfaceException {
@@ -43,7 +50,15 @@ public class update_bookAPI {
     }
 
     public String getXml_TEXT(Object requestEntity) throws UniformInterfaceException {
-        return webResource.type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+       WebResource resource = webResource;
+        String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+        JSONObject obj = new JSONObject(x);
+
+        String plainText = obj.get("title")+" " + obj.get("description") + " " + obj.get("author") + " " 
+                + obj.get("isbn") + " " + obj.get("publisher");
+         
+        return plainText;
+        
     }
 
     public String getXml_HTML(Object requestEntity) throws UniformInterfaceException {

@@ -3,6 +3,8 @@
     Created on : 2-Apr-2020, 3:00:40 PM
     Author     : vickelleung
 --%>
+
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="api.update_bookAPI"%>
 <%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <% 
@@ -15,41 +17,49 @@
     String isbn = request.getParameter("isbn"); 
     String publisher = request.getParameter("publisher");
     
+    JSONObject obj = new JSONObject();
+    obj.put("id",id);
+    obj.put("title",title);
+    obj.put("description",description);
+    obj.put("author",author);
+    obj.put("isbn",isbn);
+    obj.put("publisher",publisher);
+    
+    
     String results ="";
     update_bookAPI ub = new update_bookAPI();
     
+    String query = id + "&" + title +"&" + description+ "&" + author +"&" + isbn + "&" + publisher;
     if(type.equals("json")){
         response.setContentType("text/html");
-        results =  ub.getXml_JSON(id+title+description+author+isbn+publisher);
-
+        results = ub.getXml_TEXT_JSON(obj.toJSONString());
     }
     else if(type.equals("xml")){
         response.setContentType("text/xml");
-        results =  ub.getXml_XML(id+title+description+author+isbn+publisher);
+        results = ub.getXml_TEXT_JSON(obj.toJSONString());
     }
     else if(type.equals("text")){
-        response.setContentType("text/plain");
-        results =  ub.getXml_TEXT(id+title+description+author+isbn+publisher);
+        response.setContentType("text/html");
+        results = ub.getXml_TEXT_JSON(obj.toJSONString());
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
     }
-%>
+    %>
+    
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%= request.getParameter("id") %>
-        <%= request.getParameter("title") %>
-        <%= request.getParameter("description") %>
-        <%= request.getParameter("author") %>
-        <%= request.getParameter("isbn") %>
-        <%= request.getParameter("publisher") %>
-        
-        <%=results%>
+        <div style="display:flex; flex-direction: column; text-align: center">
+          <h1>Here is the results for get book by <%=type %></h1>
+          <%
+              out.print(results);
+          %>
+        </div>
+
     </body>
 </html>

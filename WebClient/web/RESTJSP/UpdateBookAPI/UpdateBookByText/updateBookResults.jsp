@@ -22,14 +22,13 @@
     if(type.equals("json")){
         response.setContentType("text/html");
         results = ub.getXml_TEXT_JSON(query);
-
     }
     else if(type.equals("xml")){
         response.setContentType("text/xml");
         results = ub.getXml_TEXT_JSON(query);
     }
     else if(type.equals("text")){
-        response.setContentType("text/plain");
+        response.setContentType("text/html");
         results = ub.getXml_TEXT_JSON(query);
     }
     else if(type.equals("html")){
@@ -39,7 +38,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>

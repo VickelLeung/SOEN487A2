@@ -11,19 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-<!--    <script type="text/javascript">
-        function toGetBook(){
-            var type = document.getElementById("type").value;
-            var title = document.getElementById("title").value;
-            var description = document.getElementById("description").value;
-            var author = document.getElementById("author").value;
-            var isbn = document.getElementById("isbn").value;
-            var publisher = document.getElementById("publisher").value;
-            
-             window.location.href = "http://localhost:8080/WebClient/RESTJSP/GetBookAPI/getBook_"+ type+".jsp?title="+title+"?description="+description
-                     +"?author="+author+"?isbn="+isbn+"?publisher="+publisher; 
-        }
-    </script>-->
     <body>
         <div style="text-align: center;">
             <h2>Update Book Text</h2>

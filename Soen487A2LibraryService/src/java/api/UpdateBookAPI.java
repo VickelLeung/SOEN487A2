@@ -50,12 +50,13 @@ public class UpdateBookAPI {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
-    public String getXml(@Context HttpHeaders headers,String data, @QueryParam("id") int id) throws ParseException, SQLException {
+    public String getXml(@Context HttpHeaders headers,String data) throws ParseException, SQLException {
    
         String contentType = headers.getRequestHeader("Content-Type").get(0);
         String result = "";
         String tempData = data;
         
+        int id;
         String title;
         String description;
         String isbn;
@@ -67,7 +68,7 @@ public class UpdateBookAPI {
             System.out.println("json");
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(tempData);
-
+            id = Integer.parseInt(json.get("id").toString());
             title = json.get("title").toString();
             description = json.get("description").toString();
             isbn = json.get("isbn").toString();

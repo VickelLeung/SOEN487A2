@@ -48,13 +48,10 @@
 <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
-        <%= request.getParameter("title") %>
-        <%= request.getParameter("description") %>
-        <%= request.getParameter("author") %>
-        <%= request.getParameter("isbn") %>
-        <%= request.getParameter("publisher") %>    
-        <%=results%>
-    </body>
+    <div style="display:flex; flex-direction: column; text-align: center">
+            <h1>Here is the results for add book by <%=type %></h1>
+            <%
+                out.print(results);
+            %>
+        </div>
 </html>

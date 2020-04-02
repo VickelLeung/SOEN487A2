@@ -43,7 +43,7 @@ public class InsertBookAPI {
     
     @POST
     @Consumes({"application/json",MediaType.TEXT_PLAIN}) 
-    @Produces({MediaType.TEXT_PLAIN,MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN,MediaType.TEXT_HTML})
+    @Produces({MediaType.TEXT_PLAIN,MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.TEXT_HTML})
     public String addBook(@Context HttpHeaders headers, String data) throws ParseException {
         String contentType = headers.getRequestHeader("Content-Type").get(0);
         JSONObject obj = new JSONObject();
@@ -83,7 +83,6 @@ public class InsertBookAPI {
                      publisher= tmp[1];
                  }
              }//END FOR
-             System.out.println("ffff");
             book = new Books(title, description, isbn, author, publisher);
 
             boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);

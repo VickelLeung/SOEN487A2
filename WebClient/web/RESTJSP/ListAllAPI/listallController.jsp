@@ -11,21 +11,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <script type="text/javascript">
-        function toGetAllListBook(){
-            var type = document.getElementById("type").value;
-            window.location.href = "http://localhost:8080/WebClient/RESTJSP/ListAllAPI/listall_"+ type+".jsp"; 
-        }
-    </script>
+
     <body>
-        <h1>Hello World!</h1>
-         <select id="type">
-            <option value="json">JSON</option>
-            <option value="xml">XML</option>
-            <option value="text">TEXT</option>
-            <option value="html">HTML</option>
-        </select>
-        <button onclick="toGetAllListBook()">click</button>
-    </body>
+      <div style="text-align: center;">
+            <h2>List All Books</h2>
+        <form action="listAllResults.jsp">       
+            <div style="margin: 2% 10%; display:flex; flex-direction: column;">
+                <span>ID: </span><input type="text" name="id" >
+            </div>
+            <select name="type">
+                <option value="json">JSON</option>
+                <option value="xml">XML</option>
+                <option value="text">TEXT</option>
+                <option value="html">HTML</option>
+            </select>
+            <input type="submit">Submit</input> 
+        </form> 
+        </div>
     </body>
 </html>

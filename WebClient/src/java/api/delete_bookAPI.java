@@ -8,6 +8,8 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.JSONObject;
+import org.json.XML;
 
 /**
  * Jersey REST client generated for REST resource:DeleteBookAPI
@@ -34,12 +36,42 @@ public class delete_bookAPI {
         webResource = client.resource(BASE_URI).path("delete_book");
     }
 
-    public String delete_book(String id) throws UniformInterfaceException {
+    public String delete_book_XML(String id) throws UniformInterfaceException {
         WebResource resource = webResource;
         if (id != null) {
             resource = resource.queryParam("id", id);
         }
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+       String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+       JSONObject obj = new JSONObject(x);
+       String xml = XML.toString(obj);
+
+       return xml;
+    }
+
+    public String delete_book_JSON(String id) throws UniformInterfaceException {
+        WebResource resource = webResource;
+        if (id != null) {
+            resource = resource.queryParam("id", id);
+        }
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+    }
+
+    public String delete_book_TEXT(String id) throws UniformInterfaceException {
+        WebResource resource = webResource;
+        String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+         JSONObject obj = new JSONObject(x);
+        
+        String plainText = obj.get("message")+"";
+         
+        return plainText;
+    }
+
+    public String delete_book_TEXT_XML(String id) throws UniformInterfaceException {
+        WebResource resource = webResource;
+        if (id != null) {
+            resource = resource.queryParam("id", id);
+        }
+        return resource.accept(javax.ws.rs.core.MediaType.TEXT_XML).get(String.class);
     }
 
     public void putXml(Object requestEntity) throws UniformInterfaceException {

@@ -3,9 +3,8 @@
     Created on : 1-Apr-2020, 1:08:54 AM
     Author     : vickelleung
 --%>
-
 <%@page import="api.get_bookAPI"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/xml" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,9 +19,7 @@
             String xml = gb.getBook_XML("2");
             String plain = gb.getBook_TEXT("2");
             
-            out.write("<p>");
-            out.print(plain);
-            out.write("</p>");
+            out.print("<pre>"+xml+"</pre>");
             %>
     </body>
 </html>

@@ -62,7 +62,13 @@ public class ListAllAPI {
         {"ISBN":"apple","author":"apple","description":"apple is sweet","publisher":"","id":1,"title":"apple"}*/
         for(int i = 0; i < array.size(); i++){
            //result = result + (String)(((JSONObject)array.get(i)).get("id")) +" "+(String)(((JSONObject)array.get(i)).get("title"))+" "+(String)(((JSONObject)array.get(i)).get("description"))+" "+(String)(((JSONObject)array.get(i)).get("publisher"))+" "+(String)(((JSONObject)array.get(i)).get("author"))+"\n";    
-        result =result + String.valueOf(((JSONObject)array.get(i)).get("id")) + " "+String.valueOf((((JSONObject)array.get(i)).get("title")))+"\n";
+             result =result + String.valueOf(((JSONObject)array.get(i)).get("id")) +  "  "
+                        + String.valueOf((((JSONObject)array.get(i)).get("title"))) + "  "
+                        + String.valueOf(((JSONObject)array.get(i)).get("description")) +  "  "
+                        + String.valueOf(((JSONObject)array.get(i)).get("author")) +  "  " 
+                        + String.valueOf(((JSONObject)array.get(i)).get("ISBN")) + "  "
+                        + String.valueOf(((JSONObject)array.get(i)).get("publisher"))
+                        +"\n";
         }
         return result;
     }

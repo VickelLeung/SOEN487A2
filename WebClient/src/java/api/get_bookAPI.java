@@ -50,7 +50,7 @@ public class get_bookAPI {
        JSONObject obj = new JSONObject(x);
        String xml = XML.toString(obj);
 
-       return xml;
+       return String.valueOf(xml);
     }
 
     public String getBook_JSON(String id) throws UniformInterfaceException {

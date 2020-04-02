@@ -49,7 +49,7 @@ public class UpdateBookAPI {
      */
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
     public String getXml(@Context HttpHeaders headers,String data, @QueryParam("id") int id) throws ParseException, SQLException {
    
         String contentType = headers.getRequestHeader("Content-Type").get(0);
@@ -78,8 +78,8 @@ public class UpdateBookAPI {
         }
        
         else if(contentType.equals("text/plain")){
-            String[] arr = data.split(" ");    
-            isAdded = bookMVC.BooksController.getInstance().updateBookById(id, arr[0], arr[1], arr[2], arr[3], arr[4] );
+            String[] arr = data.split("&");    
+            isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5] );
         }
         
         JSONObject obj = new JSONObject();

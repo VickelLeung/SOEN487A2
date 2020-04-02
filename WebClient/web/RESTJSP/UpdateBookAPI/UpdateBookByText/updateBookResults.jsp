@@ -18,18 +18,19 @@
     String results ="";
     update_bookAPI ub = new update_bookAPI();
     
+    String query = id + "&" + title +"&" + description+ "&" + author +"&" + isbn + "&" + publisher;
     if(type.equals("json")){
         response.setContentType("text/html");
-        results =  ub.getXml_JSON(id+title+description+author+isbn+publisher);
+        results = ub.getXml_TEXT_JSON(query);
 
     }
     else if(type.equals("xml")){
         response.setContentType("text/xml");
-        results =  ub.getXml_XML(id+title+description+author+isbn+publisher);
+        results = ub.getXml_TEXT_JSON(query);
     }
     else if(type.equals("text")){
         response.setContentType("text/plain");
-        results =  ub.getXml_TEXT(id+title+description+author+isbn+publisher);
+        results = ub.getXml_TEXT_JSON(query);
     }
     else if(type.equals("html")){
         response.setContentType("text/html");

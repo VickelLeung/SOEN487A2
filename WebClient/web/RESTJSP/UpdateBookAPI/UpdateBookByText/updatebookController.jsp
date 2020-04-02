@@ -26,7 +26,7 @@
     </script>-->
     <body>
         <div style="text-align: center;">
-            <h2>Update Book</h2>
+            <h2>Update Book Text</h2>
         <form action="updateBookResults.jsp">       
             <div style="margin: 2% 10%; display:flex; flex-direction: column;">
                 <span>ID: </span><input type="text" name="id" >

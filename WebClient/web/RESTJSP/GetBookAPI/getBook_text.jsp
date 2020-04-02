@@ -19,6 +19,6 @@
         get_bookAPI gb = new get_bookAPI();
         String text = gb.getBook_TEXT(id);
         out.print(text);
-    %>
+        %>
     </body>
 </html>

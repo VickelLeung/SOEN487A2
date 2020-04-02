@@ -10,7 +10,6 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.json.*;
 
-
 /**
  * Jersey REST client generated for REST resource:GetBookAPI [get_book]<br>
  * USAGE:
@@ -50,7 +49,7 @@ public class get_bookAPI {
        JSONObject obj = new JSONObject(x);
        String xml = XML.toString(obj);
 
-       return String.valueOf(xml);
+       return xml;
     }
 
     public String getBook_JSON(String id) throws UniformInterfaceException {

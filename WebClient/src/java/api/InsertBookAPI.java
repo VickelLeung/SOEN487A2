@@ -8,6 +8,7 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.XML;
 
 /**
  * Jersey REST client generated for REST resource:InsertBookAPI [add_book]<br>
@@ -46,7 +47,11 @@ public class InsertBookAPI {
     }
    
     public String addBook_JSON_XML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+        String x = webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+        org.json.JSONObject obj = new org.json.JSONObject(x);
+        String xml = XML.toString(obj);
+        
+        return xml;
     }
     
     

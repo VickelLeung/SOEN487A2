@@ -8,8 +8,9 @@ package api;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import org.json.*;
+import org.json.XML;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -43,7 +44,12 @@ public class ListAllAPI {
 
     public String getJson_XML() throws UniformInterfaceException {
         WebResource resource = webResource;
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+        
+        String data = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+       
+        org.json.JSONArray jsonArr = new org.json.JSONArray(data);
+
+        return XML.toString(jsonArr);
     }
 
     public String getJson_JSON() throws UniformInterfaceException {
@@ -54,23 +60,16 @@ public class ListAllAPI {
     public String getJson_TEXT() throws UniformInterfaceException, ParseException {
         WebResource resource = webResource;
         String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
-        String result = "";
-        
-        JSONParser parser = new JSONParser();
-        JSONArray array = (JSONArray)parser.parse(data);
-        /*
-        {"ISBN":"apple","author":"apple","description":"apple is sweet","publisher":"","id":1,"title":"apple"}*/
-        for(int i = 0; i < array.size(); i++){
-           //result = result + (String)(((JSONObject)array.get(i)).get("id")) +" "+(String)(((JSONObject)array.get(i)).get("title"))+" "+(String)(((JSONObject)array.get(i)).get("description"))+" "+(String)(((JSONObject)array.get(i)).get("publisher"))+" "+(String)(((JSONObject)array.get(i)).get("author"))+"\n";    
-             result =result + String.valueOf(((JSONObject)array.get(i)).get("id")) +  "  "
-                        + String.valueOf((((JSONObject)array.get(i)).get("title"))) + "  "
-                        + String.valueOf(((JSONObject)array.get(i)).get("description")) +  "  "
-                        + String.valueOf(((JSONObject)array.get(i)).get("author")) +  "  " 
-                        + String.valueOf(((JSONObject)array.get(i)).get("ISBN")) + "  "
-                        + String.valueOf(((JSONObject)array.get(i)).get("publisher"))
-                        +"\n";
-        }
-        return result;
+
+          String results = "";
+          org.json.JSONArray jsonArr = new org.json.JSONArray(data);
+          for (int i = 0; i < jsonArr.length(); i++) {
+            JSONObject obj = jsonArr.getJSONObject(i);
+            results += "Title: " + obj.getString("title") + "\nDescription: " + obj.getString("description") + "\nAuthor: " + obj.getString("author")
+                    + "\nISBN: " + obj.getString("ISBN") + "\nPublisher: " + obj.getString("publisher") + "\n\n";
+          }
+          
+        return results;
     }
 
     public String getJson_HTML() throws UniformInterfaceException {

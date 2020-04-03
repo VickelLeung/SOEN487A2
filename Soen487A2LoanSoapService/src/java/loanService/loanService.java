@@ -365,11 +365,11 @@ public class loanService {
     @WebMethod(operationName = "login")
     public String login(@WebParam(name = "name") String name, @WebParam(name = "password") String password) {
         //TODO write your implementation code here:
-        String result = "fail to login";
+        String result = "fail_to_login";
         try{
             boolean isLogin = MemberMVC.MemberController.getInstance().login(name, password);
             if(isLogin){
-                result = "success to login";
+                result = "success_to_login";
             }     
         }catch(Exception e){
             result = e.getMessage();
@@ -377,9 +377,4 @@ public class loanService {
        
         return result;
     }
-
-
-
-
-
 }

@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-    </body>
+        <form action="verifyUser.jsp">
+            <label>Username</label><input type="text" name="username"><br>
+            <label>Password</label><input type="text" name="password">
+            <input type="submit" value="Submit">
+        </form>
+
+    </body>  
+
 </html>

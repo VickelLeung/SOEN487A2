@@ -37,7 +37,7 @@
     </head>
     <body>
         <div style="display:flex; flex-direction: column; text-align: center">
-            <h1>Here is the results for get book by <%=type %></h1>
+            <h1>Here is the results for delete book by <%=type %></h1>
             <%
                 out.print("<div>");
                 out.print(results);

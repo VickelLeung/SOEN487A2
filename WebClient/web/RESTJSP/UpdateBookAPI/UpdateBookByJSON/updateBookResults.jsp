@@ -25,22 +25,20 @@
     obj.put("isbn",isbn);
     obj.put("publisher",publisher);
     
-    
     String results ="";
     update_bookAPI ub = new update_bookAPI();
     
-    String query = id + "&" + title +"&" + description+ "&" + author +"&" + isbn + "&" + publisher;
     if(type.equals("json")){
         response.setContentType("text/html");
-        results = ub.getXml_TEXT_JSON(obj.toJSONString());
+        results = ub.getXml_JSON_JSON(obj.toJSONString());
     }
     else if(type.equals("xml")){
         response.setContentType("text/xml");
-        results = ub.getXml_TEXT_JSON(obj.toJSONString());
+        results = ub.getXml_JSON_XML(obj.toJSONString());
     }
     else if(type.equals("text")){
         response.setContentType("text/html");
-        results = ub.getXml_TEXT_JSON(obj.toJSONString());
+        results = ub.getXml_JSON_TEXT(obj.toJSONString());
     }
     else if(type.equals("html")){
         response.setContentType("text/html");

@@ -42,13 +42,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <%= request.getParameter("id") %>
-        <%= request.getParameter("title") %>
-        <%= request.getParameter("description") %>
-        <%= request.getParameter("author") %>
-        <%= request.getParameter("isbn") %>
-        <%= request.getParameter("publisher") %>
-        
         <%=results%>
     </body>
 </html>

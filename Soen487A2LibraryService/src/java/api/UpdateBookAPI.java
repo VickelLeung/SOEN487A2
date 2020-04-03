@@ -56,7 +56,7 @@ public class UpdateBookAPI {
         String result = "";
         String tempData = data;
         
-        int id;
+        String id;
         String title;
         String description;
         String isbn;
@@ -68,14 +68,14 @@ public class UpdateBookAPI {
             System.out.println("json");
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(tempData);
-            id = Integer.parseInt(json.get("id").toString());
+            id = json.get("id").toString();
             title = json.get("title").toString();
             description = json.get("description").toString();
             isbn = json.get("isbn").toString();
             author  = json.get("author").toString();
             publisher = json.get("publisher").toString();
             
-            isAdded = bookMVC.BooksController.getInstance().updateBookById(id, title, description, author, isbn, publisher );
+            isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(id), title, description, author, isbn, publisher );
         }
        
         else if(contentType.equals("text/plain")){

@@ -42,39 +42,60 @@ public class ListAllAPI {
         webResource.type(javax.ws.rs.core.MediaType.APPLICATION_XML).put(requestEntity);
     }
 
-    public String getJson_XML() throws UniformInterfaceException {
-        WebResource resource = webResource;
+    public String getJson_XML(){
+        try{
+            WebResource resource = webResource;
+
+            String data = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+
+            org.json.JSONArray jsonArr = new org.json.JSONArray(data);
+
+            return XML.toString(jsonArr);
         
-        String data = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
-       
-        org.json.JSONArray jsonArr = new org.json.JSONArray(data);
-
-        return XML.toString(jsonArr);
+        }catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
 
-    public String getJson_JSON() throws UniformInterfaceException {
-        WebResource resource = webResource;
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+    public String getJson_JSON() {
+        try{
+             WebResource resource = webResource;
+            return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+        }catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return String.valueOf(obj);
+        }
     }
 
-    public String getJson_TEXT() throws UniformInterfaceException, ParseException {
-        WebResource resource = webResource;
-        String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+    public String getJson_TEXT() {
+        try{
+            WebResource resource = webResource;
+           String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
 
-          String results = "";
-          org.json.JSONArray jsonArr = new org.json.JSONArray(data);
-          for (int i = 0; i < jsonArr.length(); i++) {
-            JSONObject obj = jsonArr.getJSONObject(i);
-            results += "Title: " + obj.getString("title") + "\nDescription: " + obj.getString("description") + "\nAuthor: " + obj.getString("author")
-                    + "\nISBN: " + obj.getString("ISBN") + "\nPublisher: " + obj.getString("publisher") + "\n\n";
-          }
-          
-        return results;
+             String results = "";
+             org.json.JSONArray jsonArr = new org.json.JSONArray(data);
+             for (int i = 0; i < jsonArr.length(); i++) {
+               JSONObject obj = jsonArr.getJSONObject(i);
+               results += "Title: " + obj.getString("title") + "\nDescription: " + obj.getString("description") + "\nAuthor: " + obj.getString("author")
+                       + "\nISBN: " + obj.getString("ISBN") + "\nPublisher: " + obj.getString("publisher") + "\n\n";
+             }      
+            return results;
+        }catch(Exception e){
+            return "error " +e.toString();    
+        }
     }
 
     public String getJson_HTML() throws UniformInterfaceException {
-        WebResource resource = webResource;
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+        try{
+              WebResource resource = webResource;
+               return resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+        }
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
     }
 
     public void close() {

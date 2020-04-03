@@ -93,6 +93,15 @@ public class get_bookAPI {
         }
         
     }
+    
+    public String getBook_HTML(String id, String title) throws UniformInterfaceException {
+        WebResource resource = webResource;
+        if (id != null) {
+            resource = resource.queryParam("id", id);
+        }
+      
+        return resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+    }
 
     public void close() {
         client.destroy();

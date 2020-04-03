@@ -51,49 +51,56 @@ public class UpdateBookAPI {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
     public String getXml(@Context HttpHeaders headers,String data) throws ParseException, SQLException {
-   
-        String contentType = headers.getRequestHeader("Content-Type").get(0);
-        String result = "";
-        String tempData = data;
-        
-        String id;
-        String title;
-        String description;
-        String isbn;
-        String author;
-        String publisher;
-        boolean isAdded = false;
+                JSONObject obj = new JSONObject();
+                String contentType = headers.getRequestHeader("Content-Type").get(0);
+                String result = "";
+                String tempData = data;
+
+                String id;
+                String title;
+                String description;
+                String isbn;
+                String author;
+                String publisher;
+                boolean isAdded = false;
+                try{
+                      if(contentType.equals("application/json")){
+                    System.out.println("json");
+                    JSONParser parser = new JSONParser();
+                    JSONObject json = (JSONObject) parser.parse(tempData);
+                    id = json.get("id").toString();
+                    title = json.get("title").toString();
+                    description = json.get("description").toString();
+                    isbn = json.get("isbn").toString();
+                    author  = json.get("author").toString();
+                    publisher = json.get("publisher").toString();
+
+                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(id), title, description, author, isbn, publisher );
+                }
+
+                else if(contentType.equals("text/plain")){
+                    String[] arr = data.split("&");    
+                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5] );
+                }
+
                 
-        if(contentType.equals("application/json")){
-            System.out.println("json");
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(tempData);
-            id = json.get("id").toString();
-            title = json.get("title").toString();
-            description = json.get("description").toString();
-            isbn = json.get("isbn").toString();
-            author  = json.get("author").toString();
-            publisher = json.get("publisher").toString();
+
+                if(isAdded){
+                    obj.put("message", "Successfully update");
+                    return obj.toJSONString();
+
+                }
+                else{
+                    obj.put("message", "unsuccessfully update");
+                    return obj.toJSONString();
+                }
             
-            isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(id), title, description, author, isbn, publisher );
-        }
-       
-        else if(contentType.equals("text/plain")){
-            String[] arr = data.split("&");    
-            isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5] );
-        }
-        
-        JSONObject obj = new JSONObject();
-        
-        if(isAdded){
-            obj.put("message", "Successfully update");
-            return obj.toJSONString();
+        }catch(Exception e){
+                 obj.put("message", "unsuccessfully update " + e.getMessage());
+                    return obj.toJSONString();
             
-        }
-        else{
-            obj.put("message", "unsuccessfully update");
-            return obj.toJSONString();
-        }
+        }        
+      
     }
 
     /**

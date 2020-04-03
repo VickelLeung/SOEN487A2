@@ -72,7 +72,7 @@ public class DeleteBookAPI {
                 return obj.toJSONString();
             }
         }else{
-             obj.put("message","no book exsit");
+             obj.put("message","no book exist");
              return obj.toJSONString();
         }
     }

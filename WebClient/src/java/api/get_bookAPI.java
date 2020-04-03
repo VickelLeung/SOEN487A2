@@ -38,41 +38,60 @@ public class get_bookAPI {
         webResource.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(requestEntity);
     }
 
-    public String getBook_XML(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        
-        if (id != null) {
-            resource = resource.queryParam("id", id);
-        }
-       
-       String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
-       JSONObject obj = new JSONObject(x);
-       String xml = XML.toString(obj);
+    public String getBook_XML(String id) {
+        try{
+                WebResource resource = webResource;       
+                if (id != null) {
+                    resource = resource.queryParam("id", id);
+                }
+               String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+               JSONObject obj = new JSONObject(x);
+               String xml = XML.toString(obj);
+               return xml;
+           }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
 
-       return xml;
     }
 
-    public String getBook_JSON(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        if (id != null) {
-            resource = resource.queryParam("id", id);
+    public String getBook_JSON(String id) {
+        try{
+            WebResource resource = webResource;
+            if (id != null) {
+                resource = resource.queryParam("id", id);
+            }
+            return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+
         }
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return String.valueOf(obj);
+        }
     }
 
-    public String getBook_TEXT(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
+    public String getBook_TEXT(String id){
+        try{
+            WebResource resource = webResource;
         
-        if (id != null) {
-            resource = resource.queryParam("id", id);
+            if (id != null) {
+                resource = resource.queryParam("id", id);
+            }
+             String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+             JSONObject obj = new JSONObject(x);
+
+             String plainText = obj.get("title")+" " + obj.get("description") + " " + obj.get("author") + " " 
+                     + obj.get("isbn") + " " + obj.get("publisher");
+
+            return plainText;
         }
-         String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
-         JSONObject obj = new JSONObject(x);
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
         
-         String plainText = obj.get("title")+" " + obj.get("description") + " " + obj.get("author") + " " 
-                 + obj.get("isbn") + " " + obj.get("publisher");
-         
-        return plainText;
     }
 
     public void close() {

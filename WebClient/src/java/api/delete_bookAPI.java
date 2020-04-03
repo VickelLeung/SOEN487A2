@@ -36,42 +36,65 @@ public class delete_bookAPI {
         webResource = client.resource(BASE_URI).path("delete_book");
     }
 
-    public String delete_book_XML(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        if (id != null) {
-            resource = resource.queryParam("id", id);
-        }
-       String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
-       JSONObject obj = new JSONObject(x);
-       String xml = XML.toString(obj);
+    public String delete_book_XML(String id) {
+        try{
+               WebResource resource = webResource;
+                if (id != null) {
+                    resource = resource.queryParam("id", id);
+                }
+               String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+               JSONObject obj = new JSONObject(x);
+               String xml = XML.toString(obj);
 
-       return xml;
+               return xml;
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
 
-    public String delete_book_JSON(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        if (id != null) {
-            resource = resource.queryParam("id", id);
+    public String delete_book_JSON(String id) {
+        try{
+                WebResource resource = webResource;
+                if (id != null) {
+                    resource = resource.queryParam("id", id);
+                }
+                return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
         }
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return String.valueOf(obj);
+        }
     }
 
-    public String delete_book_TEXT(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
-         JSONObject obj = new JSONObject(x);
-        
-        String plainText = obj.get("message")+"";
-         
-        return plainText;
+    public String delete_book_TEXT(String id)  {
+        try{
+                WebResource resource = webResource;
+                String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+                 JSONObject obj = new JSONObject(x);      
+                String plainText = obj.get("message")+"";         
+                return plainText;
+        }catch(Exception e){
+            return "error " +e.toString();    
+        }
     }
 
-    public String delete_book_TEXT_XML(String id) throws UniformInterfaceException {
-        WebResource resource = webResource;
-        if (id != null) {
-            resource = resource.queryParam("id", id);
+    public String delete_book_TEXT_XML(String id) {
+        try{
+             WebResource resource = webResource;
+            if (id != null) {
+                resource = resource.queryParam("id", id);
+            }
+            return resource.accept(javax.ws.rs.core.MediaType.TEXT_XML).get(String.class);
         }
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_XML).get(String.class);
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
 
     public void putXml(Object requestEntity) throws UniformInterfaceException {

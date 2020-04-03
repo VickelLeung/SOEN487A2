@@ -40,46 +40,86 @@ public class update_bookAPI {
         return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
     }
     
-   public String getXml_JSON_XML(Object requestEntity) throws UniformInterfaceException {
-           
-       String x = webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
-       JSONObject obj = new JSONObject(x);
-       String xml = XML.toString(obj);
+   public String getXml_JSON_XML(Object requestEntity) {
+       try{
+             String x = webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
+            JSONObject obj = new JSONObject(x);
+            String xml = XML.toString(obj);
 
-       return xml;
+            return xml;
+       
+       } catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
    
-   public String getXml_JSON_TEXT(Object requestEntity) throws UniformInterfaceException {
-               
-        String x = webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
- 
-         JSONObject obj = new JSONObject(x);
+   public String getXml_JSON_TEXT(Object requestEntity) {
+        try{
+                String x = webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
+                JSONObject obj = new JSONObject(x);       
+               String plainText = obj.get("message")+ "";
+               return plainText;
         
-        String plainText = obj.get("message")+ "";
-        
-        return plainText;
+        } 
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
+
+
    }
     
-   public String getXml_JSON_HTML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
+   public String getXml_JSON_HTML(Object requestEntity) {
+       try{
+            return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(String.class, requestEntity);
+       }
+       catch(Exception e){
+            return "error " +e.toString();    
+        } 
     }
 
     ////////////
-    public String getXml_TEXT_TEXT(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+    public String getXml_TEXT_TEXT(Object requestEntity) {
+        try{
+          return webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+        }
+       catch(Exception e){
+            return "error " +e.toString();    
+        }
     }
     
-    public String getXml_TEXT_HTML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+    public String getXml_TEXT_HTML(Object requestEntity){
+        try{
+            return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+        }
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
+   
     }
     
     
-     public String getXml_TEXT_JSON(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+     public String getXml_TEXT_JSON(Object requestEntity) {
+         try{
+              return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+         }
+         catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("error", e.toString());
+            return String.valueOf(obj);
+        }
     }
     
-    public String getXml_TEXT_XML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+    public String getXml_TEXT_XML(Object requestEntity) {
+        try{
+             return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).put(String.class, requestEntity);
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
 
     public void putXml(Object requestEntity) throws UniformInterfaceException {

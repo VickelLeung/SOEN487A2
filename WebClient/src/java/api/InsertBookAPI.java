@@ -35,27 +35,51 @@ public class InsertBookAPI {
         webResource = client.resource(BASE_URI).path("add_book");
     }
 //javax.ws.rs.core.MediaType.APPLICATION_XML
-    public String addBook_JSON_TEXT(Object requestEntity) throws UniformInterfaceException {
-        String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
-        JSONObject obj = new JSONObject(data);
-        String plainText = obj.get("message")+"";
-        return plainText;
+    public String addBook_JSON_TEXT(Object requestEntity) {
+        try{
+            String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+            JSONObject obj = new JSONObject(data);
+            String plainText = obj.get("message")+"";
+            return plainText;
+        }
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
+        
     }
     
-    public String addBook_JSON_JSON(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+    public String addBook_JSON_JSON(Object requestEntity) {
+        try{
+         return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return String.valueOf(obj);
+        }   
     }
     
-   public String addBook_JSON_HTML(Object requestEntity) throws UniformInterfaceException {
+   public String addBook_JSON_HTML(Object requestEntity)  {
+       try{
         return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+       }
+       catch(Exception e){
+            return "error " +e.toString();    
+        }     
     }
    
-    public String addBook_JSON_XML(Object requestEntity) throws UniformInterfaceException {
-        String data = webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
-        org.json.JSONObject obj = new org.json.JSONObject(data);
-        String xml = XML.toString(obj);
-        
-        return xml;
+    public String addBook_JSON_XML(Object requestEntity) {
+        try{
+            String data = webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+            org.json.JSONObject obj = new org.json.JSONObject(data);
+            String xml = XML.toString(obj);
+            return xml;
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
     }
     
     
@@ -63,29 +87,54 @@ public class InsertBookAPI {
     /////////
     
     
-    public String addBook_TEXT_TEXT(Object requestEntity) throws UniformInterfaceException {
-        String data = webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
-         JSONObject obj = new JSONObject(data);
-         String plainText = obj.get("message")+"";
-        return plainText;
+    public String addBook_TEXT_TEXT(Object requestEntity) {
+        try{
+            String data = webResource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+            JSONObject obj = new JSONObject(data);
+            String plainText = obj.get("message")+"";
+            return plainText;
+        }
+        catch(Exception e){
+            return "error " +e.toString();    
+        }
+
     }
 
         
-    public String addBook_TEXT_JSON(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+    public String addBook_TEXT_JSON(Object requestEntity) {
+        try{
+           return webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return String.valueOf(obj);
+        }
     }
     
         
-    public String addBook_TEXT_HTML(Object requestEntity) throws UniformInterfaceException {
-        return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+    public String addBook_TEXT_HTML(Object requestEntity) {
+        try{
+            return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+        }
+       catch(Exception e){
+            return "error " +e.toString();    
+        }
     }
        
-    public String addBook_TEXT_XML(Object requestEntity) throws UniformInterfaceException {
-        String data =  webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
-        org.json.JSONObject obj = new org.json.JSONObject(data);
-        String xml = XML.toString(obj);
-        
-        return xml;
+    public String addBook_TEXT_XML(Object requestEntity) {
+        try{
+            String data =  webResource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+            org.json.JSONObject obj = new org.json.JSONObject(data);
+            String xml = XML.toString(obj);
+            return xml;
+        }
+        catch(Exception e){
+           JSONObject obj = new JSONObject();
+           obj.put("error", e.toString());
+           return XML.toString(obj);         
+        } 
+
     }
     
     public void putXml(Object requestEntity) throws UniformInterfaceException {

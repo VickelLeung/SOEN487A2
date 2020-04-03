@@ -13,6 +13,7 @@ import org.json.*;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,6 +25,37 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+
+import java.io.FileOutputStream;
+ 
+import java.io.OutputStream;
+ 
+import javax.xml.transform.Source;
+ 
+import javax.xml.transform.Transformer;
+ 
+import javax.xml.transform.TransformerFactory;
+ 
+import javax.xml.transform.stream.StreamResult;
+ 
+import javax.xml.transform.stream.StreamSource;
+
+import java.io.FileOutputStream;
+ 
+import java.io.OutputStream;
+import java.util.Scanner;
+ 
+import javax.xml.transform.Source;
+ 
+import javax.xml.transform.Transformer;
+ 
+import javax.xml.transform.TransformerFactory;
+ 
+import javax.xml.transform.stream.StreamResult;
+ 
+import javax.xml.transform.stream.StreamSource;
+
 /**
  * Jersey REST client generated for REST resource:GetBookAPI [get_book]<br>
  * USAGE:
@@ -108,13 +140,12 @@ public class get_bookAPI {
         
     }
     
-    public String getBook_HTML(String id) throws UniformInterfaceException {
+    public String getBook_HTML(String id) throws UniformInterfaceException, FileNotFoundException {
         WebResource resource = webResource;
         if (id != null) {
             resource = resource.queryParam("id", id);
         }
-      
-        String result = "failed";
+        String result="";
         String data =  resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
          JSONObject obj = new JSONObject(data);
          try {
@@ -169,17 +200,41 @@ public class get_bookAPI {
  
             transformer.transform(domSource, streamResult);
  
-            System.out.println("Done creating XML File");
-            result = "Done creating XML File";
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+ 
+            Source xslDoc = new StreamSource("/Applications/NetBeans/glassfish-4.1.1/glassfish/domains/domain1/config/ChuChu.xsl");
+
+            Source xmlDoc = new StreamSource("/Applications/NetBeans/glassfish-4.1.1/glassfish/domains/domain1/config/TrainBlahBlah.xml");
+
+            OutputStream htmlFile = new FileOutputStream("TrainBlahBlah.html");
+
+            Transformer trasform = tFactory.newTransformer(xslDoc);
+
+            trasform.transform(xmlDoc, new StreamResult(htmlFile));
+            
+       
+        System.out.println("Done creating XML File");
+          
+                
+        File myObj = new File("TrainBlahBlah.html");
+        Scanner myReader = new Scanner(myObj);
+           while (myReader.hasNextLine()) {
+               String d = myReader.nextLine();
+               System.out.println(data);
+               result += d;
+         }        
             
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
         } catch (TransformerException tfe) {
             tfe.printStackTrace();
+        } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
         }
+         
         return result;
-            
-        
+     
     }
 
     public void close() {

@@ -29,6 +29,7 @@
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
+        results = la.getJson_HTML();
     }
 %>
 <html>

@@ -42,6 +42,7 @@
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
+        results = ub.getXml_JSON_HTML(obj.toJSONString());
     }
     %>
     

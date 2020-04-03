@@ -162,4 +162,25 @@ public class MemberDAO {
         }
       return ret;
      } 
+     
+     
+     public boolean login(String name , String password){
+         boolean ret = false;
+        ResultSet rs = null;
+        String query = "SELECT * From members where name = ? AND password = ?";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, password);
+            rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                ret = true;
+            }
+            System.out.println(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+         return ret;
+     }
 }

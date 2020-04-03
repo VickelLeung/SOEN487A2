@@ -68,7 +68,9 @@ public class MemberController {
        return memberMap;
     }
    
-   
+   public boolean login(String name, String password){
+       return dao.login(name, password);
+   }
 
     public boolean addMember(Members m){
        return dao.addMember(m.getName(), m.getContact(),m.getPassword());

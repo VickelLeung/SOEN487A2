@@ -5,6 +5,7 @@
  */
 package api;
 
+import bookMVC.Books;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -15,6 +16,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
 import static bookMVC.BooksController.getInstance;
+import java.awt.print.Book;
 import javax.ws.rs.QueryParam;
 import org.json.simple.JSONObject;
 /**
@@ -41,19 +43,38 @@ public class DeleteBookAPI {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_XML})
     public String delete_book(@QueryParam("id") int id) {
-        
-        boolean isDeleted = bookMVC.BooksController.getInstance().deleteBookById(id);
         JSONObject obj = new JSONObject();
-         
-        if(isDeleted){
-            obj.put("message", "Successfully deleted");
-            return obj.toJSONString();
-        }
-        else{
-           obj.put("message", "unsuccessfully deleted");
-            return obj.toJSONString();
+        boolean isBookExsit = true;
+        try{
+            Books book = bookMVC.BooksController.getInstance().getBookById(id);
+            if(book.getTitle().isEmpty()||book.equals("")){
+                isBookExsit = false;
+            }
+        }catch(Exception e){
+             isBookExsit = false;
         }
         
+        
+        if(isBookExsit){
+            try{
+                boolean isDeleted = bookMVC.BooksController.getInstance().deleteBookById(id);
+                if(isDeleted){
+                    obj.put("message", "Successfully deleted");
+                    return obj.toJSONString();
+                }
+                else{
+                   obj.put("message", "unsuccessfully deleted");
+                    return obj.toJSONString();
+                }
+            }
+            catch(Exception e){
+                obj.put("message",e.getMessage());
+                return obj.toJSONString();
+            }
+        }else{
+             obj.put("message","no book exsit");
+             return obj.toJSONString();
+        }
     }
 
     /**

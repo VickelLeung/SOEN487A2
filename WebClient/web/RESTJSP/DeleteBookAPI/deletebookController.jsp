@@ -13,7 +13,7 @@
     </head>
     <body>
         <div style="text-align: center;">
-            <h2>Update Book</h2>
+            <h2>Delete Book</h2>
         <form action="deleteBookResults.jsp">       
             <div style="margin: 2% 10%; display:flex; flex-direction: column;">
                 <span>ID: </span><input type="text" name="id" >

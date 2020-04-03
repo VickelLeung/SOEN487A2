@@ -28,6 +28,7 @@
         }
         else if(type.equals("html")){
             response.setContentType("text/html");
+            results = gb.getBook_HTML(id);
         }
     }catch(Exception e){
         results = e.getMessage();

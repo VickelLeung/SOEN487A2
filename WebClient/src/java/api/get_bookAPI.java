@@ -94,7 +94,7 @@ public class get_bookAPI {
         
     }
     
-    public String getBook_HTML(String id, String title) throws UniformInterfaceException {
+    public String getBook_HTML(String id) throws UniformInterfaceException {
         WebResource resource = webResource;
         if (id != null) {
             resource = resource.queryParam("id", id);

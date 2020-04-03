@@ -9,27 +9,31 @@
 <% 
     String t_username = request.getParameter("username");
     String t_password = request.getParameter("password"); 
-    if(t_username != null && t_password != null){
-            try {
-	loanservice.LoanService_Service service = new loanservice.LoanService_Service();
-	loanservice.LoanService port = service.getLoanServicePort();
-	 // TODO initialize WS operation arguments here
-	java.lang.String name = t_username;
-	java.lang.String password = t_password;
-	// TODO process result here
-	java.lang.String result = port.login(name, password);
-	out.println("Result = "+result);
-        if(username.username.equals("")){
-            username.username = t_username;
-            username.isUserusing = true;
-        }
-        else{
-            out.print("someone using it");
-        }
-        
-    } catch (Exception ex) {
-	// TODO handle custom exceptions here
-    }
+    if(username.isUserusing){
+        out.print("someone is using");
+    } else {
+                if(t_username != null && t_password != null){
+                try {
+                    loanservice.LoanService_Service service = new loanservice.LoanService_Service();
+                    loanservice.LoanService port = service.getLoanServicePort();
+                     // TODO initialize WS operation arguments here
+                    java.lang.String name = t_username;
+                    java.lang.String password = t_password;
+                    // TODO process result here
+                    java.lang.String result = port.login(name, password);
+                    out.println("Result = "+result);
+                    if(username.username.equals("")){
+                        username.username = t_username;
+                        username.isUserusing = true;
+                    }
+
+                        } catch (Exception ex) {
+                            // TODO handle custom exceptions here
+                        }
+                }else{
+                    out.print("the username and password can't be empty");
+                }
+
     
     }
 

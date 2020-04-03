@@ -359,6 +359,26 @@ public class loanService {
         return loanMVC.LoanController.getInstance().showIsReturn(borrowBookId);
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "login")
+    public String login(@WebParam(name = "name") String name, @WebParam(name = "password") String password) {
+        //TODO write your implementation code here:
+        String result = "fail to login";
+        try{
+            boolean isLogin = MemberMVC.MemberController.getInstance().login(name, password);
+            if(isLogin){
+                result = "success to login";
+            }     
+        }catch(Exception e){
+            result = e.getMessage();
+        }
+       
+        return result;
+    }
+
+
 
 
 

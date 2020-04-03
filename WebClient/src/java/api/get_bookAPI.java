@@ -9,7 +9,21 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.json.*;
+//
 
+
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 /**
  * Jersey REST client generated for REST resource:GetBookAPI [get_book]<br>
  * USAGE:
@@ -100,7 +114,72 @@ public class get_bookAPI {
             resource = resource.queryParam("id", id);
         }
       
-        return resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+        String result = "failed";
+        String data =  resource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).get(String.class);
+         JSONObject obj = new JSONObject(data);
+         try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+ 
+            Document document = documentBuilder.newDocument();
+
+            Element root = document.createElement("html");
+            document.appendChild(root);
+            
+            Element body = document.createElement("body");
+            root.appendChild(body);
+            
+        
+             // author element
+            Element author = document.createElement("author");
+            author.appendChild(document.createTextNode(obj.get("author").toString()));
+            body.appendChild(author);
+            
+            // isbn element
+            Element isbn = document.createElement("isbn");
+            isbn.appendChild(document.createTextNode(obj.get("isbn").toString()));
+            body.appendChild(isbn);
+            
+            // description element
+            Element description = document.createElement("description");
+            description.appendChild(document.createTextNode(obj.get("description").toString()));
+            body.appendChild(description);
+            
+            // publisher element
+            Element publisher = document.createElement("publisher");
+            publisher.appendChild(document.createTextNode(obj.get("publisher").toString()));
+            body.appendChild(publisher);
+            
+            Element title = document.createElement("title");
+            title.appendChild(document.createTextNode(obj.get("title").toString()));
+            body.appendChild(title);
+            
+            
+            // create the xml file
+            //transform the DOM Object to an XML File
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File("TrainBlahBlah.xml"));
+            
+            // If you use
+            // StreamResult result = new StreamResult(System.out);
+            // the output will be pushed to the standard output ...
+            // You can use that for debugging 
+ 
+            transformer.transform(domSource, streamResult);
+ 
+            System.out.println("Done creating XML File");
+            result = "Done creating XML File";
+            
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        }
+        return result;
+            
+        
     }
 
     public void close() {

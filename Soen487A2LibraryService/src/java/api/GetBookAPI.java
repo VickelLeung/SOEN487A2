@@ -44,7 +44,9 @@ public class GetBookAPI {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML})
     public String getBook(@HeaderParam("Accept") String accepted, @QueryParam("id") int id, @QueryParam("title") String title){
-    try{
+        System.out.println("fffff");
+        
+        try{
                 if(title != null){
         return Integer.toString(bookMVC.BooksController.getInstance().getBookByTitle(title));
        }
@@ -59,8 +61,7 @@ public class GetBookAPI {
            return obj.toJSONString();
        }
     }catch(Exception e){
-           System.out.println(e.getMessage());
-           JSONObject obj = new JSONObject();
+         JSONObject obj = new JSONObject();
            obj.put("title", "No found");
            obj.put("description", "No found");
            obj.put("isbn", "No found");

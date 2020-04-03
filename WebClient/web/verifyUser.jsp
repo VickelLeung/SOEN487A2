@@ -4,6 +4,7 @@
     Author     : fokpoonkai
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     String t_username = request.getParameter("username");
@@ -18,6 +19,14 @@
 	// TODO process result here
 	java.lang.String result = port.login(name, password);
 	out.println("Result = "+result);
+        if(username.username.equals("")){
+            username.username = t_username;
+            username.isUserusing = true;
+        }
+        else{
+            out.print("someone using it");
+        }
+        
     } catch (Exception ex) {
 	// TODO handle custom exceptions here
     }
@@ -38,5 +47,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <%=username.username%>
     </body>
 </html>

@@ -49,7 +49,7 @@ public class UpdateBookAPI {
      */
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML})
     public String getXml(@Context HttpHeaders headers,String data) throws ParseException, SQLException {
                 JSONObject obj = new JSONObject();
                 String contentType = headers.getRequestHeader("Content-Type").get(0);

@@ -71,16 +71,16 @@ public class UpdateBookAPI {
                     id = json.get("id").toString();
                     title = json.get("title").toString();
                     description = json.get("description").toString();
-                    isbn = json.get("isbn").toString();
+                    //isbn = json.get("isbn").toString();
                     author  = json.get("author").toString();
                     publisher = json.get("publisher").toString();
 
-                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(id), title, description, author, isbn, publisher );
+                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(id), title, description, author, publisher );
                 }
 
                 else if(contentType.equals("text/plain")){
                     String[] arr = data.split("&");    
-                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5] );
+                    isAdded = bookMVC.BooksController.getInstance().updateBookById(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4] );
                 }
 
                 

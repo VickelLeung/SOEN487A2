@@ -20,7 +20,6 @@
                 <span>Title: </span><input type="text" name="title" >
                 <span>Description: </span><input type="text" name="description">
                 <span>Author: </span><input type="text" name="author">
-                <span>ISBN: </span><input type="text" name="isbn" >
                 <span>Publisher: </span><input type="text" name="publisher">
             </div>
             <select name="type">

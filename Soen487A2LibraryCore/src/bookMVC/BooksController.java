@@ -121,9 +121,9 @@ public class BooksController {
         return dao.delete(id);
    }
    
-   public boolean updateBookById(int id, String title, String description, String author, String ISBN, String Publisher ) throws SQLException{
+   public boolean updateBookById(int id, String title, String description, String author, String Publisher ) throws SQLException{
        
-        return dao.updateBook(id, title, description, author, ISBN, Publisher);
+        return dao.updateBook(id, title, description, author, Publisher);
    }
 
 }

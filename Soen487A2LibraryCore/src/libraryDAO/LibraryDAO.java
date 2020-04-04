@@ -160,7 +160,7 @@ public class LibraryDAO {
       return ret;
      }
      
-      public boolean updateBook(int id, String title, String description, String author, String ISBN, String Publisher) throws SQLException{
+      public boolean updateBook(int id, String title, String description, String author, String Publisher) throws SQLException{
         HashMap <String, String> map = new HashMap<>();
         boolean ret = false;
         
@@ -172,9 +172,6 @@ public class LibraryDAO {
         }
         if(!author.equals("")){
             map.put("author", author);
-        }
-        if(!ISBN.equals("")){
-            map.put("ISBN", ISBN);
         }
         if(!Publisher.equals("")){
             map.put("Publisher",Publisher);

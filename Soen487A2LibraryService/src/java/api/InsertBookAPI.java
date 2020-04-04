@@ -83,7 +83,8 @@ public class InsertBookAPI {
                      publisher= tmp[1];
                  }
              }//END FOR
-            book = new Books(title, description, isbn, author, publisher);
+             // Books(String title, String description, String author, String ISBN, String Publisher)
+            book = new Books(title, description,author, isbn, publisher);
 
             boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);
 
@@ -107,7 +108,7 @@ public class InsertBookAPI {
                 String isbn = json.get("isbn").toString();
                 String author  = json.get("author").toString();
                 String publisher = json.get("publisher").toString();
-                book = new Books(title, description, isbn, author, publisher);
+                book = new Books(title, description,author, isbn, publisher);
 
                 boolean isAdded = bookMVC.BooksController.getInstance().addBook(book);
 

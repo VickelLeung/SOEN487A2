@@ -36,9 +36,14 @@ public class loanService {
         //TODO write your implementation code here:
             Members mb  = MemberMVC.MemberController.getInstance().getMember(id);
             String result = "no member";
-
-            if ( id <= 0 ){
+            
+            if (id == 0){
+                throw new MySOAPFault("missing id");
+            }
+            
+            if ( id < 0 ){
                 throw new MySOAPFault("incorrect id");
+                
             } else {
                 if(mb!= null){
                 result = mb.getName() +" "+ mb.getContact();
@@ -55,7 +60,7 @@ public class loanService {
         //TODO write your implementation code here:
         if (name==null || name.isEmpty()){
              throw new MySOAPFault(" missing Name");
-         } else {
+        } else {
              return MemberMVC.MemberController.getInstance().getMemberIdByName(name);
          }        
     }
@@ -66,6 +71,19 @@ public class loanService {
     @WebMethod(operationName = "addMember")
     public String addMember(@WebParam(name = "name") String name, @WebParam(name = "contact") String contact, @WebParam(name = "password") String password) throws MySOAPFault {
         //TODO write your implementation code here:
+        
+        if (name==null || name.isEmpty()){
+             throw new MySOAPFault(" missing Name");
+        }
+        
+        if (contact==null || contact.isEmpty()){
+             throw new MySOAPFault(" missing Contact");
+        }
+        
+        if (password==null || password.isEmpty()){
+             throw new MySOAPFault(" missing password");
+        }
+        
         if (name.isEmpty() || password.isEmpty()){
             throw new MySOAPFault("fail to add member: missing Name or Password");
         } else {
@@ -88,8 +106,17 @@ public class loanService {
         //TODO write your implementation code here:
        String result = "fail to edit member";
        try{
+            
+            if (id == 0){
+                throw new MySOAPFault("missing id");
+            }
+            
+            if ( id < 0 ){
+                throw new MySOAPFault("incorrect id");
+            }    
+            
             if  (name == null || name.isEmpty()){
-                   throw new MySOAPFault("missing Name");
+                throw new MySOAPFault("missing Name");
             }
             if (contact == null  || name.isEmpty()) {
                 throw new MySOAPFault("missing contact");
@@ -98,6 +125,7 @@ public class loanService {
             if (MemberMVC.MemberController.getInstance().updateMember(id, name, contact)) {
                 result = "success to edit member";
             }
+            
             return result;
         }
         catch (NumberFormatException e) { 

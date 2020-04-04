@@ -67,7 +67,7 @@
             if(username.initUsername.equals(username.loginUsername)&& username.isUserusing){%>
                  <button onclick="goSoap()">Soap</button>
                 <button onclick="goRest()">REST</button>
-               
+                <button onclick="goRest()">REST</button>
              <%}else{%>
             <p>login false</p>
         <%}%>

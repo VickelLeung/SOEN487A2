@@ -12,12 +12,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="verifyUser.jsp">
-            <label>Username</label><input type="text" name="username"><br>
-            <label>Password</label><input type="text" name="password">
-            <input type="submit" value="Submit">
-        </form>
-
+        <div style="display:flex; flex-direction: column; justify-content: center; align-items:center">
+            <h1>Login</h1>
+            <form style="display: flex; flex-direction: column;" action="verifyUser.jsp">
+                <label>Username<input type="text" name="username"></label>
+                <label>Password<input type="text" name="password"></label>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </body>  
 
 </html>

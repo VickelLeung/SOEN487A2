@@ -10,7 +10,13 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <script>
+    function myFunction() {
+         var url = "http://localhost:8080/WebClient/login.jsp";
+                window.location.href = url;
+    }
+    </script>
+    <body onload="myFunction()">
         <div>TODO write content</div>
     </body>
 </html>

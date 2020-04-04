@@ -33,6 +33,7 @@
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
+        results = ib.addBook_TEXT_HTML(query);
     }
     
     

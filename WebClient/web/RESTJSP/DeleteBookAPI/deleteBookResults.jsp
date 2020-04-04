@@ -27,6 +27,7 @@
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
+        results = db.delete_book_HTML(id);
     }
 %>
 <!DOCTYPE html>

@@ -38,6 +38,7 @@
     }
     else if(type.equals("html")){
         response.setContentType(obj.toString());
+        results = ib.addBook_JSON_HTML(obj.toString());
     }
     
     
@@ -54,12 +55,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%= request.getParameter("title") %>
-        <%= request.getParameter("description") %>
-        <%= request.getParameter("author") %>
-        <%= request.getParameter("isbn") %>
-        <%= request.getParameter("publisher") %>    
+        <h1>Hello World!</h1>   
         <%=results%>
     </body>
 </html>

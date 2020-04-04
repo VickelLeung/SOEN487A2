@@ -93,8 +93,12 @@ public class delete_bookAPI {
     public String delete_book_TEXT(String id)  {
         try{
                 WebResource resource = webResource;
-                String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
-                 JSONObject obj = new JSONObject(x);      
+                if (id != null) {
+                    resource = resource.queryParam("id", id);
+                }
+                
+                String x = resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(String.class);
+                JSONObject obj = new JSONObject(x);      
                 String plainText = obj.get("message")+"";         
                 return plainText;
         }catch(Exception e){

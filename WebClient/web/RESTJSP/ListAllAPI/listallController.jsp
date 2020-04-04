@@ -16,9 +16,7 @@
       <div style="text-align: center;">
             <h2>List All Books</h2>
         <form action="listAllResults.jsp">       
-            <div style="margin: 2% 10%; display:flex; flex-direction: column;">
-                <span>ID: </span><input type="text" name="id" >
-            </div>
+            <h3>Select an option to display all the list of books</h3>
             <select name="type">
                 <option value="json">JSON</option>
                 <option value="xml">XML</option>

@@ -41,7 +41,7 @@ public class DeleteBookAPI {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN, MediaType.TEXT_HTML})
     public String delete_book(@QueryParam("id") int id) {
         JSONObject obj = new JSONObject();
         boolean isBookExsit = true;

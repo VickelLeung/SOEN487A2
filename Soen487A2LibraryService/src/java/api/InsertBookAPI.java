@@ -99,7 +99,6 @@ public class InsertBookAPI {
                   
                 String tempData = data;
 
-
                 JSONParser parser = new JSONParser();
                 JSONObject json = (JSONObject) parser.parse(tempData);
 

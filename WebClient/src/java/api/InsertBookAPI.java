@@ -77,7 +77,7 @@ public class InsertBookAPI {
     }
     
    public String addBook_JSON_HTML(Object requestEntity)  {
-       String result="";
+        String result="";
         String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
 
          JSONObject obj = new JSONObject(data);
@@ -194,12 +194,75 @@ public class InsertBookAPI {
     
         
     public String addBook_TEXT_HTML(Object requestEntity) {
-        try{
-            return webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
+        
+        String result="";
+        
+        String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+        JSONObject obj = new JSONObject(data);
+         try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+ 
+            Document document = documentBuilder.newDocument();
+
+            Element root = document.createElement("html");
+            document.appendChild(root);
+            
+            Element body = document.createElement("body");
+            root.appendChild(body);         
+        
+             // message element
+            Element message = document.createElement("message");
+            message.appendChild(document.createTextNode(obj.get("message").toString()));
+            body.appendChild(message);
+            
+            // create the xml file
+            //transform the DOM Object to an XML File
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File("TrainBlahBlah3.xml"));
+            
+            // If you use
+            // StreamResult result = new StreamResult(System.out);
+            // the output will be pushed to the standard output ...
+            // You can use that for debugging 
+ 
+            transformer.transform(domSource, streamResult);
+ 
+            
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+ 
+            Source xslDoc = new StreamSource("/Applications/NetBeans/glassfish-4.1.1/glassfish/domains/domain1/config/ChuChuMsg.xsl");
+
+            Source xmlDoc = new StreamSource("/Applications/NetBeans/glassfish-4.1.1/glassfish/domains/domain1/config/TrainBlahBlah3.xml");
+
+            OutputStream htmlFile = new FileOutputStream("TrainBlahBlah3.html");
+
+            Transformer trasform = tFactory.newTransformer(xslDoc);
+
+            trasform.transform(xmlDoc, new StreamResult(htmlFile));       
+       
+        System.out.println("Done creating XML File");
+          
+                
+        File myObj = new File("TrainBlahBlah3.html");
+        Scanner myReader = new Scanner(myObj);
+           while (myReader.hasNextLine()) {
+               String d = myReader.nextLine();
+               System.out.println(data);
+               result += d;
+        }        
+            
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
         }
-       catch(Exception e){
-            return "error " +e.toString();    
-        }
+        return result; 
     }
        
     public String addBook_TEXT_XML(Object requestEntity) {

@@ -25,14 +25,15 @@
     }
     else if(type.equals("xml")){
         response.setContentType("text/xml");
-        results = ub.getXml_TEXT_JSON(query);
+        results = ub.getXml_TEXT_XML(query);
     }
     else if(type.equals("text")){
         response.setContentType("text/html");
-        results = ub.getXml_TEXT_JSON(query);
+        results = ub.getXml_TEXT_TEXT(query);
     }
     else if(type.equals("html")){
         response.setContentType("text/html");
+        results = ub.getXml_TEXT_HTML(query);
     }
 %>
 <!DOCTYPE html>

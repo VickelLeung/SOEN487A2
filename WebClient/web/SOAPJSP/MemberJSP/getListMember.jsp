@@ -4,6 +4,7 @@
     Author     : HUY
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@
     </head>
     <body>
         <h1>Get List Of Members Info</h1>
+        <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <table border="1" width="90%">
             <tr>
                 <th>ID</th>
@@ -39,7 +41,9 @@
                 } catch (Exception ex) {
                         out.println("Exception: " + ex);
                 }
-                %>
+                }else{%>
+                        <p>Fail to login</p>
+                <%}%>
                 <%-- end web service invocation --%><hr/>
         </table>
     </body>

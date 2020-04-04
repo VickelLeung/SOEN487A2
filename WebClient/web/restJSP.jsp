@@ -4,6 +4,7 @@
     Author     : vickelleung
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,7 +55,9 @@
         </script>
     </head>
     <body style="text-align: center;"> 
-     
+ 
+    <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
+
           <img style="height: 40vh; width:100vw; object-fit: scale-down;"src="images/backgroundImg.jpg" alt="banner"/>
      
         
@@ -75,5 +78,9 @@
              <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getDeletebookURL()">Delete book</button>
              </div>
          </div>
+          <%}else{%>
+
+        <p>Fail to login</p>
+<%}%>
     </body>
 </html>

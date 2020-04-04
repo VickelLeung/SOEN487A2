@@ -16,6 +16,7 @@
         <%
         username.isUserusing = false;
         username.loginUsername = "";
+        username.initUSername = "";
         %>
         <h1>Logout</h1>
     </body>

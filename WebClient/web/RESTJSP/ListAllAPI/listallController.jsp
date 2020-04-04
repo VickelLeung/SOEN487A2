@@ -4,6 +4,7 @@
     Author     : fokpoonkai
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@
     </head>
 
     <body>
+        <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
       <div style="text-align: center;">
             <h2>List All Books</h2>
         <form action="listAllResults.jsp">       
@@ -26,5 +28,9 @@
             <input type="submit"/> 
         </form> 
         </div>
+       <%}else{%>
+
+        <p>Fail to login</p>
+<%}%>
     </body>
 </html>

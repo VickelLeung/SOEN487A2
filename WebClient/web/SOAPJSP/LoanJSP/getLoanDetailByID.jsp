@@ -4,6 +4,7 @@
     Author     : TOMMY
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
     </head>
     <body>
         <h1>Get Loan Detail By ID</h1>    
-        
+        <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <form action = "getLoanDetailByID.jsp" method = "GET">
             Borrow ID: <input type = "text" name = "borrow_id">
             <br />
@@ -75,7 +76,9 @@
             } catch (Exception ex) {
                 // TODO handle custom exceptions here
             }
-        %>
+        }else{%>
+                   <p>Fail to login</p>
+                <%}%>
         <%-- end web service invocation --%><hr/>
 
     </body>

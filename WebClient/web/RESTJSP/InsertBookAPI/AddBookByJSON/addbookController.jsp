@@ -4,6 +4,7 @@
     Author     : fokpoonkai
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+          <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <div style="text-align: center;">
-            <h2>ADD Book JSON</h2>
+            <h2>ADD Book JSON</h2>      
         <form action="addBookResults.jsp">       
             <div style="display:flex; justify-content: center; align-items: center;">
                 <div style="margin: 2% 20%; display:flex; flex-direction: column; text-align: left;">
@@ -34,5 +36,8 @@
             <input type="submit" value="Addbook">
         </form> 
         </div>
+         <%}else{%>
+           <p>Fail to login</p>
+        <%}%>
     </body>
 </html>

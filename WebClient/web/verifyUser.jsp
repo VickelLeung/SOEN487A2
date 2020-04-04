@@ -9,12 +9,13 @@
 <% 
     String t_username = request.getParameter("username");
     String t_password = request.getParameter("password"); 
+    username.loginUsername = t_username;   
     if(username.isUserusing){
         out.print("someone is using");
     } else {
                 if(t_username != null && t_password != null){
                 try {
-                    username.loginUsername = t_username;
+
                     loanservice.LoanService_Service service = new loanservice.LoanService_Service();
                     loanservice.LoanService port = service.getLoanServicePort();
                      // TODO initialize WS operation arguments here
@@ -24,7 +25,8 @@
                     java.lang.String result = port.login(name, password);
                     if(result.equals("success_to_login")){
                             out.println("Result = "+result);    
-                        if(username.loginUsername.isEmpty()||username.loginUsername.equals("")||username.loginUsername.equals(t_username)){
+                        if( username.initUSername.equals("")||username.initUSername.equals(username.loginUsername)){
+                            username.initUSername  = username.loginUsername;
                             username.isUserusing = true;
                         }else{
                             out.print("the username and password can't be empty");
@@ -73,8 +75,10 @@
         </script>
     <body>
         <h1>Hello World!</h1>
+        <%=username.loginUsername%>
+        <%=username.initUSername%>
         <%
-            if(username.loginUsername.equals(t_username)&& username.isUserusing){%>
+            if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
                  <button onclick="goSoap()">Soap</button>
                 <button onclick="goRest()">REST</button>
                 <button onclick="goLogOut()">Logout</button>

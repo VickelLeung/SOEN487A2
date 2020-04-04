@@ -4,6 +4,7 @@
     Author     : HUY
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,9 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>borrowBook</title>
     </head>
-    <body>
+    
         <h1>Borrow Book</h1>
-        
+        <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <form action = "borrowBook.jsp" method = "GET">
             Book ID: <input type = "text" name = "book_id">
             <br />
@@ -40,8 +41,10 @@
             } catch (Exception ex) {
                 // TODO handle custom exceptions here
             }
-        %>
+        }else{
+                 out.println("Fail to login");
+                }%>
         <%-- end web service invocation --%><hr/>
 
-    </body>
+    
 </html>

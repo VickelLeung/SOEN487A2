@@ -39,137 +39,90 @@
         }
         function getMember(id)
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/MemberJSP/getMember.jsp" + id;
                 window.location.href = url;
-            } 
+
         }
         function addMember()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/MemberJSP/addMember.jsp";
                 window.location.href = url;
-            } 
+
         }
         function updateMember()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/MemberJSP/updateMember.jsp";
                 window.location.href = url;
-            } 
+
         }
         function getMemberIdByName(name)
         {
-            //alert(name);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
                 var url = "http://localhost:8080/WebClient/SOAPJSP/MemberJSP/getMemberIdByName.jsp" + name ;
                 window.location.href = url;
-            } 
+
         }
         function deleteMember()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
                 var url = "http://localhost:8080/WebClient/SOAPJSP/MemberJSP/deleteMember.jsp";
                 window.location.href = url;
-            } 
         }
+        
         function getLoanListByBookName()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/getLoanListByBookName.jsp";
                 window.location.href = url;
-            } 
         }
         function createLoanBook()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/CreateLoanBook.jsp";
                 window.location.href = url;
-            } 
         }
         
         function borrowBook()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/borrowBook.jsp";
                 window.location.href = url;
-            } 
+
         }
         
         function returnBook()
         {
             //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/returnBook.jsp";
                 window.location.href = url;
-            } 
         }
         
         function updateLoan()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/updateLoan.jsp";
                 window.location.href = url;
-            } 
+
         }
         
         function deleteLoanBook()
         {
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/deleteLoanBook.jsp";
                 window.location.href = url;
-            } 
         }
         
         function getLoanListByMemberID(){
-            //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
+ 
                 var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/getLoanListByMemberID.jsp";
                 window.location.href = url;
-            } 
+
         }
         
         function getLoanDetailByID(){
             //alert(id);
-            var x = window.confirm("Are u sure?");
-            if (x)
-            {
-                var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/getLoanDetailByID.jsp";
-                window.location.href = url;
-            } 
+
+            var url = "http://localhost:8080/WebClient/SOAPJSP/LoanJSP/getLoanDetailByID.jsp";
+            window.location.href = url;
         }
         
         
@@ -177,6 +130,7 @@
 
 
     <body>
+        <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <h1>Hello, this is SOAP Loan Service!</h1>   
         <br />
             <button onclick="addMember()">Add Member</button>
@@ -207,5 +161,9 @@
             <button onclick="returnBook()">Return Book</button>
             <br><br>
             <button onclick="updateLoan()">Update Loan</button>   
+             <%}else{%>
+
+        <p>Fail to login</p>
+<%}%>
     </body>
 </html>

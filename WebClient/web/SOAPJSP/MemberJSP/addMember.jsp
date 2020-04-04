@@ -4,6 +4,7 @@
     Author     : TOMMY
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,10 @@
         <title>Add Member</title>
     </head>
     <body>
-        <h1>Add Member</h1>   
+             <h1>Add Member</h1> 
+        <%
+            if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
+             
         
         <form action = "addMember.jsp" method = "POST">
             <table>
@@ -56,6 +60,10 @@
                 // TODO handle custom exceptions here
             }
         %>
+           <% }else{%>
+           <p>login failed</p>
+           <%}%>
+    
         <%-- end web service invocation --%><hr/>
     
     </body>

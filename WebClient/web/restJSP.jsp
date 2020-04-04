@@ -53,18 +53,27 @@
             
         </script>
     </head>
-    <body style="text-align: center;">
-         <h1>Welcome to librario!</h1>
+    <body style="text-align: center;"> 
+     
+          <img style="height: 40vh; width:100vw; object-fit: scale-down;"src="images/backgroundImg.jpg" alt="banner"/>
+     
+        
+         <h1>Welcome to Book of pandemic-Corona-20!</h1>
          <h2>You can view all information of books in this application. It is essentially a virtual library.</h1>
-         <div>
+         
+         
+         
+         <div style="border:1px solid gray; margin: 0 10%; padding: 1%;">
              <h3>Please select a functionality below</h3>
-             <button onclick="getBookURL()">Get book</button>
-             <button onclick="getListallURL()">List all</button>
-             <button onclick="getAddbookByJSONURL()">Add a book by JSON</button>
-             <button onclick="getAddbookByTextURL()">Add a book by text</button>
-             <button onclick="getUpdatebookByJSONURL()">Update a book by JSON</button>
-             <button onclick="getUpdatebookByTextURL()">Update a book by text</button>
-             <button onclick="getDeletebookURL()">Delete book</button>
+             <div style="display:flex; flex-direction: row; justify-content: center; align-items:center;">
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getBookURL()">Get book</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getListallURL()">List all</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getAddbookByJSONURL()">Add a book by JSON</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getAddbookByTextURL()">Add a book by text</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getUpdatebookByJSONURL()">Update a book by JSON</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getUpdatebookByTextURL()">Update a book by text</button>
+             <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="getDeletebookURL()">Delete book</button>
+             </div>
          </div>
     </body>
 </html>

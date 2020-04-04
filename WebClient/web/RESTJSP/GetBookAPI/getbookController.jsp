@@ -13,19 +13,21 @@
     </head>
     <body>
         <div style="text-align: center;">
-            <h2>Get Book</h2>
-        <form action="getBookResults.jsp">       
-            <div style="margin: 2% 10%; display:flex; flex-direction: column;">
-                <span>ID: </span><input type="text" name="id" >
+            <h2>Get Book</h2> 
+            <div style="margin: 2% 10%; display:flex; flex-direction: rows; justify-content: center; align-items: center;">
+                <form action="getBookResults.jsp">       
+
+                        <span>Please enter an ID to get a book: <input type="text" name="id" ></span>
+
+                    <select name="type">
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="text">TEXT</option>
+                        <option value="html">HTML</option>
+                    </select>
+                    <input type="submit"/> 
+                </form> 
             </div>
-            <select name="type">
-                <option value="json">JSON</option>
-                <option value="xml">XML</option>
-                <option value="text">TEXT</option>
-                <option value="html">HTML</option>
-            </select>
-            <input type="submit">Submit</input> 
-        </form> 
         </div>
     </body>
 </html>

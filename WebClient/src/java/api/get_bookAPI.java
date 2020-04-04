@@ -129,8 +129,8 @@ public class get_bookAPI {
              String x = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
              JSONObject obj = new JSONObject(x);
 
-             String plainText = obj.get("title")+" " + obj.get("description") + " " + obj.get("author") + " " 
-                     + obj.get("isbn") + " " + obj.get("publisher");
+             String plainText = "<h3>TITLE</h3> "+obj.get("title")+"<br/><h3>Description</h3> " + obj.get("description") + "<br/><h3>Author:</h3> " + obj.get("author") + "<br/><h3>isbn:</h3>" 
+                     + obj.get("isbn") + "<br/><h3>Publisher</h3>" + obj.get("publisher");
 
             return plainText;
         }

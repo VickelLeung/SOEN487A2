@@ -197,7 +197,7 @@ public class InsertBookAPI {
         
         String result="";
         
-        String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(String.class, requestEntity);
+        String data =  webResource.accept(javax.ws.rs.core.MediaType.TEXT_HTML).type(javax.ws.rs.core.MediaType.TEXT_PLAIN).post(String.class, requestEntity);
         JSONObject obj = new JSONObject(data);
          try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

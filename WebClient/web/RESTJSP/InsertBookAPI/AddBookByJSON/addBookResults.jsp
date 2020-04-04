@@ -7,40 +7,47 @@
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="api.InsertBookAPI"%>
 <%
-    String type = request.getParameter("type");
-  
-    String title = request.getParameter("title"); 
-    String description = request.getParameter("description"); 
-    String author = request.getParameter("author");
-    String isbn = request.getParameter("isbn"); 
-    String publisher = request.getParameter("publisher");
-    JSONObject obj = new JSONObject();  
-    obj.put("title", title);
-    obj.put("description", description);
-    obj.put("author", author);
-    obj.put("isbn", isbn);
-    obj.put("publisher", publisher);
-    
-    
+    String type ="";
     String results ="";
-    InsertBookAPI ib = new InsertBookAPI();
-    if(type.equals("json")){
-        response.setContentType("text/html");
-        results = ib.addBook_JSON_JSON(obj.toJSONString());
-    }
-    else if(type.equals("xml")){
-        response.setContentType("text/xml");
-        results =  ib.addBook_JSON_XML(obj.toJSONString());
-    }
-    else if(type.equals("text")){
-        response.setContentType("text/plain");
-        results = ib.addBook_JSON_TEXT(obj.toJSONString());
-    }
-    else if(type.equals("html")){
-        response.setContentType(obj.toString());
-        results = ib.addBook_JSON_HTML(obj.toString());
-    }
     
+    try{
+            type = request.getParameter("type");
+            String title = request.getParameter("title"); 
+            String description = request.getParameter("description"); 
+            String author = request.getParameter("author");
+            String isbn = request.getParameter("isbn"); 
+            String publisher = request.getParameter("publisher");
+            JSONObject obj = new JSONObject();  
+            obj.put("title", title);
+            obj.put("description", description);
+            obj.put("author", author);
+            obj.put("isbn", isbn);
+            obj.put("publisher", publisher);
+
+
+
+            InsertBookAPI ib = new InsertBookAPI();
+            if(type.equals("json")){
+                response.setContentType("text/html");
+                results = ib.addBook_JSON_JSON(obj.toJSONString());
+            }
+            else if(type.equals("xml")){
+                response.setContentType("text/xml");
+                results =  ib.addBook_JSON_XML(obj.toJSONString());
+            }
+            else if(type.equals("text")){
+                response.setContentType("text/plain");
+                results = ib.addBook_JSON_TEXT(obj.toJSONString());
+            }
+            else if(type.equals("html")){
+                response.setContentType(obj.toString());
+                results = ib.addBook_JSON_HTML(obj.toString());
+            }
+
+    }catch(Exception e){
+               results = "Operation wrong";
+                type = "Operation wrong";
+    }
     
     
      //InsertBookAPI() 

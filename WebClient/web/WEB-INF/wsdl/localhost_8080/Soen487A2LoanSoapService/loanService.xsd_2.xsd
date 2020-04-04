@@ -76,15 +76,9 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="deleteLoanBook">
+<xs:complexType name="MySOAPFault">
 <xs:sequence>
-<xs:element name="borrowBookId" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="deleteLoanBookResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -96,6 +90,18 @@
 </xs:complexType>
 
 <xs:complexType name="loginResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteLoanBook">
+<xs:sequence>
+<xs:element name="borrowBookId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteLoanBookResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -113,21 +119,18 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="MySOAPFault">
+<xs:complexType name="updateLoan">
 <xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"/>
+<xs:element name="BookId" type="xs:int"/>
+<xs:element name="BookName" type="xs:string" minOccurs="0"/>
+<xs:element name="PersonBorrow" type="xs:int"/>
+<xs:element name="DateOfBorrowing" type="xs:string" minOccurs="0"/>
+<xs:element name="ReturnDate" type="xs:string" minOccurs="0"/>
+<xs:element name="isReturn" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="updateMember">
-<xs:sequence>
-<xs:element name="id" type="xs:int"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="contact" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updateMemberResponse">
+<xs:complexType name="updateLoanResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -147,28 +150,25 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getListMember">
-<xs:sequence/>
+<xs:complexType name="updateMember">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="contact" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getListMemberResponse">
+<xs:complexType name="updateMemberResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="updateLoan">
-<xs:sequence>
-<xs:element name="BookId" type="xs:int"/>
-<xs:element name="BookName" type="xs:string" minOccurs="0"/>
-<xs:element name="PersonBorrow" type="xs:int"/>
-<xs:element name="DateOfBorrowing" type="xs:string" minOccurs="0"/>
-<xs:element name="ReturnDate" type="xs:string" minOccurs="0"/>
-<xs:element name="isReturn" type="xs:int"/>
-</xs:sequence>
+<xs:complexType name="getListMember">
+<xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="updateLoanResponse">
+<xs:complexType name="getListMemberResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -198,18 +198,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getLoanListByMemberID">
-<xs:sequence>
-<xs:element name="memberID" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getLoanListByMemberIDResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getLoanDetailByID">
 <xs:sequence>
 <xs:element name="borrowBookId" type="xs:int"/>
@@ -217,6 +205,18 @@
 </xs:complexType>
 
 <xs:complexType name="getLoanDetailByIDResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLoanListByMemberID">
+<xs:sequence>
+<xs:element name="memberID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLoanListByMemberIDResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -238,18 +238,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="returnBook">
-<xs:sequence>
-<xs:element name="bookID" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="returnBookResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="borrowBook">
 <xs:sequence>
 <xs:element name="Bookid" type="xs:int"/>
@@ -257,6 +245,18 @@
 </xs:complexType>
 
 <xs:complexType name="borrowBookResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="returnBook">
+<xs:sequence>
+<xs:element name="bookID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="returnBookResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>

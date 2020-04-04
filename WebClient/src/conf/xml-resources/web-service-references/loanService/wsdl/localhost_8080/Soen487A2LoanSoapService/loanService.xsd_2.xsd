@@ -119,16 +119,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getListMember">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getListMemberResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="updateLoan">
 <xs:sequence>
 <xs:element name="BookId" type="xs:int"/>
@@ -169,6 +159,16 @@
 </xs:complexType>
 
 <xs:complexType name="updateMemberResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListMember">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListMemberResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>

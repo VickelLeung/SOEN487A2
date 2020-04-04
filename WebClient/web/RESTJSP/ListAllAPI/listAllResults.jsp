@@ -8,33 +8,38 @@
 <%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <!DOCTYPE html>
 <%   
-    String type = request.getParameter("type");
-  
-    String id = request.getParameter("id"); 
-    
     String results ="";
-    ListAllAPI la = new ListAllAPI();
-    
-    if(type.equals("json")){
-        response.setContentType("text/html");
-        results = la.getJson_JSON();
+    String type ="";
+    try{
+        type = request.getParameter("type");
+        String id = request.getParameter("id"); 
+
+        ListAllAPI la = new ListAllAPI();
+
+        if(type.equals("json")){
+            response.setContentType("text/html");
+            results = la.getJson_JSON();
+        }
+        else if(type.equals("xml")){
+            response.setContentType("text/xml");
+            results = la.getJson_XML();
+        }
+        else if(type.equals("text")){
+            response.setContentType("text/html");
+            results = la.getJson_TEXT();
+        }
+        else if(type.equals("html")){
+            response.setContentType("text/html");
+            results = la.getJson_HTML();
+        }
+    }catch(Exception e){
+        results = "Operation wrong";
+        type = "Operation wrong";
     }
-    else if(type.equals("xml")){
-        response.setContentType("text/xml");
-        results = la.getJson_XML();
-    }
-    else if(type.equals("text")){
-        response.setContentType("text/html");
-        results = la.getJson_TEXT();
-    }
-    else if(type.equals("html")){
-        response.setContentType("text/html");
-        results = la.getJson_HTML();
-    }
+  
 %>
 <html>
     <head>
-        
         <title>JSP Page</title>
     </head>
     <body>

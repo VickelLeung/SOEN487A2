@@ -6,29 +6,42 @@
 <%@page import="api.delete_bookAPI"%>
 <%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <%   
-    String type = request.getParameter("type");
-  
-    String id = request.getParameter("id"); 
+   
+    String results = "";
+    String type = "";
     
-    String results ="";
-    delete_bookAPI db = new delete_bookAPI();
+    try{
+
+        type = request.getParameter("type");
+
+        String id = request.getParameter("id"); 
+
+        delete_bookAPI db = new delete_bookAPI();
+
+        if(type.equals("json")){
+            response.setContentType("text/html");
+            results =  db.delete_book_JSON(id);
+        }
+        else if(type.equals("xml")){
+            response.setContentType("text/xml");
+            results = db.delete_book_XML(id);
+        }
+        else if(type.equals("text")){
+            response.setContentType("text/html");
+            results = db.delete_book_TEXT(id);
+        }
+        else if(type.equals("html")){
+            response.setContentType("text/html");
+            results = db.delete_book_HTML(id);
+        }
     
-    if(type.equals("json")){
-        response.setContentType("text/html");
-        results =  db.delete_book_JSON(id);
+    }catch(Exception e){
+          results = "Operation wrong";
+          type = "Operation wrong";
+    
     }
-    else if(type.equals("xml")){
-        response.setContentType("text/xml");
-        results = db.delete_book_XML(id);
-    }
-    else if(type.equals("text")){
-        response.setContentType("text/html");
-        results = db.delete_book_TEXT(id);
-    }
-    else if(type.equals("html")){
-        response.setContentType("text/html");
-        results = db.delete_book_HTML(id);
-    }
+    
+    
 %>
 <!DOCTYPE html>
 <html>

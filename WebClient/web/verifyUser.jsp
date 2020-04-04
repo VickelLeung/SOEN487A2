@@ -14,6 +14,7 @@
     } else {
                 if(t_username != null && t_password != null){
                 try {
+                    username.loginUsername = t_username;
                     loanservice.LoanService_Service service = new loanservice.LoanService_Service();
                     loanservice.LoanService port = service.getLoanServicePort();
                      // TODO initialize WS operation arguments here
@@ -22,8 +23,8 @@
                     // TODO process result here
                     java.lang.String result = port.login(name, password);
                     out.println("Result = "+result);
-                    if(username.username.equals("")){
-                        username.username = t_username;
+                    if(username.initUsername.equals("")||username.initUsername.equals(username.loginUsername)){
+                        username.initUsername = t_username;
                         username.isUserusing = true;
                     }
 
@@ -49,8 +50,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+     <script>
+        function goSoap()
+        {
+            window.location.href = "http://localhost:8080/WebClient/soapJSP.jsp";
+        }
+         
+        function goRest()
+        {
+            window.location.href = "http://localhost:8080/WebClient/restJSP.jsp";
+        } 
+        </script>
     <body>
         <h1>Hello World!</h1>
-        <%=username.username%>
+        <%
+            if(username.initUsername.equals(username.loginUsername)&& username.isUserusing){%>
+                 <button onclick="goSoap()">Soap</button>
+                <button onclick="goRest()">REST</button>
+               
+             <%}else{%>
+            <p>login false</p>
+        <%}%>
     </body>
 </html>

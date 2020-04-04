@@ -15,7 +15,7 @@
     <body>
         <%
         username.isUserusing = false;
-        username.initUsername = "";
+        username.loginUsername = "";
         %>
         <h1>Logout</h1>
     </body>

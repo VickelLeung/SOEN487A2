@@ -22,11 +22,17 @@
                     java.lang.String password = t_password;
                     // TODO process result here
                     java.lang.String result = port.login(name, password);
-                    out.println("Result = "+result);
-                    if(username.initUsername.equals("")||username.initUsername.equals(username.loginUsername)){
-                        username.initUsername = t_username;
-                        username.isUserusing = true;
+                    if(result.equals("success_to_login")){
+                            out.println("Result = "+result);    
+                        if(username.loginUsername.isEmpty()||username.loginUsername.equals("")||username.loginUsername.equals(t_username)){
+                            username.isUserusing = true;
+                        }else{
+                            out.print("the username and password can't be empty");
+                        }
+                    }else{
+                         out.println("Result = "+result);      
                     }
+                 
 
                         } catch (Exception ex) {
                             // TODO handle custom exceptions here
@@ -64,7 +70,7 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            if(username.initUsername.equals(username.loginUsername)&& username.isUserusing){%>
+            if(username.loginUsername.equals(t_username)&& username.isUserusing){%>
                  <button onclick="goSoap()">Soap</button>
                 <button onclick="goRest()">REST</button>
                 <button onclick="goRest()">REST</button>

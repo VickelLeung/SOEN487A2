@@ -12,5 +12,5 @@ package login;
 public class username {
     public static String loginUsername = "";
     public static boolean isUserusing = false;
-    public static String initUsername = "";
+
 }

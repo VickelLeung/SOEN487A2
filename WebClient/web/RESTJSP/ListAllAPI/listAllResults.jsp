@@ -38,9 +38,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="text-align: center">
+        <div style="text-align: center; display:flex; flex-direction: column; margin: 0 10%;">
         <h1>List all books by <%= type %></h1>
-        <%=results%>
+        
+            <%=results%>
+       
         </div>
     </body>
 </html>

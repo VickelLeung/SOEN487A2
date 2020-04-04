@@ -23,7 +23,7 @@
                 <option value="text">TEXT</option>
                 <option value="html">HTML</option>
             </select>
-            <input type="submit">Submit</input> 
+            <input type="submit"/> 
         </form> 
         </div>
     </body>

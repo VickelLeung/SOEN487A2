@@ -87,14 +87,14 @@ public class ListAllAPI {
     public String getJson_TEXT() {
         try{
             WebResource resource = webResource;
-           String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+            String data = resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
 
              String results = "";
              org.json.JSONArray jsonArr = new org.json.JSONArray(data);
              for (int i = 0; i < jsonArr.length(); i++) {
                JSONObject obj = jsonArr.getJSONObject(i);
                results += "Title: " + obj.getString("title") + "\nDescription: " + obj.getString("description") + "\nAuthor: " + obj.getString("author")
-                       + "\nISBN: " + obj.getString("ISBN") + "\nPublisher: " + obj.getString("publisher") + "\n\n";
+                       + "\nISBN: " + obj.getString("ISBN") + "\nPublisher: " + obj.getString("publisher") + "<br /> <br/>";
              }      
             return results;
         }catch(Exception e){

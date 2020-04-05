@@ -1,7 +1,7 @@
 <%-- 
     Document   : addMember
     Created on : Mar 27, 2020, 10:18:34 PM
-    Author     : TOMMY
+    Author     : HUY
 --%>
 
 <%@page import="loanservice.MySOAPFault_Exception"%>
@@ -59,7 +59,7 @@
                 
             } catch(MySOAPFault_Exception e){
                    out.print(e);
-              }
+            }
             catch (Exception ex) {
                 // TODO handle custom exceptions here   
             }

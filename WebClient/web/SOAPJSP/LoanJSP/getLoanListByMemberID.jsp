@@ -4,6 +4,7 @@
     Author     : TOMMY
 --%>
 
+<%@page import="loanservice.MySOAPFault_Exception"%>
 <%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,18 +21,8 @@
             <br />
             <input type = "submit" value = "Submit" />
         </form>
-        
-        
 
-        <table border="1" width="90%">
-            <tr>
-                <th>Book Name</th>
-                <th>Person Borrow</th>
-                <th>Borrow ID</th>
-                <th>Date Of Borrowing</th>
-                <th>Return Date</th>
-                <th>Return Status</th>
-            </tr>     
+          
             
         <%-- start web service invocation --%><hr/>
         <%
@@ -51,7 +42,17 @@
                             || result.equals("fail to get loan list by MemberID")) {
                         %><font color="red"><%out.print(result);%></font><%
                             
-                    } else {
+                    } else { %>
+                         <table border="1" width="90%">
+                            <tr>
+                                <th>Book Name</th>
+                                <th>Person Borrow</th>
+                                <th>Borrow ID</th>
+                                <th>Date Of Borrowing</th>
+                                <th>Return Date</th>
+                                <th>Return Status</th>
+                            </tr> 
+                        <%    
                         String[] resultSplit = result.split("\n");
                         for (int i = 0; i < resultSplit.length; i++) {
                                 String[] part = resultSplit[i].split(" ");
@@ -79,6 +80,9 @@
                         out.print(result);
                 }
    
+            } catch(MySOAPFault_Exception e){
+                   out.print(e); 
+
             } catch (Exception ex) {
                 // TODO handle custom exceptions here
             }

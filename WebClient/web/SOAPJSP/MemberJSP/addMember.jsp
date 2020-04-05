@@ -4,6 +4,7 @@
     Author     : TOMMY
 --%>
 
+<%@page import="loanservice.MySOAPFault_Exception"%>
 <%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,8 +57,11 @@
                     %><font color="red"><%out.print(result);%></font><%
                 }  
                 
-            } catch (Exception ex) {
-                // TODO handle custom exceptions here
+            } catch(MySOAPFault_Exception e){
+                   out.print(e);
+              }
+            catch (Exception ex) {
+                // TODO handle custom exceptions here   
             }
         %>
            <% }else{%>

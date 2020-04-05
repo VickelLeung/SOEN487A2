@@ -4,6 +4,8 @@
     Author     : HUY
 --%>
 
+<%@page import="loanservice.MySOAPFault_Exception"%>
+<%@page import="loanservice.MySOAPFault_Exception"%>
 <%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,9 +32,10 @@
                 // TODO initialize WS operation arguments here
                 java.lang.String bookName = request.getParameter("book_name");;
                 // TODO process result here
-                java.lang.String result = port.getLoanListByBookName(bookName);
+                java.lang.String result = "";
                 
                 if (bookName != null){
+                    result = port.getLoanListByBookName(bookName);
                     if (result.equals("No loanBook on the list")
                             || result.equals("fail to get loan list by book name")) {
                         %><font color="red"><%out.print(result);%></font><%
@@ -67,6 +70,10 @@
                     result="";
                     out.print(result);
                 }
+
+            } catch(MySOAPFault_Exception e){
+                   out.print(e);  
+                      
 
             }catch (Exception ex) {
                 out.print("Exception: " + ex);

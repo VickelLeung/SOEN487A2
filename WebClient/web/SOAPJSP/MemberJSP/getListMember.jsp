@@ -4,6 +4,7 @@
     Author     : HUY
 --%>
 
+<%@page import="loanservice.MySOAPFault_Exception"%>
 <%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,13 +32,17 @@
                     String[] part = result.split("\n");
                     for (int i = 0; i < part.length; i++) {
                         String[] partSplit = part[i].split("\\s++");
-                        %><tr><%
+                        %><tr style="text-align:center"><%
                         for (int j = 1; j < partSplit.length; j++) {  
                         %>  
                             <td><%out.print(partSplit[j]);%></td>
                         <%
                         }%></tr><%
                     }
+
+                } catch(MySOAPFault_Exception e){
+                   out.print(e);  
+
                 } catch (Exception ex) {
                         out.println("Exception: " + ex);
                 }

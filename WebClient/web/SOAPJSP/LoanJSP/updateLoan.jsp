@@ -4,6 +4,7 @@
     Author     : TOMMY
 --%>
 
+<%@page import="loanservice.MySOAPFault_Exception"%>
 <%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -86,7 +87,11 @@
                 } else {
                     %><font color="red"><%out.print("Invalid input of BookName, BorrowID, PersonBorrow");%></font> <%
                 } 
-                    
+               
+                
+            } catch(MySOAPFault_Exception e){
+                   out.print(e);  
+                      
             } catch (Exception ex) {
                 // TODO handle custom exceptions here
             }

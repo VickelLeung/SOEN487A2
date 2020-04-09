@@ -75,8 +75,6 @@
         </script>
     <body>
         <h1>Hello World!</h1>
-        <%=username.loginUsername%>
-        <%=username.initUSername%>
         <%
             if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
                  <button onclick="goSoap()">Soap</button>

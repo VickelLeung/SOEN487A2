@@ -19,27 +19,43 @@
             var url = "http://localhost:8080/WebClient/soapJSP.jsp";
             window.location.href = url;
         }
+        
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+            var getName = document.getElementById("name").value;
+            
+            if(getId.length === 0){
+                alert("ERROR: ID cannot be empty");
+                return false;
+            }
+            else if(getName === 0){
+                alert("ERROR: Name cannot be empty");
+                return false;
+            }
+            
+            return true;
+        }
         </script>
     </head>
     <body>
         <h1>Update Member</h1>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
 
-            <form action = "updateMember.jsp" method = "POST">
-                <table>
-                    <tr><td>ID: </td>
-                        <td><input type = "text" name = "member_id"></td>
-                    <br/></tr>
-                    <tr><td>Name: </td>
-                        <td> <input type = "text" name = "member_name"></td>
-                    <br/></tr>
-                    <tr><td>Contact: </td>
-                        <td><input type = "text" name = "member_contact"></td>
-                    <br/></tr>
-                    <tr><td><input type = "submit" value = "Submit" /></td>
-                    <br/></tr>
-                </table>
-                 &nbsp;
+            <form action = "updateMember.jsp" onsubmit="return displayErr()" method = "POST">
+                <div style="display:flex; flex-direction: column">
+                    <h3>In order to change your contact information.<br />You will need to provide your ID and name to change due to security reason<h3>
+                    <span>ID:
+                        <input type = "text" id="id" name = "member_id">
+                    </span>
+                    <span>Name:
+                        <input type = "text" id="name" name="name" name = "member_name">
+                    </span>
+                    <span>Contact:
+                        <input type = "text" name = "member_contact">
+                    </span>
+                 
+                </div>
+                    <input type = "submit" value = "Submit" />
                     <input type="button" value="home" onclick="Soaphome()"></input> 
             </form> 
 

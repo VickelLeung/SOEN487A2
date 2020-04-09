@@ -51,6 +51,11 @@
                 var url = "http://localhost:8080/WebClient/RESTJSP/UpdateBookAPI/UpdateBookByText/updatebookController.jsp";
                 window.location.href = url;
         }
+        
+        function goHomepage(){
+            var url = "http://localhost:8080/WebClient/";
+            window.location.href = url;
+        }
             
         </script>
     </head>
@@ -63,7 +68,7 @@
         
          <h1>Welcome to Book of pandemic-Corona-20!</h1>
          <h2>You can view all information of books in this application. It is essentially a virtual library.</h1>
-         
+         <button style="height: 6em; width: 8em; margin: 0 0.5%;" onclick="goHomepage()">Go to homepage</button>
          
          
          <div style="border:1px solid gray; margin: 0 10%; padding: 1%;">

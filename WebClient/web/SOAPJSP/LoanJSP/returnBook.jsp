@@ -19,13 +19,23 @@
             var url = "http://localhost:8080/WebClient/soapJSP.jsp";
             window.location.href = url;
         }
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+            
+            if(getId.length === 0){
+                alert("ERROR: ID cannot be empty");
+                return false;
+            }
+            
+            return true;
+        }
         </script>
     </head>
     <body>
         <h1>Return Book</h1>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-        <form action = "returnBook.jsp" method = "GET">
-            Book ID: <input type = "text" name = "book_id">
+        <form action = "returnBook.jsp" onsubmit="return displayErr()" method = "GET">
+            Book ID: <input type = "text" id="id" name = "book_id">
             <br />
             <input type = "submit" value = "Submit" />
              &nbsp;

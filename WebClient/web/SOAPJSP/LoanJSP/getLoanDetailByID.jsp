@@ -19,13 +19,23 @@
             var url = "http://localhost:8080/WebClient/soapJSP.jsp";
             window.location.href = url;
         }
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+            
+            if(getId.length === 0){
+                alert("ERROR: ID cannot be empty");
+                return false;
+            }
+            
+            return true;
+        }
         </script>
     </head>
     <body>
         <h1>Get Loan Detail By ID</h1>    
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-        <form action = "getLoanDetailByID.jsp" method = "GET">
-            Borrow ID: <input type = "text" name = "borrow_id">
+        <form action = "getLoanDetailByID.jsp" onsubmit="return displayErr(0)" method = "GET">
+            Borrow ID: <input type = "text" id="id" name = "borrow_id">
             <br />
             <input type = "submit" value = "Submit" />
                                                    &nbsp;

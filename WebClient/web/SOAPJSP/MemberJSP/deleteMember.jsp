@@ -19,15 +19,31 @@
             var url = "http://localhost:8080/WebClient/soapJSP.jsp";
             window.location.href = url;
         }
+        
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+            var getName = document.getElementById("name").value;
+            
+            if(getId.length === 0){
+                alert("ERROR: ID cannot be empty");
+                return false;
+            }
+            else if(getName.length === 0){
+                alert("ERROR: Name cannot be empty");
+                return false;
+            }
+            
+            return true;
+        }
         </script>
     </head>
     <body>
         <h1>Delete Member</h1>  
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-        <form action = "deleteMember.jsp" method = "GET">
-            Member ID: <input type = "text" name = "member_id">
+        <form action = "deleteMember.jsp" onsubmit="return displayErr()" method = "GET">
+            Member ID: <input type = "text" id="id" name = "member_id">
             <br />
-            Member Name: <input type = "text" name = "member_name">
+            Member Name: <input type = "text" id="name" name = "member_name">
             <br />
             <input type = "submit" value = "Submit" />
                 &nbsp;

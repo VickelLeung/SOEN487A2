@@ -17,15 +17,26 @@
             var url = "http://localhost:8080/WebClient/restJSP.jsp";
             window.location.href = url;
         }
+        
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+           
+            if(getId.length === 0){
+                alert("Error: ID cannot be empty");
+                return false;
+            }
+            
+            return true;
+        } 
        </script>
     </head>
     <body>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <div style="text-align: center;">
             <h2>Update Book Text</h2>
-        <form action="updateBookResults.jsp">       
+        <form action="updateBookResults.jsp" onsubmit="return displayErr()">       
             <div style="margin: 2% 10%; display:flex; flex-direction: column;">
-                <span>ID: </span><input type="text" name="id" >
+                <span>ID: </span><input type="text" id="id" name="id" >
                 <span>Title: </span><input type="text" name="title" >
                 <span>Description: </span><input type="text" name="description">
                 <span>Author: </span><input type="text" name="author">

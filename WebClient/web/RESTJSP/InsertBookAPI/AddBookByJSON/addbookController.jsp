@@ -17,20 +17,52 @@
             var url = "http://localhost:8080/WebClient/restJSP.jsp";
             window.location.href = url;
         }
+                
+        function displayErr(){
+            var getTitle = document.getElementById("title").value;
+            var getDescription = document.getElementById("description").value;
+            var getAuthor = document.getElementById("author").value;
+            var getIsbn = document.getElementById("isbn").value;
+            var getpublisher = document.getElementById("publisher").value;
+           
+            if(getTitle.length === 0){
+                alert("Error: title is empty");
+                return false;
+            }
+            else if(getDescription.length === 0){
+                 alert("Error: Description is empty");
+                 return false;
+            } 
+            else if(getAuthor.length === 0){
+                alert("Error: Author is empty");
+                return false;
+            }
+            else if(getIsbn.length === 0){
+                 alert("Error: ISBN is empty");
+                 return false;
+            }
+            else if(getpublisher.length === 0){
+                 alert("Error: Publisher is empty");
+                return false;
+            }
+            
+            return true;
+        } 
+        
        </script>
     </head>
     <body>
           <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <div style="text-align: center;">
             <h2>ADD Book JSON</h2>      
-        <form action="addBookResults.jsp">       
+            <form action="addBookResults.jsp" onsubmit="return displayErr()">       
             <div style="display:flex; justify-content: center; align-items: center;">
                 <div style="margin: 2% 20%; display:flex; flex-direction: column; text-align: left;">
-                    <span>Title: <input type="text" name="title" ></span>
-                    <span>Description: <input type="text" name="description"></span>
-                    <span>Author: <input type="text" name="author"></span>
-                    <span>ISBN:<input type="text" name="isbn" > </span>
-                    <span>Publisher:<input type="text" name="publisher"></span>
+                    <span>Title: <input type="text" id="title" name="title" ></span>
+                    <span>Description: <input type="text" id="description" name="description"></span>
+                    <span>Author: <input type="text" id="author" name="author"></span>
+                    <span>ISBN:<input type="text" id="isbn" name="isbn" > </span>
+                    <span>Publisher:<input type="text" id="publisher" name="publisher"></span>
                 </div>
             </div>
             <select name="type">

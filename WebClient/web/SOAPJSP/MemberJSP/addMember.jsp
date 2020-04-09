@@ -24,7 +24,7 @@
                 <tr><td>Name*: </td>
                     <td> <input type = "text" name = "member_name"></td>
                 <br/></tr>
-                <tr><td>Contact: </td>
+                <tr><td>Contact*: </td>
                     <td><input type = "text" name = "member_contact"></td>
                 <br/></tr>
                 <tr><td>Password*: </td>

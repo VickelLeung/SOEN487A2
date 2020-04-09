@@ -12,10 +12,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>List Members</title>
+                <script>
+         //http://localhost:8080/WebClient/soapJSP.jsp
+          function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/soapJSP.jsp";
+            window.location.href = url;
+        }
+        </script>
     </head>
     <body>
         <h1>Get List Of Members Info</h1>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
+                                               &nbsp;
+            <input type="button" value="home" onclick="Soaphome()"></input> 
         <table border="1" width="90%">
             <tr>
                 <th>ID</th>

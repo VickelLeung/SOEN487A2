@@ -12,6 +12,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>deleteLoanBook</title>
+                <script>
+         //http://localhost:8080/WebClient/soapJSP.jsp
+          function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/soapJSP.jsp";
+            window.location.href = url;
+        }
+        </script>
     </head>
     <body>
         <h1>Delete Loan Book</h1>
@@ -20,6 +28,8 @@
             Member ID: <input type = "text" name = "borrow_BookId">
             <br />
             <input type = "submit" value = "Submit" />
+                                                   &nbsp;
+            <input type="button" value="home" onclick="Soaphome()"></input> 
         </form>
 
         <%-- start web service invocation --%><hr/>

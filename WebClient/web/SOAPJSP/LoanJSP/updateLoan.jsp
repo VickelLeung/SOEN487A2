@@ -12,6 +12,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>updateLoan</title>
+                <script>
+         //http://localhost:8080/WebClient/soapJSP.jsp
+          function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/soapJSP.jsp";
+            window.location.href = url;
+        }
+        </script>
     </head>
     <body>
         <h1>Update Loan</h1>
@@ -42,6 +50,8 @@
                 <tr><td><input type = "submit" value = "Submit" /></td>
                 <br/></tr>
             </table>
+             &nbsp;
+            <input type="button" value="home" onclick="Soaphome()"></input> 
         </form> 
         
         

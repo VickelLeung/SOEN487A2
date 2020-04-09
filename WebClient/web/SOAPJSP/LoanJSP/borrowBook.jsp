@@ -12,6 +12,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>borrowBook</title>
+       <script>
+           function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/restJSP.jsp";
+            window.location.href = url;
+        }
+       </script>
     </head>
     
         <h1>Borrow Book</h1>
@@ -20,6 +27,8 @@
             Book ID: <input type = "text" name = "book_id">
             <br />
             <input type = "submit" value = "Submit" />
+                                                   &nbsp;
+            <input type="button" value="home" onclick="Soaphome()"></input> 
         </form>
         
         

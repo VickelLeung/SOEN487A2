@@ -12,6 +12,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>getMemberIdByName</title>
+         <script>
+         //http://localhost:8080/WebClient/soapJSP.jsp
+          function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/soapJSP.jsp";
+            window.location.href = url;
+        }
+        </script>
     </head>
     <body>
         <h1>Get Member ID by Name</h1>    
@@ -20,6 +28,8 @@
             Name: <input type = "text" name = "member_name">
             <br />
             <input type = "submit" value = "Submit" />
+                                                   &nbsp;
+            <input type="button" value="home" onclick="Soaphome()"></input> 
         </form>
         
         

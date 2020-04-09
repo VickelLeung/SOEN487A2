@@ -11,6 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script>
+           function Resthome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/restJSP.jsp";
+            window.location.href = url;
+        }
+       </script>
     </head>
 
     <body>
@@ -26,6 +33,8 @@
                 <option value="html">HTML</option>
             </select>
             <input type="submit"/> 
+                                                  &nbsp;
+                <input type="button" value="home" onclick="Resthome()"></input> 
         </form> 
         </div>
        <%}else{%>

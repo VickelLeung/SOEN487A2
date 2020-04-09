@@ -125,13 +125,18 @@
             window.location.href = url;
         }
         
-        
+        function GoHome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/";
+            window.location.href = url;
+            }
     </script>
 
 
     <body>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-        <h1>Hello, this is SOAP Loan Service!</h1>   
+        <h1>Hello, this is SOAP Loan Service!</h1> 
+        <button onclick="GoHome()">Go to Homepage</button>
         <br />
             <button onclick="addMember()">Add Member</button>
             <br><br>

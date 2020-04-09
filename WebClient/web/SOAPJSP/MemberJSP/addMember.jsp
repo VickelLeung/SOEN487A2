@@ -12,18 +12,35 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Member</title>
-
+        
+        <script>
+            
+            function displayErr(){
+                var username = document.getElementById("memberName").value;
+                if(username.includes(" ")){
+                    alert("Error: You cannot contains any space");
+                }
+            }
+            
+            function Soaphome(){
+            //alert(id)
+            var url = "http://localhost:8080/WebClient/soapJSP.jsp";
+            window.location.href = url;
+            }
+            
+            </script>
     </head>
     <body>
              <h1>Add Member</h1> 
         <%
             if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
              
+            <button onclick="Soaphome()">Home</button>    
         
         <form action = "addMember.jsp" method = "POST">
             <table>
                 <tr><td>Name*: </td>
-                    <td> <input type = "text" name = "member_name"></td>
+                    <td> <input type = "text" id="memberName" name = "member_name"></td>
                 <br/></tr>
                 <tr><td>Contact*: </td>
                     <td><input type = "text" name = "member_contact"></td>
@@ -31,7 +48,7 @@
                 <tr><td>Password*: </td>
                     <td><input type = "password" name = "member_password"></td>
                 <br/></tr>
-                <tr><td><input type = "submit" value = "Submit" /></td>
+                <tr><td><input type = "submit" onclick="displayErr()" value = "Submit" /></td>
                 <br/></tr>
             </table>
         </form> 

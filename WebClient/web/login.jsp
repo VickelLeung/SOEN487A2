@@ -4,6 +4,7 @@
     Author     : fokpoonkai
 --%>
 
+<%@page import="login.username"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,11 @@
     <body>
         <div style="display:flex; flex-direction: column; justify-content: center; align-items:center">
             <h1>Login</h1>
+             <%
+                username.isUserusing = false;
+                username.loginUsername = "";
+                username.initUSername = "";
+             %>
             <form style="display: flex; flex-direction: column;" action="verifyUser.jsp">
                 <label>Username<input type="text" name="username"></label>
                 <label>Password<input type="text" name="password"></label>

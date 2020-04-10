@@ -127,45 +127,37 @@
         
         function GoHome(){
             //alert(id)
-            var url = "http://localhost:8080/WebClient/";
+            var url = "http://localhost:8080/WebClient/verifyUser.jsp?username=vick&password=abcd";
             window.location.href = url;
             }
     </script>
 
-
     <body>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
         <h1>Hello, this is SOAP Loan Service!</h1> 
-        <button onclick="GoHome()">Go to Homepage</button>
+        
+        <div style="text-align: center;">
+            <button style="height:4em; width: 10em;" onclick="GoHome()">Go to Homepage</button>
+        </div>
         <br />
-            <button onclick="addMember()">Add Member</button>
-            <br><br>
-            <button onclick="deleteMember()">Delete Member</button>
-            <br><br>
-            <button onclick="getListMember()">Get List of Members</button> 
-            <br><br>
-            <button onclick="getMember(id)">Get Member by ID</button>
-            <br><br>
-            <button onclick="getMemberIdByName(name)">Get Member ID by Name</button>
-            <br><br>
-            <button onclick="updateMember()">Update Member</button>
-            <br><br>
+        <div style="margin: 2% 8%; padding: 1.5%; background:rgba(0,0,0,0.5); border:1px solid black; display: flex; flex-direction: row">
+            <button style=" margin:0 2%;" onclick="addMember()">Add Member</button>
+           
+            <button style=" margin:0 0.5%;" onclick="deleteMember()">Delete Member</button>
+            <button style=" margin:0 0.5%;" onclick="getListMember()">Get List of Members</button> 
+            <button style=" margin:0 0.5%;" onclick="getMember(id)">Get Member by ID</button>
+            <button style=" margin:0 0.5%;" onclick="getMemberIdByName(name)">Get Member ID by Name</button>
+            <button style=" margin:0 0.5%;" onclick="updateMember()">Update Member</button>
             
-            <button onclick="createLoanBook()">Create Loan Book</button>
-            <br><br>
-            <button onclick="borrowBook()">Borrow Book</button>
-            <br><br>
-            <button onclick="deleteLoanBook()">Delete Loan Book</button>
-            <br><br>
-            <button onclick="getLoanDetailByID()">Get Loan Detail By ID</button>
-            <br><br>
-            <button onclick="getLoanListByBookName()">Get Loan List by Book Name</button>
-            <br><br>
-            <button onclick="getLoanListByMemberID()">Get Loan List By MemberID</button>
-            <br><br>
-            <button onclick="returnBook()">Return Book</button>
-            <br><br>
-            <button onclick="updateLoan()">Update Loan</button>   
+            <button style=" margin:0 0.5%;" onclick="createLoanBook()">Create Loan Book</button>
+            <button style=" margin:0 0.5%;" onclick="borrowBook()">Borrow Book</button>
+            <button style=" margin:0 0.5%;" onclick="deleteLoanBook()">Delete Loan Book</button>
+            <button style=" margin:0 0.5%;" onclick="getLoanDetailByID()">Get Loan Detail By ID</button>
+            <button style=" margin:0 0.5%;" onclick="getLoanListByBookName()">Get Loan List by Book Name</button>
+            <button style=" margin:0 0.5%;" onclick="getLoanListByMemberID()">Get Loan List By MemberID</button>
+            <button style=" margin:0 0.5%;" onclick="returnBook()">Return Book</button>
+            <button style=" margin:0 0.5%;" onclick="updateLoan()">Update Loan</button> 
+        </div>
              <%}else{%>
 
         <p>Fail to login</p>

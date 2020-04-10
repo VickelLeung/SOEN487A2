@@ -10,6 +10,7 @@
     String t_username = request.getParameter("username");
     String t_password = request.getParameter("password"); 
     username.loginUsername = t_username;   
+    username.password  = t_password;
     if(username.isUserusing){
         out.print("someone is using");
     } else {

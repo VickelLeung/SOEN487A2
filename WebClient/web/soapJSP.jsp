@@ -125,9 +125,12 @@
             window.location.href = url;
         }
         
-        function GoHome(){
-            //alert(id)
-            var url = "http://localhost:8080/WebClient/verifyUser.jsp?username=vick&password=abcd";
+        function GoHome(arg){
+            window.alert(arg);
+           var parma =  arg.split('&');
+           var username = parma[0];
+           var password = parma[1];
+            var url = "http://localhost:8080/WebClient/verifyUser.jsp?username="+username+"&password="+password;
             window.location.href = url;
             }
     </script>
@@ -137,7 +140,7 @@
         <h1>Hello, this is SOAP Loan Service!</h1> 
         
         <div style="text-align: center;">
-            <button style="height:4em; width: 10em;" onclick="GoHome()">Go to Homepage</button>
+            <button style="height:4em; width: 10em;" onclick="GoHome('<%=username.loginUsername%>&<%=username.password%>')">Go to Homepage</button>
         </div>
         <br />
         <div style="margin: 2% 8%; padding: 1.5%; background:rgba(0,0,0,0.5); border:1px solid black; display: flex; flex-direction: row">

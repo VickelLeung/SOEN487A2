@@ -13,5 +13,6 @@ public class username {
     public static String loginUsername = "";
     public static String initUSername = "";
     public static boolean isUserusing = false;
+    public static String password = "";
 
 }

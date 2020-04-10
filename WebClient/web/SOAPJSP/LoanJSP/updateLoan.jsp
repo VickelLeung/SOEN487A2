@@ -19,38 +19,57 @@
             var url = "http://localhost:8080/WebClient/soapJSP.jsp";
             window.location.href = url;
         }
+
+        function displayErr(){
+            var getId = document.getElementById("id").value;
+            var getName = document.getElementById("name").value;
+           
+            var getMemberName = document.getElementById("memberName").value;
+            
+            console.log(document.getElementById("test"));
+            
+            if(getId.length === 0){
+                alert("ERROR: ID cannot be empty");
+                return false;
+            }
+            else if(getName.length === 0){
+                alert("ERROR: Name cannot be empty");
+                return false;
+            }
+            else if(getMemberName.length === 0){
+                alert("ERROR: Member name cannot be empty");
+                return false;
+            }
+            
+            return true;
+        }         
+        
         </script>
     </head>
     <body>
         <h1>Update Loan</h1>
         <%if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-        <form action = "updateLoan.jsp" method = "POST">
-            <table>
-                <tr><td>Borrow ID: </td>
-                    <td><input type = "text" name = "book_id"></td>
-                <br/></tr>
-                <tr><td>Book Name: </td>
-                    <td> <input type = "text" name = "book_name"></td>
-                <br/></tr>
-                <tr><td>Person Borrow: </td>
-                    <td><input type = "text" name = "person_borrow"></td>
-                <br/></tr>
-                <tr><td>Date Of Borrowing: </td>
-                    <td><input type = "text" name = "date_of_borrowing"></td>
-                <br/></tr>
-                <tr><td>Return Date: </td>
-                    <td><input type = "text" name = "return_date"></td>
-                <br/></tr>
-                <tr><td>Return Status (enter 0 or 1): </td>
-                    <td><input type = "text" name = "is_return"></td>
-                <br/></tr>
-                <tr><td>Member Name: </td>
-                    <td><input type = "text" name = "member_name"></td>
-                <br/></tr>
-                <tr><td><input type = "submit" value = "Submit" /></td>
-                <br/></tr>
-            </table>
-             &nbsp;
+        <form action = "updateLoan.jsp" onsubmit="return displayErr()" method = "POST">
+            <div style="display:flex; flex-direction: column;">
+                <span>Borrow ID*: <input type = "text" id="id" name = "book_id"></span>
+                <span>Book Name*: <input type = "text" id="name" name = "book_name"></span>
+                <span>Person Borrow ID*: <input type = "text" id="person" name = "person_borrow"></span>
+                <span>Date Of Borrowing: <input type = "text" id="borrowDate" name = "date_of_borrowing"></span>
+                <span>Return Date: 
+                    <input type = "text" name = "return_date">
+                </span>
+                <span>Return Status*:
+                    <select name = "is_return">
+                        <option value="1" >yes</option>
+                        <option value="0" >no</option>
+                    </select>
+                </span>
+                   
+                <span> Member Name*: 
+                    <input type = "text" id="memberName" name = "member_name">
+                </span>
+            </div>
+                <input type = "submit" value = "Submit" />
             <input type="button" value="home" onclick="Soaphome()"></input> 
         </form> 
         
@@ -69,7 +88,7 @@
                 java.lang.String is_return = request.getParameter("is_return");
                 java.lang.String name = request.getParameter("member_name");
                 java.lang.String result="";
-                
+
                 int bookId = Integer.parseInt(book_id);
                 int personBorrow = Integer.parseInt(person_borrow);
                 int isReturn = Integer.parseInt(is_return);

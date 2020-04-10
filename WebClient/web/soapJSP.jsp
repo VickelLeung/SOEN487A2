@@ -131,7 +131,7 @@
            var password = parma[1];
             var url = "http://localhost:8080/WebClient/verifyUser.jsp?username="+username+"&password="+password;
             window.location.href = url;
-            }
+        }
     </script>
 
     <body>
@@ -141,9 +141,8 @@
         <div style="text-align: center;">
             <button style="height:4em; width: 10em;" onclick="GoHome('<%=username.loginUsername%>&<%=username.password%>')">Go to Homepage</button>
         </div>
-        <br />
-        <div style="margin: 2% 8%; padding: 1.5%; background:rgba(0,0,0,0.5); border:1px solid black; display: flex; flex-direction: row">
-            <button style=" margin:0 2%;" onclick="addMember()">Add Member</button>
+        <div style="margin: 2% 6%; padding: 1.5%; background:rgba(0,0,0,0.5); border:1px solid black; display: flex; flex-direction: row">
+            <button style=" margin:0 0.5%;" onclick="addMember()">Add Member</button>
            
             <button style=" margin:0 0.5%;" onclick="deleteMember()">Delete Member</button>
             <button style=" margin:0 0.5%;" onclick="getListMember()">Get List of Members</button> 

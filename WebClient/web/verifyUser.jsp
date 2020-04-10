@@ -75,10 +75,12 @@
         } 
         </script>
     <body>
-        <h1>Hello World!</h1>
+        
         <%
             if(username.loginUsername.equals(username.initUSername)&& username.isUserusing){%>
-                 <button onclick="goSoap()">Soap</button>
+                 
+            <h1>Welcome <%=username.loginUsername%></h1>
+            <button onclick="goSoap()">Soap</button>
                 <button onclick="goRest()">REST</button>
                 <button onclick="goLogOut()">Logout</button>
              <%}else{%>

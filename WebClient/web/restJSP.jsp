@@ -53,7 +53,6 @@
         }
         
         function goHomepage(arg){
-            window.alert(arg);
            var parma =  arg.split('&');
            var username = parma[0];
            var password = parma[1];

@@ -11,6 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script>
+         function goLogin(){
+               window.location.href = "http://localhost:8080/WebClient/login.jsp";
+         }
+            
+        </script>
     </head>
     <body>
         <%
@@ -19,5 +25,6 @@
         username.initUSername = "";
         %>
         <h1>Logout</h1>
+        <button onclick="goLogin()">Go back to login</button>
     </body>
 </html>
